@@ -1,0 +1,75 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* ──────────────────────────────────────────────────────────────────── *
+ * Base
+ * ──────────────────────────────────────────────────────────────────── */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+}
+
+::selection {
+  background-color: var(--color-ink-1);
+  color: var(--color-ink-inverse);
+}
+
+/* ──────────────────────────────────────────────────────────────────── *
+ * Editorial primitives (project-wide utilities)
+ * ──────────────────────────────────────────────────────────────────── */
+
+@utility hairline {
+  /* A 1px architectural line — the only divider primitive used site-wide. */
+  height: 1px;
+  background-color: var(--color-line);
+}
+
+@utility rule-soft {
+  height: 1px;
+  background-color: var(--color-line-soft);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* ──────────────────────────────────────────────────────────────────── *
+ * Accessibility
+ * ──────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink-1);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
