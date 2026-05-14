@@ -113,7 +113,7 @@ export function ProblemSpace() {
             workspace, every new feature, every new enterprise customer.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
-            Internal review · Quarterly platform planning
+            Framing · Why governance became a systems problem
           </footer>
         </motion.blockquote>
       </div>

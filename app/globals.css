@@ -14,7 +14,8 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  /* Account for the 56px sticky nav + a touch of editorial breathing room. */
+  scroll-padding-top: 72px;
 }
 
 body {

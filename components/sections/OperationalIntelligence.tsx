@@ -123,7 +123,7 @@ export function OperationalIntelligence() {
               <motion.article
                 key={c.module}
                 variants={revealUp}
-                className="flex h-full flex-col gap-4 rounded-md border border-line bg-surface p-5 transition-colors hover:border-line-strong md:p-6"
+                className="flex h-full flex-col gap-4 rounded-md border border-line bg-surface p-5 transition-colors duration-200 hover:border-line-strong md:p-6"
               >
                 <header className="flex items-baseline justify-between gap-3">
                   <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-4">
@@ -173,7 +173,7 @@ export function OperationalIntelligence() {
             committed to — and the architecture is what makes the commitment honest.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
-            Platform maturity · Principle
+            Platform maturity · Legibility as the success metric
           </footer>
         </motion.blockquote>
       </div>

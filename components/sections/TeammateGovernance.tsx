@@ -135,7 +135,7 @@ export function TeammateGovernance() {
             holding, and keeps the ones the admin alone can.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
-            Operational lifecycle · Principle
+            Membership · A living surface, not a setup screen
           </footer>
         </motion.blockquote>
       </div>

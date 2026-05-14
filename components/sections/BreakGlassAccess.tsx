@@ -66,7 +66,7 @@ export function BreakGlassAccess() {
               <motion.article
                 key={m.index}
                 variants={revealUp}
-                className="flex flex-col gap-5 rounded-md border border-line bg-surface p-6 transition-colors hover:border-line-strong"
+                className="flex flex-col gap-5 rounded-md border border-line bg-surface p-6 transition-colors duration-200 hover:border-line-strong"
               >
                 <header className="flex items-baseline justify-between">
                   <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-4">
@@ -236,7 +236,7 @@ export function BreakGlassAccess() {
             a session that knows how to end on its own.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
-            Operational continuity · Principle
+            Resilience · A design constraint, not a recovery
           </footer>
         </motion.blockquote>
       </div>

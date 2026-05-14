@@ -23,11 +23,15 @@ export function Hero() {
       {/* Faint architectural grid backdrop — establishes the systems language without dominating */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.10]"
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage:
             'linear-gradient(to right, rgba(250,250,247,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(250,250,247,0.08) 1px, transparent 1px)',
           backgroundSize: '64px 64px',
+          maskImage:
+            'radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.35) 75%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.35) 75%, rgba(0,0,0,0) 100%)',
         }}
       />
 
@@ -75,11 +79,11 @@ export function Hero() {
             {/* Editorial meta strip */}
             <motion.dl
               variants={revealUp}
-              className="mt-14 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-[rgba(250,250,247,0.16)] pt-8 sm:grid-cols-4"
+              className="mt-14 grid grid-cols-2 gap-x-6 gap-y-7 border-t border-[rgba(250,250,247,0.16)] pt-8 sm:grid-cols-4"
             >
               <MetaCell label="Role"        value="Lead Product Designer" />
               <MetaCell label="Surfaces"    value="Admin · Identity · Access" />
-              <MetaCell label="Discipline"  value="Systems · Governance · UX" />
+              <MetaCell label="Discipline"  value="Systems · Governance · Platform" />
               <MetaCell label="Scale"       value="Multi-workspace enterprise" />
             </motion.dl>
 
@@ -89,7 +93,7 @@ export function Hero() {
               className="mt-16 flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[rgba(250,250,247,0.40)]"
             >
               <ScrollMark />
-              <span>Scroll · Problem Space</span>
+              <span>Continue · Problem Space</span>
             </motion.div>
           </motion.div>
 
@@ -110,11 +114,11 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Bottom hairline rail */}
+      {/* Bottom hairline rail — quiet architectural attribution. */}
       <div className="relative z-10 border-t border-[rgba(250,250,247,0.10)]">
         <div className="mx-auto flex flex-wrap items-center justify-between gap-y-3 max-w-[var(--container-max)] px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[rgba(250,250,247,0.45)] sm:px-10 lg:px-16">
-          <span>SSO · SCIM · RBAC · Audit Logs · Break-Glass Access</span>
-          <span className="font-mono">v2.0 / orchestration</span>
+          <span>Governance layer · Multi-workspace projection</span>
+          <span className="font-mono">v2.0 · orchestration</span>
         </div>
       </div>
     </section>
@@ -131,13 +135,23 @@ function MetaCell({ label, value }: { label: string; value: string }) {
 }
 
 function ScrollMark() {
+  // A quiet glyph — a slow, decaying drop. Single iteration count keeps the
+  // hero from looping motion that competes with the reader.
   return (
-    <span aria-hidden className="relative inline-flex h-5 w-3 items-start justify-center rounded-full border border-[rgba(250,250,247,0.40)]">
+    <span
+      aria-hidden
+      className="relative inline-flex h-5 w-3 items-start justify-center rounded-full border border-[rgba(250,250,247,0.30)]"
+    >
       <motion.span
-        initial={{ y: 1, opacity: 0.4 }}
-        animate={{ y: 6, opacity: 0 }}
-        transition={{ duration: 1.6, ease: ease.standard, repeat: Infinity, repeatDelay: 0.4 }}
-        className="mt-1 h-1 w-px bg-[rgba(250,250,247,0.85)]"
+        initial={{ y: 1, opacity: 0.5 }}
+        animate={{ y: 7, opacity: 0 }}
+        transition={{
+          duration: 2.2,
+          ease: ease.quiet,
+          repeat: Infinity,
+          repeatDelay: 1.4,
+        }}
+        className="mt-1 h-1 w-px bg-[rgba(250,250,247,0.70)]"
       />
     </span>
   );

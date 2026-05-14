@@ -40,10 +40,13 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   const Title = as;
+  // h1 is reserved for the hero. h2 is the case study's recurring "top of section"
+  // mark — bigger than the movement-level h3s (text-h2 at 2rem) so the hierarchy
+  // reads cleanly: section title > movement title > card title.
   const titleClass =
     as === 'h1'
       ? 'text-[clamp(2.25rem,5.2vw,4rem)] leading-[1.04] tracking-[-0.035em] font-semibold text-ink-1 text-balance'
-      : 'text-h2 text-ink-1 text-balance';
+      : 'text-[clamp(2rem,3.6vw,2.625rem)] leading-[1.1] tracking-[-0.025em] font-semibold text-ink-1 text-balance';
 
   return (
     <motion.header
@@ -52,7 +55,7 @@ export function SectionHeader({
       viewport={IN_VIEW}
       variants={revealStagger}
       className={cn(
-        'flex flex-col gap-5',
+        'flex flex-col gap-6',
         align === 'center' && 'items-center text-center',
         className,
       )}

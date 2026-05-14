@@ -98,7 +98,7 @@ export function GovernanceArchitecture() {
               <motion.article
                 key={p.index}
                 variants={revealUp}
-                className="group flex h-full flex-col gap-5 rounded-md border border-line bg-surface p-6 transition-colors hover:border-line-strong md:p-7"
+                className="group flex h-full flex-col gap-5 rounded-md border border-line bg-surface p-6 transition-colors duration-200 hover:border-line-strong md:p-7"
               >
                 <header className="flex items-baseline justify-between">
                   <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-4">

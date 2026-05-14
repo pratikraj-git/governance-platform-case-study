@@ -150,17 +150,17 @@ export function CommandCenterMock({ className }: CommandCenterMockProps) {
               <p className="text-eyebrow uppercase text-ink-3">Recent administrative activity</p>
               <ul className="mt-4 flex flex-col gap-3 text-[12px]">
                 {ACTIVITY.map((a, i) => (
-                  <li key={i} className="flex items-baseline gap-3">
+                  <li key={i} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <span aria-hidden className={cn(
                       'mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full ring-2',
                       ACTIVITY_TONE[a.tone].dot,
                       ACTIVITY_TONE[a.tone].ring,
                     )} />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-4">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-4 shrink-0">
                       {a.time}
                     </span>
-                    <span className="text-ink-1 text-balance">{a.event}</span>
-                    <span className="ml-auto font-mono text-[11px] text-ink-3">{a.actor}</span>
+                    <span className="text-ink-1 text-balance flex-1 min-w-[12rem]">{a.event}</span>
+                    <span className="ml-auto font-mono text-[11px] text-ink-3 shrink-0">{a.actor}</span>
                   </li>
                 ))}
               </ul>

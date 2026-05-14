@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { SECTIONS, SITE } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
@@ -12,6 +13,9 @@ import { cn } from '@/lib/utils';
  * No drop shadows, no backdrop blur. A 1px line appears on scroll. The
  * active section is detected via IntersectionObserver and surfaced as a
  * single-weight emphasis (no underline glyphs).
+ *
+ * A 1px scroll-progress bar lives at the bottom of the header — quiet
+ * reading-position cue, never an animation.
  */
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
@@ -66,8 +70,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <span className="sm:hidden">{SITE.shortTitle}</span>
           </Link>
 
-          <nav aria-label="Sections" className="hidden md:block">
-            <ul className="flex items-center gap-6 lg:gap-7">
+          <nav aria-label="Sections" className="hidden lg:block">
+            <ul className="flex items-center gap-5 xl:gap-7">
               {navSections.map((s) => {
                 const isActive = activeId === s.id;
                 return (
@@ -76,7 +80,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                       href={`#${s.id}`}
                       aria-current={isActive ? 'true' : undefined}
                       className={cn(
-                        'group inline-flex items-center gap-2 text-[13px] transition-colors',
+                        'group inline-flex items-center gap-2 text-[13px] transition-colors duration-200',
                         overDarkHero
                           ? isActive
                             ? 'text-ink-inverse'
@@ -89,7 +93,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                       <span
                         aria-hidden
                         className={cn(
-                          'h-1 w-1 rounded-full transition-colors',
+                          'h-1 w-1 rounded-full transition-colors duration-200',
                           isActive
                             ? overDarkHero
                               ? 'bg-ink-inverse'
@@ -107,12 +111,22 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </ul>
           </nav>
 
+          {/* Tablet fallback — show only the active section as a quiet anchor crumb. */}
+          <p
+            className={cn(
+              'hidden font-mono text-[11px] uppercase tracking-[0.16em] sm:inline-flex lg:hidden',
+              overDarkHero ? 'text-[rgba(250,250,247,0.55)]' : 'text-ink-3',
+            )}
+          >
+            {activeSectionLabel(activeId)}
+          </p>
+
           <a
             href={SITE.repoUrl}
             target="_blank"
             rel="noreferrer"
             className={cn(
-              'hidden text-[12px] transition-colors md:inline-flex',
+              'hidden text-[12px] transition-colors lg:inline-flex',
               overDarkHero
                 ? 'text-[rgba(250,250,247,0.55)] hover:text-ink-inverse'
                 : 'text-ink-3 hover:text-ink-1',
@@ -121,6 +135,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             Source ↗
           </a>
         </div>
+
+        {/* Scroll progress — 1px reading-position cue */}
+        <ScrollProgress overDarkHero={overDarkHero} />
       </header>
 
       <main>{children}</main>
@@ -204,6 +221,46 @@ function useActiveSection() {
   }, []);
 
   return activeId;
+}
+
+function activeSectionLabel(activeId: string): string {
+  const match = SECTIONS.find((s) => s.id === activeId);
+  if (!match) return 'Overview';
+  // Hero reads cleanly as "Overview"; other sections show their editorial number + label.
+  return match.id === 'hero' ? 'Overview' : `${match.index} · ${match.label}`;
+}
+
+/* ──────────────────────────────────────────────────────────────────── *
+ * Scroll progress — a 1px reading-position cue at the base of the nav.
+ * Tone-aware: light fill on dark hero, ink-1 on the body.
+ * ──────────────────────────────────────────────────────────────────── */
+
+function ScrollProgress({ overDarkHero }: { overDarkHero: boolean }) {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 24,
+    mass: 0.4,
+    restDelta: 0.001,
+  });
+
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        'pointer-events-none absolute inset-x-0 bottom-0 h-px transition-colors',
+        overDarkHero ? 'bg-[rgba(250,250,247,0.06)]' : 'bg-line-soft',
+      )}
+    >
+      <motion.div
+        style={{ scaleX, transformOrigin: '0% 50%' }}
+        className={cn(
+          'h-full origin-left transition-colors',
+          overDarkHero ? 'bg-ink-inverse/85' : 'bg-ink-1',
+        )}
+      />
+    </div>
+  );
 }
 
 function BrandMark({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
