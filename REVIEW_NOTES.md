@@ -1,6 +1,6 @@
 # Review Notes
 
-Working audit for the local review + iteration phase. Not part of the published case study.
+Working audit for local review + iteration. Not part of the published case study.
 
 ## How to run locally
 
@@ -9,138 +9,122 @@ npm install
 npm run dev
 ```
 
-Opens at `http://localhost:3000`. The dev review toolkit is only mounted in development — `next build` strips it from the production bundle.
+Opens at `http://localhost:3000`. The dev review toolkit is mounted only in development — `next build` strips it from the production bundle.
 
 ## Dev review toolkit
 
-Keyboard shortcuts (development only):
-
 | Shortcut    | Effect                                                              |
 | ----------- | ------------------------------------------------------------------- |
-| `Shift + O` | Toggle section outlines + section labels                            |
+| `Shift + O` | Toggle section outlines + labels                                    |
 | `Shift + G` | Toggle 12-column layout grid overlay                                |
-| `Shift + I` | Toggle visual boundaries; click any figure/svg to inspect enlarged  |
+| `Shift + I` | Toggle visual boundaries; click any figure to inspect enlarged      |
 | `Shift + R` | Show / hide the floating review panel                               |
-| `Esc`       | Close the visual inspector modal                                    |
+| `Esc`       | Close the visual inspector                                          |
 
-Floating panel (bottom-right): jump-to-section nav, overlay toggles, current-section indicator. Hidden in production.
+---
 
-## The new direction
+## What changed in this refinement pass
 
-This is **v2** of the case study, deliberately a strategic rewrite rather than an incremental patch:
+**Visual storytelling**
 
-- Compressed from **9 sections → 7**, organized around a single readable narrative arc.
-- Removed every synthetic SVG mock (~22 components deleted) — visuals are now **real product screenshots only**, served through `next/image`.
-- Removed the dark hero + dark/light navigation toggle. Single editorial light tone, matching the portfolio site.
-- Cut overall copy by roughly 45%. Designer voice; no PRD prose.
-- Bundle size on `/`: **29.5 kB → 13.9 kB** (53% smaller).
+- New `FlowDiagram` primitive — monochrome, editorial, mobile-responsive. Four flow diagrams now sit in Problem, Identity, Resilience, and Governance.
+- `Figure` refactored with a three-scale system (`hero` / `support` / `detail`) and the Figma-style frame chrome removed. Captions remain; the dot-and-label header did not.
+- Each flow diagram carries a short designer insight beneath it.
 
-## Section-by-section
+**Screenshot curation (7 → 5, −29%)**
 
-### Strongest sections (ship as-is)
+| Removed | Reason |
+|---|---|
+| `dashboard/governance-layer-overview.png` | The dead-end "click-to-view" image you flagged. Replaced functionally by Flow D (Governance Command Surface). |
+| `scim/token-generate-fetch-and-push.jpg` | Dense Figma board. The insight it carried (blocking modal, cost of regeneration) is already in the SCIM movement copy and the Flow B node ("SCIM provisioning — Tokens, sync, edge states"). |
 
-**01 · The Growing Governance Problem**
-Sets the design problem in three short patterns. Sets up Signals cleanly.
+Five figures remain — one per major design surface — at the smaller, more curated `support` scale by default. None are bigger than necessary.
 
-**02 · Enterprise Signals**
-Three customer-pattern cards on a warm surface. No logo wall. Grounds the rest of the case study in real enterprise pressure.
+---
 
-**03 · Simplifying Identity & Access**
-The first major design surface, anchored by three real screenshots (SSO setup, SCIM role mapping, SCIM tokens). Two sub-movements (SSO, then SCIM) carry the narrative.
+## Internal-info redaction checklist (do before public deploy)
 
-**04 · Operational Resilience & Lifecycle**
-BGU + teammates merged into one section. Two real screenshots. The "designer's note" at the end is one of the strongest moments in the case study.
+The screenshots in `public/assets/` are raw Figma exports. Before pushing this site to a public URL, apply the following per-image edits (any image editor — Pixelmator / Photopea / Figma export). Each item lists the **likely sensitive elements** you should crop, blur, or replace with generic placeholders.
 
-**05 · Toward Centralized Governance**
-Closing design surface. Two real dashboard screenshots. The blockquote at the close pays off the narrative arc cleanly.
+### `public/assets/sso/sso-setup.jpg`
 
-**06 · Reflection & Outcomes**
-Designer-led close. Honest about not having fake metrics. Four short outcomes + a personal sign-off.
+- [ ] Replace any **real IdP names** (Okta, Azure AD, OneLogin) in dropdowns with generic "Identity provider".
+- [ ] Replace **real domain names** (e.g. `*.whatfix.com`, `*.acme.com`) in metadata URLs with `app.example.com` or similar.
+- [ ] Blur **certificate Common Names / SANs** if they reference internal CAs.
+- [ ] Blur **entity IDs / ACS URLs** that contain product hostnames.
+- [ ] Strip any visible **admin email** in user menus.
 
-### Sections to keep an eye on during local review
+### `public/assets/scim/setup-group-and-role-attributes.jpg`
 
-**00 · Hero**
-Light, type-led, no diagram. Watch the title scale on small laptops (clamp tops out at 4.75rem).
+- [ ] Replace **real role names** (e.g. internal naming like "PlatformAdmin_Tier2") with generic editorial labels — "Admin", "Editor", "Viewer".
+- [ ] Replace **real IdP group names** (e.g. AD groups like `CN=...,OU=...`) with neutral placeholders — "Engineering · Senior", "Sales · APAC".
+- [ ] Blur **SCIM endpoint URLs** that contain product hostnames.
+- [ ] Strip the **admin avatar/email** in the top nav.
 
-**03 · Identity & Access**
-Three figures here — the most visually dense section. If pacing feels heavy on first scroll, the SCIM tokens figure is the most droppable.
+### `public/assets/bgu/bgu-setup.jpg`
 
-**05 · Centralized Governance**
-The `governance-layer-overview.png` is 760 KB and serves at small size; check that the dashboard landing visual reads well on tablet.
+- [ ] Replace any **real admin email addresses** in the Break-Glass user list with `admin-1@example.com`, `admin-2@example.com`.
+- [ ] Blur any **internal customer name** in workspace pickers.
+- [ ] Strip the **admin avatar** in the top nav.
 
-## Visuals — real screenshots
+### `public/assets/teammates/handling-of-different-members.jpg`
 
-All visuals are real product screenshots served from `public/assets/` through `next/image` (AVIF/WebP, responsive `sizes`).
+- [ ] Replace **all real names + emails** in the teammates table with editorial placeholders (`Alex Lee`, `Sam Patel`, `Robin Ito` etc.).
+- [ ] Replace **real role names** with the same generic editorial labels used in the SCIM screenshot.
+- [ ] Blur **last-active timestamps** if they reveal product internal cadence.
+- [ ] Strip **admin avatar/email** in top nav.
 
-| File                                                          | Section | Notes                            |
-| ------------------------------------------------------------- | ------- | -------------------------------- |
-| `sso/sso-setup.jpg`                                           | 03      | SSO configuration surface        |
-| `scim/setup-group-and-role-attributes.jpg`                    | 03      | Group → role mapping             |
-| `scim/token-generate-fetch-and-push.jpg`                      | 03      | Multi-workspace token portability|
-| `bgu/bgu-setup.jpg`                                           | 04      | Break-glass setup                |
-| `teammates/handling-of-different-members.jpg`                 | 04      | Teammate lifecycle table         |
-| `dashboard/landing-page.jpg`                                  | 05      | Governance dashboard landing     |
-| `dashboard/governance-layer-overview.png`                     | 05      | Architectural layer view         |
+### `public/assets/dashboard/landing-page.jpg`
 
-**Not currently used** (available in `public/assets/` for future iteration):
+- [ ] Replace **real workspace names** (likely internal customer slugs) with generic placeholders — "Workspace · North America", "Workspace · APAC retail", etc.
+- [ ] Replace **all activity-feed actor names + emails** with editorial placeholders.
+- [ ] Replace **any product copy that names features uniquely** ("Whatfix XYZ") with neutral noun phrases ("Governance · Setup", "Audit · Notification").
+- [ ] Blur **counts / metrics** that could be reverse-engineered to a real customer.
+- [ ] Strip **admin avatar/email** in top nav.
 
-- `scim/scim-v2-overview.png`
-- `scim/edge-cases-and-error-scenarios.jpg`
-- `teammates/adding-new-when-scim-enabled.jpg`
-- `teammates/adding-new-when-scim-disabled.jpg`
+### Once redacted
 
-If a section needs another anchor, these are the strongest candidates.
+1. Re-export each at ~2400 px wide, JPEG quality 80, strip EXIF.
+2. Drop the redacted files back into `public/assets/...` at the same paths.
+3. `next/image` picks them up automatically on next build — no code changes required.
 
-## Image weight — known performance trade-off
+If the image dimensions change materially, update the `width={}` / `height={}` props on the corresponding `<Figure>` in `components/sections/*.tsx`.
 
-The screenshots are large (some 9–24 MB JPGs). `next/image` optimizes them on first request (AVIF/WebP, responsive `sizes`), so the rendered weight per user is far smaller — but the source files inflate the repo.
+---
 
-**Recommended pre-deployment step:**
+## Final visual inventory
 
-```bash
-# Optional — compress source JPGs to ~1.5–2 MB each before pushing.
-# A quick path with ImageMagick:
-mogrify -resize '2400x>' -quality 80 -strip public/assets/**/*.jpg
-```
+| Section | Visuals | Notes |
+|---|---|---|
+| 00 · Hero | none | Type-led, intentional |
+| 01 · Problem | **Flow A** | Governance evolution, 4 nodes |
+| 02 · Signals | card grid | The cards are the visual |
+| 03 · Identity | `sso-setup` + `scim-role-mapping` + **Flow B** | Two figures (was three), one flow |
+| 04 · Resilience | `bgu-setup` + `teammates` + **Flow C** | Two figures, one flow |
+| 05 · Governance | `dashboard-landing` + **Flow D** | One figure (was two), one flow |
+| 06 · Reflection | none | Type-led close |
 
-This is not required for local review — Next will already serve optimized variants. It only matters for git repo bloat and initial CDN cache priming.
+Total: **5 screenshots + 4 flow diagrams** across 7 sections.
 
-## Spacing rhythm — known acceptable
+---
 
-| Section                  | Vertical rhythm    |
-| ------------------------ | ------------------ |
-| Hero                     | self-contained, `min-h-[88svh]` |
-| Problem → Reflection     | `SectionContainer` default `py-24 md:py-28 lg:py-36` |
-| Signals + Governance     | also wrapped in `surface-warm` for variation |
+## Spacing rhythm
 
-## Responsiveness — known good
+| Section | Vertical rhythm |
+|---|---|
+| Hero | self-contained, `min-h-[88svh]` |
+| Problem → Reflection | `SectionContainer` default `py-24 md:py-28 lg:py-36` |
+| Signals + Governance | also wrapped in `bg-surface-warm` for tonal variation |
 
-- Tested ranges: 375, 768, 1024, 1280, 1440, 1920.
-- All editorial split sections collapse to single column cleanly at `< lg`.
-- Sticky navigation no longer toggles tone — flat light styling means no flicker.
-
-## Storytelling tightness — open opportunities
-
-These are subjective; iterate only if they bother you on re-read.
-
-- **01 Problem Space** — the three patterns could become two if we wanted to compress further.
-- **03 Identity & Access** — the second movement (SCIM) is the longest read in the case study. Acceptable, but worth watching.
-- **06 Reflection** — the four outcomes are intentionally non-metric. If a recruiter explicitly asks for numbers, this is the section to revise.
-
-## Modularity — iteration patterns
-
-- **Copy edits:** edit the section file in `components/sections/<Name>.tsx`. Each section is short and self-contained.
-- **Visual swaps:** drop a new JPG/PNG into `public/assets/` and update the `src=` in the corresponding `<Figure>`.
-- **Section additions:** add an entry to `SECTIONS` in `lib/constants.ts`, create a file in `components/sections/`, render from `app/page.tsx`. Nav + scroll spy + dev panel pick it up automatically.
-- **Tone changes:** `styles/tokens.css` is the single source of truth.
+---
 
 ## Known issues
 
-- **None blocking.** Build passes, lint passes, no console errors expected.
-- Image source files are large (see "Image weight" above) — optional compression before public deployment.
+- **None blocking.** Build passes, lint clean, no console errors expected.
+- Source JPGs are still large on disk (some 9–24 MB) — `next/image` optimizes per request, but a one-time compression before public deploy is recommended (see commit notes).
+
+---
 
 ## Iteration log
-
-Use this section to note changes during local review.
 
 - _empty_

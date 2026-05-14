@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Figure } from '@/components/ui/Figure';
+import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -64,28 +65,25 @@ export function CentralizedGovernance() {
           whileInView={{ opacity: 1 }}
           viewport={IN_VIEW}
           transition={{ duration: 0.7 }}
-          className="lg:col-span-7 flex flex-col gap-10"
+          className="lg:col-span-7"
         >
           <Figure
             src="/assets/dashboard/landing-page.jpg"
-            alt="Governance dashboard landing page — workspaces summary, identity posture, pending tasks, recent activity."
-            label="governance · landing"
-            meta="Dashboard"
+            alt="Governance dashboard — workspaces grouped by posture, attention items, a quiet activity feed."
             width={2400}
             height={1500}
-            caption="The landing surface. Workspaces grouped by posture, attention items pinned to the top, and a quiet activity feed that anchors the page in real operational signal."
-          />
-
-          <Figure
-            src="/assets/dashboard/governance-layer-overview.png"
-            alt="Governance layer overview — workspaces, identity, access, and audit visualized as one administrative plane."
-            label="governance · layer overview"
-            meta="Architecture"
-            width={2000}
-            height={1250}
-            caption="A read-only system view: the governance plane sitting cleanly above the workspaces it administers. The visual is intentionally restrained — it’s a map for orienting, not a diagram to interpret."
+            caption="Workspaces grouped by posture, attention items pinned to the top, and an activity feed that anchors the page in real operational signal."
           />
         </motion.div>
+      </div>
+
+      {/* Flow D — Governance command surface. The five things this page makes available in one view. */}
+      <div className="mt-24 border-t border-line-soft pt-14">
+        <FlowDiagram
+          eyebrow="Flow D · What the surface brings together"
+          nodes={COMMAND_SURFACE}
+          insight="The dashboard isn’t a new product. It’s the surface where the earlier surfaces finally know about each other — workspaces, identity, teammates, audit, all visible at the same time."
+        />
       </div>
 
       <motion.blockquote
@@ -102,3 +100,11 @@ export function CentralizedGovernance() {
     </SectionContainer>
   );
 }
+
+const COMMAND_SURFACE = [
+  { label: 'Workspaces',     sublabel: 'The unit of governance' },
+  { label: 'Identity',       sublabel: 'SSO posture, cert state' },
+  { label: 'Teammates',      sublabel: 'Roles, ownership, lifecycle' },
+  { label: 'Auditability',   sublabel: 'What changed, when, by whom' },
+  { label: 'Operational visibility', sublabel: 'One view, ready on Monday' },
+];

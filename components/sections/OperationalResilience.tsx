@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Figure } from '@/components/ui/Figure';
+import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -63,12 +64,10 @@ export function OperationalResilience() {
         >
           <Figure
             src="/assets/bgu/bgu-setup.jpg"
-            alt="Break-glass access setup screen with a hard ceiling on emergency users, expiry timer, and audit notification settings."
-            label="break-glass · setup"
-            meta="Resilience"
+            alt="Break-glass access setup with a hard ceiling on emergency users, an immutable flag, and audit notification rules."
             width={2400}
             height={1500}
-            caption="A hard ceiling on the number of break-glass users, an immutable “SCIM-immune” flag, and a notification rule that fires on every emergency login. The constraints are what make it safe — not the absence of the feature."
+            caption="A hard ceiling on emergency users, an immutable sync-exempt flag, and a notification rule on every login. The constraints make it safe — not the absence of the feature."
           />
         </motion.div>
       </div>
@@ -109,14 +108,21 @@ export function OperationalResilience() {
         >
           <Figure
             src="/assets/teammates/handling-of-different-members.jpg"
-            alt="Teammates table showing managed, unmanaged, guest, and temporary users with source-of-truth indicators per row."
-            label="teammates · lifecycle"
-            meta="Administration"
+            alt="Teammates table — four lifecycle states with source-of-truth indicators per row."
             width={2400}
             height={1500}
-            caption="Every row carries a small indicator of who manages it — IdP, admin, or the platform itself. Read-only states are explicit. The action menu adapts to the row, not the page."
+            caption="Each row carries a small indicator of who manages it. Read-only states are explicit. The action menu adapts to the row, not the page."
           />
         </motion.div>
+      </div>
+
+      {/* Flow C — Operational resilience. Connects failure to recovery. */}
+      <div className="mt-28 border-t border-line-soft pt-14">
+        <FlowDiagram
+          eyebrow="Flow C · How resilience is paid for"
+          nodes={OPERATIONAL_RESILIENCE}
+          insight="Resilience isn’t a feature, it’s a sequence the admin can follow without thinking — designed once, then quietly available whenever it’s needed."
+        />
       </div>
 
       {/* Designer’s note */}
@@ -139,3 +145,10 @@ export function OperationalResilience() {
     </SectionContainer>
   );
 }
+
+const OPERATIONAL_RESILIENCE = [
+  { label: 'SSO unavailable',     sublabel: 'IdP outage, cert expiry, misconfig' },
+  { label: 'Break-glass access',  sublabel: 'Discoverable fallback, sync-exempt' },
+  { label: 'Temporary continuity', sublabel: 'Time-bounded, audit-notified' },
+  { label: 'Lifecycle recovery',  sublabel: 'Return to IdP, close the door' },
+];

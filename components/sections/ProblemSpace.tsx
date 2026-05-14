@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { IN_VIEW, ease, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -77,9 +78,25 @@ export function ProblemSpace() {
           </motion.article>
         ))}
       </motion.div>
+
+      {/* Flow A — Governance evolution. A short visual pause before Signals. */}
+      <div className="mt-24 border-t border-line-soft pt-14">
+        <FlowDiagram
+          eyebrow="Flow A · The shape of the problem"
+          nodes={GOVERNANCE_EVOLUTION}
+          insight="Governance surfaces evolved independently before they shared a model — the friction at the right of this flow is what made the centralization on the left side of every later section possible."
+        />
+      </div>
     </SectionContainer>
   );
 }
+
+const GOVERNANCE_EVOLUTION = [
+  { label: 'Disconnected admin tools',  sublabel: 'Per-team ownership, drift over time' },
+  { label: 'Growing enterprise complexity', sublabel: 'Multi-workspace, federated identity' },
+  { label: 'Operational friction',      sublabel: 'Repeated questions, no single view' },
+  { label: 'Centralized governance',    sublabel: 'One model, one operational surface' },
+];
 
 const PATTERNS = [
   {

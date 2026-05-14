@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Figure } from '@/components/ui/Figure';
+import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -63,11 +64,9 @@ export function IdentityAccess() {
           <Figure
             src="/assets/sso/sso-setup.jpg"
             alt="SSO setup screen showing identity provider configuration, metadata, and certificate state."
-            label="sso-setup · v2"
-            meta="Identity"
             width={2400}
             height={1500}
-            caption="The setup reads the IdP metadata and certificate, names the four observable states (Active, Expiring, Expired, Invalid), and surfaces them inline. Admins stop translating their IdP — they review it."
+            caption="The setup reads the IdP metadata and parses the certificate, then surfaces the four observable states inline. Admins stop translating their IdP — they review it."
           />
         </motion.div>
       </div>
@@ -103,28 +102,25 @@ export function IdentityAccess() {
           whileInView={{ opacity: 1 }}
           viewport={IN_VIEW}
           transition={{ duration: 0.7 }}
-          className="lg:col-span-7 flex flex-col gap-10"
+          className="lg:col-span-7"
         >
           <Figure
             src="/assets/scim/setup-group-and-role-attributes.jpg"
-            alt="SCIM role and group attribute mapping screen, showing source-of-truth indicators and validation states."
-            label="scim · role-mapping"
-            meta="Provisioning"
+            alt="SCIM role and group attribute mapping screen with source-of-truth indicators and validation states."
             width={2400}
             height={1500}
-            caption="Group-to-role mapping is the single highest-stakes screen in SCIM. The redesign makes precedence explicit, validates against the configured IdP groups, and never lets two rules silently disagree."
-          />
-
-          <Figure
-            src="/assets/scim/token-generate-fetch-and-push.jpg"
-            alt="SCIM token generation flow showing how a single token is fetched once and pushed across workspaces."
-            label="scim · token-portability"
-            meta="Multi-workspace"
-            width={2400}
-            height={1500}
-            caption="Tokens are generated once and pushed across the workspaces that need them. The screen makes the cost of regeneration legible up-front — a blocking modal that lists every workspace that will need a re-push."
+            caption="Role mapping is the highest-stakes screen in SCIM. Precedence is explicit, validation runs against the configured IdP groups, and two rules can never silently disagree."
           />
         </motion.div>
+      </div>
+
+      {/* Flow B — Identity lifecycle. Connects SSO → SCIM → operational lifecycle. */}
+      <div className="mt-28 border-t border-line-soft pt-14">
+        <FlowDiagram
+          eyebrow="Flow B · Identity, end to end"
+          nodes={IDENTITY_LIFECYCLE}
+          insight="The challenge wasn’t setup — it was maintaining operational clarity over time. Each step in this flow has a steady state that has to read cleanly months after the initial configuration."
+        />
       </div>
 
       {/* Designer’s note */}
@@ -146,3 +142,11 @@ export function IdentityAccess() {
     </SectionContainer>
   );
 }
+
+const IDENTITY_LIFECYCLE = [
+  { label: 'Identity provider',  sublabel: 'IdP as the source of truth' },
+  { label: 'SSO setup',          sublabel: 'Metadata read, state named' },
+  { label: 'SCIM provisioning',  sublabel: 'Tokens, sync, edge states' },
+  { label: 'Role mapping',       sublabel: 'Explicit precedence per rule' },
+  { label: 'Operational lifecycle', sublabel: 'Drift, audit, recovery' },
+];

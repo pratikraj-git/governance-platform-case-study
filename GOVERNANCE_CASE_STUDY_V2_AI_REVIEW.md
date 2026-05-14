@@ -1,6 +1,6 @@
-# Governance Platform Case Study — v2 AI Review Brief
+# Governance Platform Case Study — v2.1 AI Review Brief
 
-**Purpose:** Single markdown document to hand to an AI agent (or human reviewer) for structured feedback on the **current shipped direction** of the case study website.
+**Purpose:** Single markdown document to hand to an AI agent (or human reviewer) for structured feedback on the **current shipped direction** of the case study website (v2 editorial direction + v2.1 refinement pass: flow diagrams, screenshot curation, three-scale figure system).
 
 **Repository:** `https://github.com/pratikraj-git/governance-platform-case-study`  
 **Author:** Pratik Raj  
@@ -12,7 +12,9 @@
 
 - A **Next.js 15** single-page editorial case study (App Router, TypeScript, Tailwind v4, Framer Motion).
 - **Seven sections**, one narrative arc — designed to read as a **design-led** story, not an architecture wiki or PRD.
-- **Real product screenshots only** — no synthetic SVG dashboards or wireframe mocks. Images live under `public/assets/` and render through `next/image` (AVIF/WebP, responsive sizes).
+- **Five real product screenshots** (curated down from seven) — no synthetic SVG dashboards or wireframe mocks. Images live under `public/assets/` and render through `next/image` (AVIF/WebP, responsive sizes).
+- **Four monochrome flow diagrams** — one each in Problem, Identity, Resilience, Governance. Each carries a single designer insight.
+- **Three-scale `Figure` system** — `hero`, `support`, `detail`. No arbitrary widths. Frame chrome removed; figures are bare image + caption.
 - **Unified light editorial tone** — warm canvas (`#FAFAF7`), ink hierarchy via typography; no dark hero, no nav theme switching between dark/light.
 - **Designer visibility** — first-person framing in the hero; short “A note from the designer” asides after major visual sections; reflection closes with a personal sign-off.
 - **Enterprise validation without marketing** — section 02 uses **three anonymized customer-pattern cards** (industry + role attribution on quotes), not logos or testimonials.
@@ -68,6 +70,7 @@ Enterprise governance **accumulated** across disconnected admin surfaces. **Ente
 - **Body:** Short paragraphs — governance accumulates; identity / provisioning / roles / audit fragmented; coordination vs UI framing.
 - **Pull quote:** Settings page that “grew up.”
 - **Three pattern cards:** (1) owned by no one in particular, (2) designed for setup not for living with it, (3) no single operational view.
+- **Flow A — The shape of the problem:** Four-node flow: *Disconnected admin tools → Growing enterprise complexity → Operational friction → Centralized governance*. Insight: “Governance surfaces evolved independently before they shared a model.”
 
 ### 02 · Signals (`components/sections/EnterpriseSignals.tsx`, `id="signals"`)
 
@@ -79,23 +82,25 @@ Enterprise governance **accumulated** across disconnected admin surfaces. **Ente
 ### 03 · Identity & Access (`components/sections/IdentityAccess.tsx`, `id="identity"`)
 
 - **Title:** “Simplifying identity and access — without simplifying it away.”
-- **Movement A — SSO:** Sticky left column copy; right column **screenshot** `public/assets/sso/sso-setup.jpg` — metadata/cert states, inline legibility.
-- **Movement B — SCIM:** Two figures: `public/assets/scim/setup-group-and-role-attributes.jpg`, `public/assets/scim/token-generate-fetch-and-push.jpg`.
+- **Movement A — SSO:** Sticky left column copy; right column **screenshot** `public/assets/sso/sso-setup.jpg`.
+- **Movement B — SCIM:** One figure (`public/assets/scim/setup-group-and-role-attributes.jpg`). The previous second figure (token portability) was removed — its insight is now carried by the section copy and Flow B.
+- **Flow B — Identity, end to end:** Five-node flow: *Identity provider → SSO setup → SCIM provisioning → Role mapping → Operational lifecycle*. Insight: “The challenge wasn’t setup — it was maintaining operational clarity over time.”
 - **Designer aside:** “A note from the designer” — patience, read metadata, name state, lifecycle as object, write less.
 
 ### 04 · Resilience & Lifecycle (`components/sections/OperationalResilience.tsx`, `id="resilience"`)
 
 - **Title:** “Designing for the day SSO doesn’t work — and the years after it does.”
-- **Movement A — Break-glass:** `public/assets/bgu/bgu-setup.jpg` — constraints, SCIM-immune concept, audit notifications.
-- **Movement B — Teammates:** `public/assets/teammates/handling-of-different-members.jpg` — lifecycle table, source-of-truth per row.
+- **Movement A — Break-glass:** `public/assets/bgu/bgu-setup.jpg`.
+- **Movement B — Teammates:** `public/assets/teammates/handling-of-different-members.jpg`.
+- **Flow C — How resilience is paid for:** Four-node flow: *SSO unavailable → Break-glass access → Temporary continuity → Lifecycle recovery*. Insight: “Resilience isn’t a feature, it’s a sequence the admin can follow without thinking.”
 - **Designer aside:** Resilience + lifecycle as longest-lived admin work.
 
 ### 05 · Centralized governance (`components/sections/CentralizedGovernance.tsx`, `id="governance"`)
 
 - **Warm surface** (same pattern as Signals).
 - **Title:** “What started as separate features became one operational surface.”
-- **Figures:** `public/assets/dashboard/landing-page.jpg`, `public/assets/dashboard/governance-layer-overview.png`.
-- **Positioning:** “Monday-morning view” — operational, not analytics BI.
+- **Figure:** `public/assets/dashboard/landing-page.jpg` only. The previous second figure (`governance-layer-overview.png`) was removed — it functioned as a dead-end "click-to-view" image. Replaced functionally by Flow D below.
+- **Flow D — What the surface brings together:** Five-node flow: *Workspaces → Identity → Teammates → Auditability → Operational visibility*. Insight: “The dashboard isn’t a new product. It’s the surface where the earlier surfaces finally know about each other.”
 - **Closing blockquote:** Dashboard as surfaces that “finally know about each other.”
 
 ### 06 · Reflection (`components/sections/Reflection.tsx`, `id="reflection"`)
@@ -106,30 +111,42 @@ Enterprise governance **accumulated** across disconnected admin surfaces. **Ente
 
 ---
 
-## 6. Screenshot inventory
+## 6. Visual inventory (5 screenshots + 4 flow diagrams)
 
-**Used on the page (7 figures across 3 sections):**
+**Screenshots used on the page (curated from 7 → 5 in the v2.1 pass):**
 
-| Public URL path | Section |
-|-----------------|---------|
-| `/assets/sso/sso-setup.jpg` | Identity |
-| `/assets/scim/setup-group-and-role-attributes.jpg` | Identity |
-| `/assets/scim/token-generate-fetch-and-push.jpg` | Identity |
-| `/assets/bgu/bgu-setup.jpg` | Resilience |
-| `/assets/teammates/handling-of-different-members.jpg` | Resilience |
-| `/assets/dashboard/landing-page.jpg` | Governance |
-| `/assets/dashboard/governance-layer-overview.png` | Governance |
+| Public URL path | Section | Scale |
+|---|---|---|
+| `/assets/sso/sso-setup.jpg` | Identity (Movement A) | `support` (default) |
+| `/assets/scim/setup-group-and-role-attributes.jpg` | Identity (Movement B) | `support` |
+| `/assets/bgu/bgu-setup.jpg` | Resilience (Movement A) | `support` |
+| `/assets/teammates/handling-of-different-members.jpg` | Resilience (Movement B) | `support` |
+| `/assets/dashboard/landing-page.jpg` | Governance | `support` |
 
-**In repo but not yet wired into the page (candidates for iteration):**
+**Removed in v2.1:**
+
+- `/assets/dashboard/governance-layer-overview.png` — flagged as dead-end "click-to-view" image; replaced functionally by Flow D.
+- `/assets/scim/token-generate-fetch-and-push.jpg` — dense Figma board; insight retained in copy + Flow B.
+
+**In repo, available for future iteration (not currently rendered):**
 
 - `/assets/scim/scim-v2-overview.png`
 - `/assets/scim/edge-cases-and-error-scenarios.jpg`
 - `/assets/teammates/adding-new-when-scim-enabled.jpg`
 - `/assets/teammates/adding-new-when-scim-disabled.jpg`
 
-**Implementation:** `components/ui/Figure.tsx` wraps `next/image` with optional frame chrome (label, meta, caption).
+**Flow diagrams in the page (component `components/ui/FlowDiagram.tsx`):**
 
-**Note:** Source JPGs can be large on disk; `next/image` serves optimized formats to browsers. Optional repo-size step: compress originals (see `REVIEW_NOTES.md`).
+| ID | Section | Nodes |
+|---|---|---|
+| A | Problem | Disconnected admin tools → Growing enterprise complexity → Operational friction → Centralized governance |
+| B | Identity | Identity provider → SSO setup → SCIM provisioning → Role mapping → Operational lifecycle |
+| C | Resilience | SSO unavailable → Break-glass access → Temporary continuity → Lifecycle recovery |
+| D | Governance | Workspaces → Identity → Teammates → Auditability → Operational visibility |
+
+**Figure implementation:** `components/ui/Figure.tsx`. Three-scale system: `hero` (1240px), `support` (880px, default), `detail` (680px). Frame chrome was removed in v2.1 — figures render as a bare image with a single caption.
+
+**Note on source JPG size:** Files are large (9–24 MB each); `next/image` serves optimized formats to browsers. Internal-information redaction checklist for each screenshot is in `REVIEW_NOTES.md`.
 
 ---
 
@@ -201,7 +218,7 @@ Copy any of these into your agent chat along with this file:
 
 ## 12. Document version
 
-This brief describes the **v2 editorial direction**: real screenshots, seven sections, unified light tone, designer-led copy. Regenerate or update this file if the IA or section files change materially.
+This brief describes the **v2.1 refinement**: real screenshots curated 7 → 5, four monochrome flow diagrams added, three-scale Figure system, frame chrome removed. The IA (seven sections), tone (warm light editorial), and designer voice are unchanged from v2. Regenerate this file if the IA or section files change materially.
 
 ---
 
