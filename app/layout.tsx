@@ -18,9 +18,26 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: SITE.title,
+  title: {
+    default: SITE.title,
+    template: `%s — ${SITE.shortTitle}`,
+  },
   description: SITE.description,
   authors: [{ name: SITE.author }],
+  keywords: [
+    'enterprise governance',
+    'SSO orchestration',
+    'SCIM lifecycle management',
+    'RBAC',
+    'identity platform design',
+    'enterprise UX case study',
+    'admin platform design',
+    'operational intelligence',
+    'SaaS governance',
+    'product design portfolio',
+    'Pratik Raj',
+  ],
+  creator: SITE.author,
   openGraph: {
     title: SITE.title,
     description: SITE.description,
@@ -32,16 +49,26 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE.title,
     description: SITE.description,
+    creator: '@pratikraj',
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   formatDetection: { telephone: false, address: false, email: false },
+  category: 'portfolio',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.svg',
+  },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  // The hero loads on the dark surface; the rest of the page on the warm canvas.
-  // Two tinted entries keeps the browser chrome consistent with the active section.
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#FAFAF7' },
     { media: '(prefers-color-scheme: dark)',  color: '#0E0F0E' },

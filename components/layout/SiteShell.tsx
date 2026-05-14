@@ -53,22 +53,40 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         )}
       >
         <div className="mx-auto flex h-14 max-w-[var(--container-max)] items-center justify-between gap-6 px-6 sm:px-10 lg:px-16">
-          <Link
-            href="#hero"
-            className={cn(
-              'flex items-center gap-2.5 text-caption font-semibold tracking-tight transition-opacity hover:opacity-70',
-              overDarkHero ? 'text-ink-inverse' : 'text-ink-1',
+          {/* Brand + optional portfolio back-link */}
+          <div className="flex items-center gap-5">
+            {SITE.portfolioUrl && (
+              <a
+                href={SITE.portfolioUrl}
+                className={cn(
+                  'hidden items-center gap-1.5 text-[11px] transition-colors duration-200 sm:inline-flex',
+                  overDarkHero
+                    ? 'text-[rgba(250,250,247,0.45)] hover:text-ink-inverse'
+                    : 'text-ink-4 hover:text-ink-2',
+                )}
+                aria-label="Back to portfolio"
+              >
+                <span aria-hidden className="text-[10px]">←</span>
+                <span className="uppercase tracking-[0.14em]">Portfolio</span>
+              </a>
             )}
-          >
-            <BrandMark tone={overDarkHero ? 'dark' : 'light'} />
-            <span className="hidden sm:inline">
-              {SITE.shortTitle}{' '}
-              <span className={overDarkHero ? 'text-[rgba(250,250,247,0.55)]' : 'text-ink-3'}>
-                / Case Study
+            <Link
+              href="#hero"
+              className={cn(
+                'flex items-center gap-2.5 text-caption font-semibold tracking-tight transition-opacity hover:opacity-70',
+                overDarkHero ? 'text-ink-inverse' : 'text-ink-1',
+              )}
+            >
+              <BrandMark tone={overDarkHero ? 'dark' : 'light'} />
+              <span className="hidden sm:inline">
+                {SITE.shortTitle}{' '}
+                <span className={overDarkHero ? 'text-[rgba(250,250,247,0.55)]' : 'text-ink-3'}>
+                  / Case Study
+                </span>
               </span>
-            </span>
-            <span className="sm:hidden">{SITE.shortTitle}</span>
-          </Link>
+              <span className="sm:hidden">{SITE.shortTitle}</span>
+            </Link>
+          </div>
 
           <nav aria-label="Sections" className="hidden lg:block">
             <ul className="flex items-center gap-5 xl:gap-7">
@@ -143,29 +161,51 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
 
       <footer className="border-t border-line-soft">
-        <div className="mx-auto flex flex-col gap-6 px-6 py-12 sm:px-10 lg:px-16 max-w-[var(--container-max)]">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <p className="text-eyebrow uppercase text-ink-3">{SITE.shortTitle}</p>
-              <p className="mt-2 max-w-[58ch] text-body-sm text-ink-2 text-pretty">
-                {SITE.description}
+        <div className="mx-auto flex flex-col gap-8 px-6 py-14 sm:px-10 lg:px-16 max-w-[var(--container-max)]">
+          {/* Top row: identity + navigation */}
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex flex-col gap-2">
+              <p className="text-body font-semibold text-ink-1">{SITE.author}</p>
+              <p className="max-w-[52ch] text-body-sm text-ink-3 text-pretty">
+                Senior Product Designer — enterprise platform UX, governance systems, operational infrastructure.
               </p>
+              {SITE.portfolioUrl && (
+                <a
+                  href={SITE.portfolioUrl}
+                  className="mt-1 inline-flex items-center gap-1.5 text-[12px] text-ink-3 transition-colors hover:text-ink-1"
+                >
+                  <span aria-hidden className="text-[10px]">←</span>
+                  Back to portfolio
+                </a>
+              )}
             </div>
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-ink-3 sm:justify-end">
+
+            <ul className="flex flex-wrap items-start gap-x-8 gap-y-2 text-[12px] text-ink-3 sm:flex-col sm:items-end sm:gap-y-3">
               <li>
-                <a href={SITE.repoUrl} target="_blank" rel="noreferrer" className="hover:text-ink-1">
+                <a
+                  href={SITE.repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-ink-1"
+                >
                   Source on GitHub ↗
                 </a>
               </li>
               <li>
-                <a href="#hero" className="hover:text-ink-1">Back to top</a>
+                <a href="#hero" className="transition-colors hover:text-ink-1">
+                  Back to top
+                </a>
               </li>
             </ul>
           </div>
 
-          <div className="flex flex-col gap-2 border-t border-line-soft pt-6 text-[12px] text-ink-3 sm:flex-row sm:items-baseline sm:justify-between">
-            <p>© {new Date().getFullYear()} {SITE.author}. Case study artifact for portfolio.</p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-4">
+          {/* Bottom row: colophon */}
+          <div className="flex flex-col gap-1.5 border-t border-line-soft pt-6 text-[12px] text-ink-4 sm:flex-row sm:items-baseline sm:justify-between">
+            <p>
+              © {new Date().getFullYear()} {SITE.author}.
+              {' '}Case study artifact — not affiliated with any employer.
+            </p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em]">
               Enterprise Platform Design · 2026
             </p>
           </div>

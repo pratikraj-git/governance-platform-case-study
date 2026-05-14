@@ -1,181 +1,194 @@
-# Governance Platform — Case Study
+# Governance Platform — Enterprise Administration & Operational Infrastructure
 
-> An end-to-end enterprise governance case study: SSO orchestration, SCIM lifecycle, break-glass access, teammate governance, and the operational intelligence layer that unifies them.
+> A flagship enterprise platform case study. Documenting the design of a unified governance layer across SSO orchestration, SCIM lifecycle management, break-glass access, teammate governance, and operational intelligence — built for multi-workspace SaaS at enterprise scale.
 
-This repository is the source for an editorial case-study website (Next.js) that will be hyperlinked from my portfolio. It contains:
-
-- the **case-study website** at the repo root (Next.js · App Router · Tailwind v4 · Framer Motion),
-- a separate **interactive Admin Dashboard prototype** (Vite · React 19) under `dashboard-prototype/` that the site embeds or links to,
-- the project **context**, all **design artifacts**, and the **PRDs / business documents** that drove the work.
+**By [Pratik Raj](https://github.com/pratikraj-git)** · Senior Product Designer
 
 ---
 
-## 1. Repository Layout
+## Overview
 
-```
-governance-platform-case-study/
-├── README.md                       ← you are here
-│
-├── app/                            ← Next.js App Router (the case-study website)
-│   ├── layout.tsx                  ← root layout: fonts, metadata, SiteShell
-│   ├── page.tsx                    ← single editorial page composing the 9 sections
-│   └── globals.css                 ← Tailwind import + tokens import + base styles
-│
-├── components/
-│   ├── layout/                     ← shell, container, split, sticky rail
-│   ├── ui/                         ← header, cards, diagram, workflow frame
-│   └── sections/                   ← one file per site section (Hero → Outcomes)
-│
-├── lib/                            ← cn(), motion primitives, constants
-├── styles/                         ← design tokens (Tailwind v4 @theme)
-├── public/                         ← static images, fonts (none yet)
-│
-├── context/                        ← project intent + operating principles
-│   ├── project.md                  ← what this case study IS / IS NOT, tone, themes
-│   ├── design-principles.md        ← visual & UX rules of engagement
-│   └── site-structure.md           ← the 9-section site outline
-│
-├── assets/                         ← all visual artifacts (organized by module)
-│   ├── dashboard/  sso/  scim/  bgu/  teammates/
-│
-├── docs/                           ← written context (see docs/README.md)
-│   ├── README.md                   ← index of every PRD/business doc
-│   ├── RECREATION_PROMPT.md        ← interactive dashboard build spec
-│   ├── prd/                        ← Product Requirements Documents and design specs
-│   └── business-context/           ← business cases, baseline existing-state, explorations
-│
-└── dashboard-prototype/            ← separate Vite + React 19 + TS app
-                                      (the interactive Admin Dashboard — 4 UX options)
-```
+This is an end-to-end case study website — not a portfolio carousel, but an architectural narrative. It covers the design of a centralized governance layer that replaced per-workspace identity and access management with a single orchestration plane, federated to enterprise identity providers and projected across every tenant.
 
-Excluded from git (kept locally): the original Google-Drive bundle (`Work files/`, `Work files-…zip`) and two PDFs over GitHub's 100 MB per-file limit — see [`docs/README.md`](./docs/README.md).
+The case study is structured as an editorial sequence:
+
+| Section | What it covers |
+|---|---|
+| **00 · Hero** | The architectural thesis |
+| **01 · Problem Space** | Why governance became a systems problem |
+| **02 · Governance Architecture** | The unified policy plane and orchestration model |
+| **03 · SSO Orchestration** | Certificate lifecycle, setup orchestration, failure taxonomy |
+| **04 · SCIM Lifecycle Management** | Token portability, role mapping, sync loop, edge states |
+| **05 · Break-Glass Access** | Resilience design — BGU and temporary access |
+| **06 · Teammate Governance** | Authority hand-off, lifecycle, ownership transfer |
+| **07 · Operational Intelligence** | The governance command center |
+| **08 · Outcomes** | Architectural evolution and what scales next |
 
 ---
 
-## 2. Tech Stack — Case-Study Website
+## Tech Stack
 
 | Layer | Choice |
-| --- | --- |
+|---|---|
 | Framework | **Next.js 15** (App Router) |
 | Language | **TypeScript 5.9** |
 | UI | **React 19** |
 | Styling | **Tailwind v4** via `@tailwindcss/postcss` |
-| Design tokens | CSS `@theme` block in [`styles/tokens.css`](./styles/tokens.css) |
-| Motion | **Framer Motion 12** — minimal: `revealUp`, `revealStagger`, `fade` |
+| Design tokens | CSS `@theme` in `styles/tokens.css` |
+| Motion | **Framer Motion 12** — `revealUp`, `revealStagger`, scroll progress |
 | Fonts | Inter + JetBrains Mono via `next/font/google` |
-| Utility | `clsx` + `tailwind-merge` for `cn()` |
+| Deployment | **Vercel** |
 
 ---
 
-## 3. Visual System
+## Project Structure
 
-Restrained enterprise SaaS. Editorial systems storytelling. Architecture-first.
+```
+governance-platform-case-study/
+│
+├── app/
+│   ├── layout.tsx        ← Root layout: fonts, metadata, SiteShell
+│   ├── page.tsx          ← Single editorial page (9 sections composed)
+│   └── globals.css       ← Tailwind import + token import + base styles
+│
+├── components/
+│   ├── layout/           ← SiteShell, SectionContainer, EditorialSplitSection
+│   ├── ui/               ← SectionHeader + 14 custom diagram/visualization components
+│   └── sections/         ← One file per section (Hero → Outcomes)
+│
+├── lib/
+│   ├── constants.ts      ← SITE metadata, SECTIONS nav config
+│   ├── motion.ts         ← Framer Motion primitives (revealUp, revealStagger, fade)
+│   └── utils.ts          ← cn() utility (clsx + tailwind-merge)
+│
+├── styles/
+│   └── tokens.css        ← Design tokens: color, typography, spacing, radii, easing
+│
+├── public/
+│   └── favicon.svg       ← Architectural brand mark (SVG, renders at any size)
+│
+├── context/              ← Project intent, design principles, site structure (binding)
+├── assets/               ← Visual artifacts (sso/, scim/, bgu/, dashboard/, teammates/)
+├── docs/                 ← PRDs, business context documents
+│
+├── next.config.ts        ← Image optimization, security headers, package import opts
+├── vercel.json           ← Vercel deployment configuration
+├── .env.example          ← Environment variable reference
+└── dashboard-prototype/  ← Separate Vite + React 19 interactive prototype
+```
 
-Hierarchy lives in type and rhythm, not in color or shadow:
+---
 
-| Token group | Where it lives | Examples |
-| --- | --- | --- |
-| Color | `styles/tokens.css` → `@theme` | `canvas` (warm paper), `surface`, `surface-warm`, `ink-1 … ink-4`, `line-soft / line / line-strong` |
-| Type ramp | `styles/tokens.css` | `text-display` (64 / -0.035em), `text-h1` (44), `text-h2` (32), `text-h3` (22), `text-body-lg / body / body-sm`, `text-caption`, `text-eyebrow` (uppercase 12 / 0.16em) |
-| Spacing rhythm | `SectionContainer` only | `default = py-24 / md:py-28 / lg:py-36`, `tight`, `flush` |
+## Local Setup
+
+**Requirements:** Node.js 18+
+
+```bash
+# Clone
+git clone https://github.com/pratikraj-git/governance-platform-case-study.git
+cd governance-platform-case-study
+
+# Install
+npm install
+
+# (Optional) configure the portfolio back-link
+cp .env.example .env.local
+# Edit .env.local → set NEXT_PUBLIC_PORTFOLIO_URL=https://your-portfolio.com
+
+# Run development server
+npm run dev
+# → http://localhost:3000
+```
+
+**Other commands:**
+
+```bash
+npm run build        # Production build
+npm run start        # Serve production build locally
+npm run typecheck    # TypeScript check (no emit)
+npm run lint         # ESLint
+```
+
+---
+
+## Deployment (Vercel)
+
+### One-click
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/pratikraj-git/governance-platform-case-study)
+
+### Manual
+
+1. Import the repository at [vercel.com/new](https://vercel.com/new)
+2. Framework: **Next.js** (auto-detected via `vercel.json`)
+3. Add environment variable (optional):
+   - `NEXT_PUBLIC_PORTFOLIO_URL` → your portfolio URL (activates the header back-link)
+4. Deploy
+
+The `vercel.json` at the root handles clean URLs and trailing-slash normalization. No additional config required.
+
+---
+
+## Design System
+
+Restrained enterprise SaaS. Hierarchy through type, weight, and rhythm — not color or shadow.
+
+| System | Token file | Examples |
+|---|---|---|
+| Color | `styles/tokens.css` | `canvas` (#FAFAF7 warm paper), `surface`, `ink-1…ink-4`, `line-soft/line/line-strong`, `signal-positive/attention/critical` |
+| Type ramp | `styles/tokens.css` | `text-display` (64px / −0.035em), `text-h1` (44), `text-h2` (32), `text-h3` (22), `text-body-lg/body/body-sm`, `text-eyebrow` (12 / uppercase / 0.16em tracking) |
+| Spacing | `SectionContainer` only | `default = py-24 md:py-28 lg:py-36`, `tight`, `flush` |
 | Container widths | `SectionContainer` only | `wide = 1240px`, `narrow = 880px`, `prose = 680px` |
-| Motion | `lib/motion.ts` only | `revealUp` (8px / 0.6s), `revealStagger` (60ms), `fade` (0.35s); easing `[0.16, 1, 0.3, 1]` |
-| Radii | `--radius-sm/--radius/--radius-md/--radius-lg` | `4 / 6 / 8 / 12` px — no rounded-3xl |
+| Motion | `lib/motion.ts` only | `revealUp` (8px / 0.6s), `revealStagger` (60ms stagger), `fade` (0.35s); easing `[0.16, 1, 0.3, 1]` |
+| Radii | `tokens.css` | 4 / 6 / 8 / 12 px — no rounded-3xl |
 
-What's not in this system: gradients, glassmorphism, drop shadows, dribbble flourishes, scroll-jacked storytelling, fake personas, sticky-note UX-process visuals.
-
----
-
-## 4. Foundational Components
-
-| Component | Path | Purpose |
-| --- | --- | --- |
-| `SiteShell` | `components/layout/SiteShell.tsx` | Sticky top nav (brand + section anchors + Source link) + minimal footer |
-| `SectionContainer` | `components/layout/SectionContainer.tsx` | The only spacing/width primitive — `wide / narrow / prose` × `default / tight / flush` |
-| `EditorialSplitSection` | `components/layout/EditorialSplitSection.tsx` | Left/right storytelling grid; `balanced / text-heavy / visual-heavy`; reversible |
-| `StickyInsightRail` | `components/layout/StickyInsightRail.tsx` | Quiet right-side rail with section-level facts; stays sticky on `lg+`, stacks below |
-| `SectionHeader` | `components/ui/SectionHeader.tsx` | `eyebrow` · `title` · `description`; animates in via `revealStagger` |
-| `ArchitectureCard` | `components/ui/ArchitectureCard.tsx` | Governance modules, operational blocks; variants `default / emphasis / ghost / inverse` |
-| `MetricCard` | `components/ui/MetricCard.tsx` | Operational metric; signal dot only when `tone` is set |
-| `GovernanceDiagram` | `components/ui/GovernanceDiagram.tsx` | SVG: Admin Orchestration → Governance Layer ↔ SSO/SCIM/RBAC/Audit Logs → Workspaces; dashed connectors animate on viewport entry |
-| `WorkflowFrame` (+ `…Placeholder`) | `components/ui/WorkflowFrame.tsx` | Figma-frame-like image container with caption; placeholder variant for the foundation |
+**Not in this system:** gradients, glassmorphism, drop shadows, dribbble aesthetics, scroll-jacked storytelling.
 
 ---
 
-## 5. Site Structure (9 Sections)
+## Operating Principles
 
-Lives in `components/sections/` and is composed in [`app/page.tsx`](./app/page.tsx):
+Anyone extending this project must read the three files in `context/`:
 
-1. **Hero** — display title, supporting line, 4-up meta strip
-2. **Problem Space** — editorial split: header + 4 ghost cards
-3. **Governance Architecture** — full-bleed `GovernanceDiagram` + 4-up anchor row
-4. **SSO Orchestration** — workflow frame (left) + sticky insight rail (right)
-5. **SCIM Lifecycle** — two stacked workflow frames + sticky insight rail
-6. **Break-Glass Access** — sticky rail (left) + workflow frame (right)
-7. **Teammate Governance** — three stacked workflow frames + sticky insight rail
-8. **Operational Intelligence** — dashboard frame + 5-up KPI rail + 6 module cards
-9. **Outcomes** — 3-up outcome cards (one `inverse` variant for editorial close)
-
-All copy in the foundation is **working draft** — placeholders that establish rhythm and hierarchy. Final narrative arrives in subsequent phases.
+- `context/project.md` — what this case study is and is not
+- `context/design-principles.md` — visual and UX rules
+- `context/site-structure.md` — the 9-section outline
 
 ---
 
-## 6. Running the Site
+## Custom UI Components
 
-```bash
-npm install
-npm run dev          # http://localhost:3000
-```
+All built from scratch. No component library dependencies.
 
-Type-check / lint / production build:
-
-```bash
-npm run typecheck
-npm run lint
-npm run build && npm start
-```
-
----
-
-## 7. Running the Interactive Dashboard Prototype
-
-The Vite app under [`dashboard-prototype/`](./dashboard-prototype) is independent:
-
-```bash
-cd dashboard-prototype
-npm install
-npm run dev          # http://localhost:5173
-```
-
-It will eventually be embedded in (or linked from) section 07 — Operational Intelligence — once both surfaces are detailed in the next phase.
+| Component | What it visualizes |
+|---|---|
+| `GovernanceDiagram` | Full architecture map: IdP → Governance Layer → Workspaces |
+| `GovernanceStack` | Vertical plane hierarchy (used in Hero) |
+| `FragmentationGrid` | Per-workspace administration "before" state |
+| `OrchestrationFlow` | N-stage horizontal setup flow (SSO, SCIM) |
+| `CertLifecyclePanel` | Four X.509 observable states |
+| `TokenPortabilityDiagram` | One-to-many SCIM token sharing |
+| `RoleMappingRules` | Attribute-driven role mapping with resolution logic |
+| `SCIMSyncFlow` | End-to-end provisioning orchestration loop (SVG) |
+| `FallbackLoginMock` | Dual-path login entry for Break-Glass |
+| `TempAccessTimeline` | T+0 → T+90 temporary access lifecycle |
+| `TeammatesTable` | Canonical user types with authority source column |
+| `AuthorityHandoffDiagram` | SCIM-off vs SCIM-on admin capability matrix |
+| `CommandCenterMock` | Org-level governance command center |
+| `EvolutionLadder` | Before → After architectural transformation |
+| `PrincipleRow` | Five-up principle ribbon |
 
 ---
 
-## 8. Operating Principles
+## Repository Notes
 
-Anyone (human or AI) extending this project must read the three files in [`context/`](./context):
+The following are excluded from git (kept locally only):
 
-- [`context/project.md`](./context/project.md) — what this case study **is** and **is not**
-- [`context/design-principles.md`](./context/design-principles.md) — visual & UX rules
-- [`context/site-structure.md`](./context/site-structure.md) — the 9-section outline
+- `Work files/` and `Work files-…zip` — original Google Drive export (~458MB)
+- Two PDFs exceeding GitHub's 100MB per-file limit (listed in `.gitignore`)
 
-These are binding.
+The `dashboard-prototype/` directory is a separate Vite + React 19 app and requires its own `npm install` inside that directory.
 
 ---
 
-## 9. Status
-
-**Done — foundation phase**
-
-- Repository restructured (Next.js at root; Vite prototype isolated under `dashboard-prototype/`).
-- Tailwind v4 design tokens, motion primitives, and layout primitives established.
-- All 9 sections scaffolded with reusable components and working-draft placeholders.
-- Sticky navigation, anchor scrolling, viewport-triggered reveals working.
-- TypeScript strict, ESLint configured, type-check passes.
-
-**Not built yet**
-
-- Final per-section narrative copy.
-- Real screenshots placed into each `WorkflowFrame`.
-- Live or embedded dashboard prototype inside section 07.
-- Deployment + portfolio hyperlink.
+*Enterprise Platform Design · 2026 · Pratik Raj*

@@ -1,16 +1,20 @@
 /**
  * Site-wide constants — single source of truth for nav, metadata, etc.
- * Keep this file lean. Anything more than a handful of static values
- * belongs in its own module under /lib.
+ *
+ * portfolioUrl: Set NEXT_PUBLIC_PORTFOLIO_URL in your .env.local (or Vercel
+ * environment variables) to enable the "← Portfolio" back-link in the header.
+ * If unset, the link is not rendered.
  */
 
 export const SITE = {
-  title: 'Governance Platform — Case Study',
+  title: 'Governance Platform — Enterprise Administration & Operational Infrastructure',
   shortTitle: 'Governance Platform',
   author: 'Pratik Raj',
   description:
-    'An end-to-end enterprise governance case study: SSO orchestration, SCIM lifecycle, break-glass access, teammate governance, and the operational intelligence layer that unifies them.',
+    'Designing scalable governance infrastructure for enterprise SaaS administration across SSO, SCIM, RBAC, lifecycle management, and operational intelligence.',
   repoUrl: 'https://github.com/pratikraj-git/governance-platform-case-study',
+  /** Set NEXT_PUBLIC_PORTFOLIO_URL in .env.local or Vercel to activate the back-link. */
+  portfolioUrl: process.env.NEXT_PUBLIC_PORTFOLIO_URL ?? '',
 } as const;
 
 export type SectionId =
