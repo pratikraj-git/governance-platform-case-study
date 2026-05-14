@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { LogoStrip, type LogoEntry } from '@/components/ui/LogoStrip';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -93,9 +94,47 @@ export function EnterpriseSignals() {
         were the operational reality of the customers we were already serving — and the ones
         about to land. Governance had to become a product surface, not a configuration page.
       </motion.p>
+
+      {/*
+        Closing logo strip — industries / customers shaping these signals.
+        Render order matches the four industries named in the section's intro
+        paragraph above. Each entry can be upgraded from a typographic
+        wordmark to a real brand SVG by dropping the file into
+        public/assets/logos/ and setting `src` on the corresponding entry.
+        See REVIEW_NOTES.md for the swap procedure and permission checklist.
+      */}
+      <div className="mt-20 border-t border-line-soft pt-12">
+        <LogoStrip
+          eyebrow="Industries shaping these signals"
+          logos={CUSTOMER_LOGOS}
+          caption="Industries are named editorially; specific customers are anonymized. Drop a real brand SVG into public/assets/logos/ and update the array to replace any wordmark with a logo."
+        />
+      </div>
     </SectionContainer>
   );
 }
+
+/* ──────────────────────────────────────────────────────────────────── *
+ * Customer / industry strip.
+ *
+ * Each entry can be either:
+ *   1. { name: 'Customer Name', src: '/assets/logos/customer-name.svg' }
+ *      → renders the SVG, desaturated to ink tone.
+ *   2. { name: 'Industry Name' }
+ *      → renders the name as a restrained typographic wordmark.
+ *
+ * To swap a wordmark for a real logo:
+ *   • Save the brand SVG as public/assets/logos/{slug}.svg
+ *   • Add `src: '/assets/logos/{slug}.svg'` to the corresponding entry
+ *   • Confirm you have permission to use the mark publicly (see REVIEW_NOTES)
+ * ──────────────────────────────────────────────────────────────────── */
+
+const CUSTOMER_LOGOS: LogoEntry[] = [
+  { name: 'Pharma' },
+  { name: 'Financial services' },
+  { name: 'Global retail' },
+  { name: 'Enterprise software' },
+];
 
 const SIGNALS = [
   {

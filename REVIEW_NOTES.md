@@ -98,13 +98,42 @@ If the image dimensions change materially, update the `width={}` / `height={}` p
 |---|---|---|
 | 00 · Hero | none | Type-led, intentional |
 | 01 · Problem | **Flow A** | Governance evolution, 4 nodes |
-| 02 · Signals | card grid | The cards are the visual |
+| 02 · Signals | card grid + **logo strip** | Cards carry the substance; logo strip names the industries |
 | 03 · Identity | `sso-setup` + `scim-role-mapping` + **Flow B** | Two figures (was three), one flow |
 | 04 · Resilience | `bgu-setup` + `teammates` + **Flow C** | Two figures, one flow |
 | 05 · Governance | `dashboard-landing` + **Flow D** | One figure (was two), one flow |
 | 06 · Reflection | none | Type-led close |
 
-Total: **5 screenshots + 4 flow diagrams** across 7 sections.
+Total: **5 screenshots + 4 flow diagrams + 1 logo strip** across 7 sections.
+
+---
+
+## Customer logo strip (section 02)
+
+A restrained monochrome logo strip sits below the three Signal cards. It currently renders four industries as typographic wordmarks:
+
+```
+PHARMA   ·   FINANCIAL SERVICES   ·   GLOBAL RETAIL   ·   ENTERPRISE SOFTWARE
+```
+
+The strip's component (`components/ui/LogoStrip.tsx`) supports two render modes per entry:
+
+- **Wordmark** (default) — uppercase, mono-spaced, letter-spaced, ink-3 tone.
+- **SVG logo** — if `src: '/assets/logos/{slug}.svg'` is set on the entry, the strip renders the SVG with a desaturate filter to keep it monochrome.
+
+### To swap a wordmark for a real customer logo
+
+1. **Confirm permission.** Use only logos you have explicit rights to publish. If this case study reflects work done at an employer, confirm with that employer first. NDA-covered customer identities **must not** appear.
+2. Save the brand SVG to `public/assets/logos/{slug}.svg` — single-color and tightly cropped if possible.
+3. In `components/sections/EnterpriseSignals.tsx`, find `CUSTOMER_LOGOS` and update the entry:
+   ```ts
+   { name: 'Acme Pharmaceuticals', src: '/assets/logos/acme-pharmaceuticals.svg' },
+   ```
+4. The strip auto-renders the SVG. No layout changes required.
+
+Until each entry gets a `src`, it stays a wordmark — file-by-file upgrade works fine.
+
+See `public/assets/logos/README.md` for SVG conventions.
 
 ---
 
