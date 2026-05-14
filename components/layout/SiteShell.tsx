@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { SECTIONS, SITE } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
@@ -9,10 +9,13 @@ import { cn } from '@/lib/utils';
  * SiteShell — sticky top navigation + content + minimal footer.
  *
  * Restrained header: brand mark on the left, section anchors on the right.
- * No drop shadows, no backdrop blur. A 1px line appears on scroll.
+ * No drop shadows, no backdrop blur. A 1px line appears on scroll. The
+ * active section is detected via IntersectionObserver and surfaced as a
+ * single-weight emphasis (no underline glyphs).
  */
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
+  const activeId = useActiveSection();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 6);
@@ -21,37 +24,86 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Nav items: trimmed by `inNav` flag from the SECTIONS source-of-truth.
+  const navSections = useMemo(() => SECTIONS.filter((s) => s.inNav && s.id !== 'hero'), []);
+
+  // Over the dark hero, the nav inherits a dark surface to avoid the bright
+  // bar / dark hero seam. Switches back to the light editorial surface as soon
+  // as the reader crosses into the body of the case study.
+  const overDarkHero = activeId === 'hero';
+
   return (
     <>
       <header
+        data-tone={overDarkHero ? 'dark' : 'light'}
         className={cn(
-          'sticky top-0 z-40 bg-canvas/95 transition-colors duration-200',
-          scrolled ? 'border-b border-line' : 'border-b border-transparent',
+          'sticky top-0 z-40 transition-colors duration-300',
+          overDarkHero
+            ? 'bg-surface-ink text-ink-inverse'
+            : 'bg-canvas/95 text-ink-1',
+          scrolled
+            ? overDarkHero
+              ? 'border-b border-[rgba(250,250,247,0.10)]'
+              : 'border-b border-line'
+            : 'border-b border-transparent',
         )}
       >
         <div className="mx-auto flex h-14 max-w-[var(--container-max)] items-center justify-between gap-6 px-6 sm:px-10 lg:px-16">
           <Link
             href="#hero"
-            className="flex items-center gap-2 text-caption font-semibold tracking-tight text-ink-1 transition-opacity hover:opacity-70"
+            className={cn(
+              'flex items-center gap-2.5 text-caption font-semibold tracking-tight transition-opacity hover:opacity-70',
+              overDarkHero ? 'text-ink-inverse' : 'text-ink-1',
+            )}
           >
-            <BrandMark />
-            <span>
-              {SITE.shortTitle} <span className="text-ink-3">/ Case Study</span>
+            <BrandMark tone={overDarkHero ? 'dark' : 'light'} />
+            <span className="hidden sm:inline">
+              {SITE.shortTitle}{' '}
+              <span className={overDarkHero ? 'text-[rgba(250,250,247,0.55)]' : 'text-ink-3'}>
+                / Case Study
+              </span>
             </span>
+            <span className="sm:hidden">{SITE.shortTitle}</span>
           </Link>
 
           <nav aria-label="Sections" className="hidden md:block">
-            <ul className="flex items-center gap-7">
-              {SECTIONS.filter((s) => s.id !== 'hero').map((s) => (
-                <li key={s.id}>
-                  <a
-                    href={`#${s.id}`}
-                    className="text-[13px] text-ink-3 transition-colors hover:text-ink-1"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
+            <ul className="flex items-center gap-6 lg:gap-7">
+              {navSections.map((s) => {
+                const isActive = activeId === s.id;
+                return (
+                  <li key={s.id}>
+                    <a
+                      href={`#${s.id}`}
+                      aria-current={isActive ? 'true' : undefined}
+                      className={cn(
+                        'group inline-flex items-center gap-2 text-[13px] transition-colors',
+                        overDarkHero
+                          ? isActive
+                            ? 'text-ink-inverse'
+                            : 'text-[rgba(250,250,247,0.55)] hover:text-ink-inverse'
+                          : isActive
+                            ? 'text-ink-1'
+                            : 'text-ink-3 hover:text-ink-1',
+                      )}
+                    >
+                      <span
+                        aria-hidden
+                        className={cn(
+                          'h-1 w-1 rounded-full transition-colors',
+                          isActive
+                            ? overDarkHero
+                              ? 'bg-ink-inverse'
+                              : 'bg-ink-1'
+                            : overDarkHero
+                              ? 'bg-transparent group-hover:bg-[rgba(250,250,247,0.45)]'
+                              : 'bg-transparent group-hover:bg-line-strong',
+                        )}
+                      />
+                      <span className={cn(isActive && 'font-medium')}>{s.label}</span>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -59,7 +111,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             href={SITE.repoUrl}
             target="_blank"
             rel="noreferrer"
-            className="hidden text-[12px] text-ink-3 transition-colors hover:text-ink-1 md:inline-flex"
+            className={cn(
+              'hidden text-[12px] transition-colors md:inline-flex',
+              overDarkHero
+                ? 'text-[rgba(250,250,247,0.55)] hover:text-ink-inverse'
+                : 'text-ink-3 hover:text-ink-1',
+            )}
           >
             Source ↗
           </a>
@@ -69,31 +126,97 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
 
       <footer className="border-t border-line-soft">
-        <div className="mx-auto flex flex-col gap-2 px-6 py-8 sm:px-10 sm:flex-row sm:items-center sm:justify-between sm:py-6 lg:px-16 max-w-[var(--container-max)]">
-          <p className="text-[12px] text-ink-3">
-            © {new Date().getFullYear()} {SITE.author}. Case study artifact for portfolio.
-          </p>
-          <p className="text-[12px] text-ink-3">
-            <a href={SITE.repoUrl} target="_blank" rel="noreferrer" className="hover:text-ink-1">
-              View source on GitHub ↗
-            </a>
-          </p>
+        <div className="mx-auto flex flex-col gap-6 px-6 py-12 sm:px-10 lg:px-16 max-w-[var(--container-max)]">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-eyebrow uppercase text-ink-3">{SITE.shortTitle}</p>
+              <p className="mt-2 max-w-[58ch] text-body-sm text-ink-2 text-pretty">
+                {SITE.description}
+              </p>
+            </div>
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-ink-3 sm:justify-end">
+              <li>
+                <a href={SITE.repoUrl} target="_blank" rel="noreferrer" className="hover:text-ink-1">
+                  Source on GitHub ↗
+                </a>
+              </li>
+              <li>
+                <a href="#hero" className="hover:text-ink-1">Back to top</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col gap-2 border-t border-line-soft pt-6 text-[12px] text-ink-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <p>© {new Date().getFullYear()} {SITE.author}. Case study artifact for portfolio.</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-4">
+              Enterprise Platform Design · 2026
+            </p>
+          </div>
         </div>
       </footer>
     </>
   );
 }
 
-function BrandMark() {
+/* ──────────────────────────────────────────────────────────────────── *
+ * Active section detection
+ * ──────────────────────────────────────────────────────────────────── */
+
+function useActiveSection() {
+  const [activeId, setActiveId] = useState<string>('hero');
+  const visibleRef = useRef<Map<string, IntersectionObserverEntry>>(new Map());
+
+  useEffect(() => {
+    const visible = visibleRef.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.set(e.target.id, e);
+          else visible.delete(e.target.id);
+        }
+
+        if (visible.size === 0) return;
+
+        // Pick the entry closest to (but not above) the viewport's reference line.
+        // `rootMargin` already biases toward the top of the viewport, so we just
+        // pick whichever currently-visible entry has the smallest top coordinate.
+        let best: IntersectionObserverEntry | null = null;
+        for (const e of visible.values()) {
+          if (!best || e.boundingClientRect.top < best.boundingClientRect.top) {
+            best = e;
+          }
+        }
+        if (best) setActiveId(best.target.id);
+      },
+      {
+        // Active band: top ~96px (under the sticky nav) down to roughly 50% of viewport.
+        rootMargin: '-96px 0px -50% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      },
+    );
+
+    const sections = SECTIONS.map((s) => document.getElementById(s.id)).filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return activeId;
+}
+
+function BrandMark({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
   // Abstract architectural mark — three stacked lines, monochrome.
+  const bar = tone === 'dark' ? 'bg-ink-inverse' : 'bg-ink-1';
   return (
     <span
       aria-hidden
-      className="inline-flex h-4 w-4 flex-col justify-between"
+      className="inline-flex h-4 w-4 flex-col justify-between transition-colors"
     >
-      <span className="h-px w-full bg-ink-1" />
-      <span className="h-px w-3/4 bg-ink-1" />
-      <span className="h-px w-1/2 bg-ink-1" />
+      <span className={cn('h-px w-full', bar)} />
+      <span className={cn('h-px w-3/4', bar)} />
+      <span className={cn('h-px w-1/2', bar)} />
     </span>
   );
 }

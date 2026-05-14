@@ -25,7 +25,7 @@ import { IN_VIEW, ease, revealStagger, revealUp } from '@/lib/motion';
 export function GovernanceArchitecture() {
   return (
     <SectionContainer id="governance-architecture" width="wide" spacing="default" topRule>
-      <div className="flex flex-col gap-16 lg:gap-24">
+      <div className="flex flex-col gap-20 lg:gap-28">
         {/* ── Movement 1: the map ────────────────────────────────────── */}
         <div className="flex flex-col gap-12 lg:gap-14">
           <SectionHeader

@@ -26,19 +26,22 @@ export type SectionId =
 
 export interface SectionMeta {
   id: SectionId;
-  index: string;       // editorial section number ("01" … "09")
+  index: string;       // editorial section number ("01" … "08")
   label: string;       // nav label
   title: string;       // editorial title
+  /** Whether this section appears in the top navigation rail. */
+  inNav: boolean;
 }
 
 export const SECTIONS: readonly SectionMeta[] = [
-  { id: 'hero',                     index: '00', label: 'Overview',     title: 'Overview' },
-  { id: 'problem-space',            index: '01', label: 'Problem',      title: 'Problem Space' },
-  { id: 'governance-architecture',  index: '02', label: 'Architecture', title: 'Governance Architecture' },
-  { id: 'sso-orchestration',        index: '03', label: 'SSO',          title: 'SSO Orchestration' },
-  { id: 'scim-lifecycle',           index: '04', label: 'SCIM',         title: 'SCIM Lifecycle' },
-  { id: 'break-glass-access',       index: '05', label: 'Break-Glass',  title: 'Break-Glass Access' },
-  { id: 'teammate-governance',      index: '06', label: 'Teammates',    title: 'Teammate Governance' },
-  { id: 'operational-intelligence', index: '07', label: 'Operations',   title: 'Operational Intelligence' },
-  { id: 'outcomes',                 index: '08', label: 'Outcomes',     title: 'Outcomes' },
+  { id: 'hero',                     index: '00', label: 'Overview',     title: 'Overview',                inNav: true  },
+  { id: 'problem-space',            index: '01', label: 'Problem',      title: 'Problem Space',           inNav: true  },
+  { id: 'governance-architecture',  index: '02', label: 'Architecture', title: 'Governance Architecture', inNav: true  },
+  { id: 'sso-orchestration',        index: '03', label: 'SSO',          title: 'SSO Orchestration',       inNav: true  },
+  { id: 'scim-lifecycle',           index: '04', label: 'SCIM',         title: 'SCIM Lifecycle',          inNav: true  },
+  { id: 'break-glass-access',       index: '05', label: 'BGU',          title: 'Break-Glass Access',      inNav: true  },
+  // Teammate governance sits inline in the page flow but is not a top-level nav anchor.
+  { id: 'teammate-governance',      index: '06', label: 'Teammates',    title: 'Teammate Governance',     inNav: false },
+  { id: 'operational-intelligence', index: '07', label: 'Governance',   title: 'Operational Intelligence',inNav: true  },
+  { id: 'outcomes',                 index: '08', label: 'Outcomes',     title: 'Outcomes',                inNav: true  },
 ] as const;

@@ -31,18 +31,6 @@ export function Hero() {
         }}
       />
 
-      {/* Top hairline rail — restates section ordinal, mirrors the rest of the site */}
-      <div className="relative z-10 border-b border-[rgba(250,250,247,0.10)]">
-        <div className="mx-auto flex max-w-[var(--container-max)] items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[rgba(250,250,247,0.55)]">
-            00 · Enterprise Platform Design
-          </p>
-          <p className="hidden font-mono text-[11px] uppercase tracking-[0.22em] text-[rgba(250,250,247,0.40)] sm:block">
-            Case study · 2026
-          </p>
-        </div>
-      </div>
-
       {/* Main content */}
       <div className="relative z-10 flex-1">
         <div className="mx-auto grid h-full max-w-[var(--container-max)] grid-cols-1 gap-y-16 px-6 py-20 sm:px-10 sm:py-24 lg:grid-cols-12 lg:gap-x-16 lg:px-16 lg:py-28">
