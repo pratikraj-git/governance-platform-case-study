@@ -29,7 +29,7 @@ export function SSOOrchestration() {
         <SectionHeader
           eyebrow="03 · SSO Orchestration"
           title="Identity setup, designed for the operational lifecycle — not just the happy path."
-          description="SSO is the highest-consequence surface in the platform: a misconfigured certificate or a dropped session translates directly into an outage. The redesign treats setup as an orchestration with observable state, not a wizard that ends at &lsquo;Test passed.&rsquo;"
+          description="A misconfigured certificate or a dropped session is an outage. The redesign treats SSO setup as an orchestration with observable state — not a wizard that ends at &lsquo;Test passed.&rsquo;"
           descriptionWidth="narrow"
         />
 
@@ -52,17 +52,14 @@ export function SSOOrchestration() {
                 Parse the cert. Show what's in it. Name the state.
               </motion.h3>
               <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
-                X.509 metadata was previously inert text. Admins pasted PEM-encoded blobs and
-                left the platform to verify them in OpenSSL. The redesign parses certificates
-                client-side and surfaces the five fields that matter — Common Name, Subject
-                Alternative Names, validity window, and serial number — directly under the
-                input.
+                Certs used to be inert text — pasted PEM blobs, verified out-of-band. The redesign
+                parses X.509 client-side and surfaces the five fields that matter directly under
+                the input: Common Name, SANs, validity window, serial.
               </motion.p>
               <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
-                Each cert resolves into one of four observable states. Active is quiet. The
-                other three carry weight: a thirty-day rotation window earns an amber chip,
-                an expired cert is named for what it is (an SSO outage), and an unreadable cert
-                is rejected at input — not at test time.
+                Each cert resolves into one of four observable states. Active is quiet; the other
+                three carry weight — named at the field rather than at test time, so the failure
+                mode never travels.
               </motion.p>
               <motion.dl variants={revealUp} className="mt-2 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line-soft pt-5">
                 <Stat label="Parse path"    value="Client-side · WebCrypto" />
@@ -98,15 +95,14 @@ export function SSOOrchestration() {
               Three stages, one continuous session — state retained from intake to activation.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              The old flow lost the admin between steps. Back-navigation reset fields. Editing
-              a saved configuration always defaulted to the upload path — never the one originally
-              used. The orchestration treats setup as a single contract with explicit state.
+              The old flow lost the admin between steps — back-navigation reset fields, edits defaulted
+              to the upload path. The orchestration treats setup as a single contract with explicit state.
             </motion.p>
           </motion.header>
 
           <OrchestrationFlow
             stages={SSO_STAGES}
-            caption="On edit, the saved entry method, IdP, and field values are restored. Back-navigation within a session preserves the draft. Partial setups discard cleanly — only saved configurations persist."
+            caption="On edit, the original entry method, IdP, and field values are restored. Partial setups discard cleanly — only saved configurations persist."
           />
         </div>
 
@@ -126,9 +122,8 @@ export function SSOOrchestration() {
               Errors are classified by who can see them — and what the admin should check next.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              Test-failure used to be a dead end: a single &ldquo;Test failed&rdquo; with no path forward.
-              The taxonomy splits failures by where they can be detected and renders an actionable
-              next step instead of a SAML stack trace.
+              Test-failure used to be a dead end. The taxonomy classifies failures by where they
+              can be detected — and points at the next concrete step rather than a SAML stack trace.
             </motion.p>
           </motion.header>
 
@@ -171,24 +166,6 @@ export function SSOOrchestration() {
               </motion.article>
             ))}
           </motion.div>
-
-          {/* Retry CTA insight */}
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={IN_VIEW}
-            transition={{ duration: 0.55, ease: ease.standard }}
-            className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 rounded-md border border-line-soft bg-surface-mute px-6 py-5"
-          >
-            <p className="max-w-[60ch] text-body-sm text-ink-1 text-pretty">
-              On test failure, a <span className="font-medium">Run test again</span> CTA fires the test inline — no
-              re-navigation through Steps 1 and 2 to retry. Where the failure cause is knowable, it's named.
-              Where it isn't, the guidance points at the IdP — not at us.
-            </p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-3">
-              No raw SAML codes
-            </p>
-          </motion.div>
         </div>
 
         {/* ── Closing observation ───────────────────────────────── */}
@@ -202,7 +179,7 @@ export function SSOOrchestration() {
           <p>
             Reliability in identity is a function of what's visible. The work was less about
             redesigning the setup screen and more about making cert state, error provenance,
-            and session continuity legible to the admin who has to live with the configuration.
+            and session continuity legible to the admin living with the configuration.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
             Identity reliability · A function of what's visible

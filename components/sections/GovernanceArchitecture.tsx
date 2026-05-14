@@ -31,7 +31,7 @@ export function GovernanceArchitecture() {
           <SectionHeader
             eyebrow="02 · Governance Architecture"
             title="One layer between identity, policy, and the workspaces they govern."
-            description="The redesign promotes governance from a feature shipped per workspace to a layer that sits above all of them — federated to every identity provider, projected down to every tenant, and instrumented for operational visibility end to end."
+            description="Governance moved from a per-workspace feature to a layer that sits above them all — federated upward to identity providers, projected downward to every tenant."
             descriptionWidth="narrow"
           />
 
@@ -141,9 +141,8 @@ export function GovernanceArchitecture() {
               Policy flows down. Telemetry flows up. One contract in the middle.
             </h3>
             <p className="mt-5 max-w-[52ch] text-body text-ink-2 text-pretty">
-              Administrators author policy once at the governance layer. The layer projects that policy
-              into every workspace it governs and emits a normalized audit trail back the other way.
-              Workspaces stay autonomous in execution — never in definition.
+              Policy is authored once at the governance layer, projected into every workspace it governs,
+              and a normalized audit trail flows back. Workspaces stay autonomous in execution — never in definition.
             </p>
           </motion.div>
 

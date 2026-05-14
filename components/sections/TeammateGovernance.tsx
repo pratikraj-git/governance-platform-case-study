@@ -30,7 +30,7 @@ export function TeammateGovernance() {
         <SectionHeader
           eyebrow="06 · Teammate Governance"
           title="Governance is an ongoing operational lifecycle — not a one-time setup."
-          description="Identity setup ends. Membership management does not. Teammate governance is the steady-state surface where authority hand-off between the IdP and the admin becomes legible — and where temporary, deactivated, and inherited users coexist without confusion."
+          description="Identity setup ends. Membership management does not. Teammate governance is the steady-state surface where authority between the IdP and the admin becomes legible."
           descriptionWidth="narrow"
         />
 
@@ -50,10 +50,9 @@ export function TeammateGovernance() {
               Five canonical states. One table. One authority column that tells the truth.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              The Teammates page distinguishes the five member states the platform actually
-              cares about — permanent active, manually managed, deactivated, temporary, and
-              expired. A single Source column makes the authority owner explicit so admins
-              never wonder where a change should be made.
+              The Teammates page distinguishes five member states — permanent, manually managed,
+              deactivated, temporary, expired. A single Source column makes the authority owner
+              explicit, so admins never wonder where a change should be made.
             </motion.p>
           </motion.header>
 
@@ -76,10 +75,9 @@ export function TeammateGovernance() {
               When SCIM is on, the dashboard surfaces — but never forks — IdP authority.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              Activating SCIM on a workspace closes specific administrative paths in the
-              dashboard. Manual invites disable. Manual role changes disable. Lifecycle
-              transitions move to the sync. The point isn't to take capability away from
-              the admin — it's to keep there from being two sources of truth at once.
+              Activating SCIM closes specific administrative paths. Manual invites disable. Role changes
+              disable. Lifecycle moves to the sync. The point isn't to remove admin capability — it's
+              to keep one source of truth at a time.
             </motion.p>
           </motion.header>
 
@@ -100,9 +98,8 @@ export function TeammateGovernance() {
               Offboarding is a governance event — content, not just users.
             </h3>
             <p className="mt-5 max-w-[52ch] text-body text-ink-2 text-pretty">
-              When a teammate leaves, their access disappears — but their work doesn't.
-              The platform requires an explicit ownership target for content, dashboards,
-              and saved configurations before a delete completes. Authority over users may
+              When a teammate leaves, their access disappears — their work doesn't. The platform
+              requires an explicit ownership target before delete completes. User authority may
               shift to the IdP; ownership transfer stays administrative.
             </p>
           </motion.div>
@@ -129,10 +126,8 @@ export function TeammateGovernance() {
           className="max-w-[var(--container-narrow)] border-l-2 border-ink-1 pl-6 text-[1.0625rem] leading-[1.65] text-ink-1 text-pretty"
         >
           <p>
-            Membership is where governance stops being a setup screen and starts being a
-            living surface. The right design isn&rsquo;t the one that allows the most
-            admin action — it&rsquo;s the one that closes the doors the IdP should be
-            holding, and keeps the ones the admin alone can.
+            Membership is where governance stops being a setup screen. The right design closes
+            the doors the IdP should be holding — and keeps the ones the admin alone can.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
             Membership · A living surface, not a setup screen

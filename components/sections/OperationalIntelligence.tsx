@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { CommandCenterMock } from '@/components/ui/CommandCenterMock';
-import { PrincipleRow, type Principle } from '@/components/ui/PrincipleRow';
 import { IN_VIEW, ease, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -14,11 +13,14 @@ import { IN_VIEW, ease, revealStagger, revealUp } from '@/lib/motion';
  * ladder up to this one: a single, org-level operational view that makes
  * the governance layer legible at a glance.
  *
- * Four movements:
+ * Three movements:
  *  A. The thesis — what an operational view of governance is.
  *  B. The Command Center mock — the centerpiece artifact.
  *  C. The composition — how the prior modules surface here.
- *  D. The platform commitments — five principles closing the arc.
+ *
+ * The closing blockquote is the strategic close; redundant restatement of
+ * the platform's principles (already covered in section 02) is deliberately
+ * absent.
  */
 export function OperationalIntelligence() {
   return (
@@ -28,7 +30,7 @@ export function OperationalIntelligence() {
         <SectionHeader
           eyebrow="07 · Operational Intelligence"
           title="An evolving governance command center — every module, one operational view."
-          description="The case study converges here. SSO health, SCIM coverage, BGU posture, teammate lifecycle, and audit flow are surfaces of the same governance object. The command center is the design surface that lets a single operator hold the whole picture — healthy by default, named by exception."
+          description="Every prior module is a surface of the same governance object. The command center lets a single operator hold all of them at once — healthy by default, named by exception."
           descriptionWidth="narrow"
         />
 
@@ -46,10 +48,9 @@ export function OperationalIntelligence() {
               Operational intelligence is what governance looks like from above.
             </h3>
             <p className="mt-5 max-w-[52ch] text-body text-ink-2 text-pretty">
-              Underneath, every module is its own surface. From above, they share a state
-              vocabulary: healthy, attention, critical, drift, expiry. The command center is
-              the place that vocabulary gets resolved into a single operational sentence —
-              one that an enterprise admin can read in a glance and trust enough to act on.
+              From above, every module shares a state vocabulary — healthy, attention, critical,
+              drift, expiry. The command center resolves that vocabulary into a sentence an enterprise
+              admin can read at a glance and trust enough to act on.
             </p>
           </motion.div>
 
@@ -105,10 +106,8 @@ export function OperationalIntelligence() {
               How the prior modules surface here.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              The command center isn&rsquo;t a separate product — it&rsquo;s the natural
-              consequence of designing every module against a shared state vocabulary. Each
-              surface contributes the same shape of signal, so the operational view
-              composes without adapters.
+              The command center isn&rsquo;t a separate product. It&rsquo;s the natural consequence
+              of designing every module against a shared state vocabulary — signals compose without adapters.
             </motion.p>
           </motion.header>
 
@@ -138,26 +137,6 @@ export function OperationalIntelligence() {
           </motion.div>
         </div>
 
-        {/* ── Movement D: The platform commitments ─────────────────── */}
-        <div className="flex flex-col gap-10">
-          <motion.header
-            initial="hidden"
-            whileInView="show"
-            viewport={IN_VIEW}
-            variants={revealStagger}
-            className="flex flex-col gap-4 lg:max-w-[var(--container-narrow)]"
-          >
-            <motion.p variants={revealUp} className="text-eyebrow uppercase text-ink-3">
-              D · Platform commitments
-            </motion.p>
-            <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-              Five commitments the command center is engineered to uphold.
-            </motion.h3>
-          </motion.header>
-
-          <PrincipleRow principles={COMMITMENTS} />
-        </div>
-
         {/* ── Closing observation ─────────────────────────────────── */}
         <motion.blockquote
           initial={{ opacity: 0, y: 8 }}
@@ -167,10 +146,9 @@ export function OperationalIntelligence() {
           className="max-w-[var(--container-narrow)] border-l-2 border-ink-1 pl-6 text-[1.0625rem] leading-[1.65] text-ink-1 text-pretty"
         >
           <p>
-            A platform is mature not when every administrative action is possible, but when
-            the operational state of the system is legible to a single person on a single
-            page. The command center is the design surface where that legibility gets
-            committed to — and the architecture is what makes the commitment honest.
+            A platform is mature not when every administrative action is possible, but when its
+            operational state is legible to a single person on a single page. The command center
+            is the surface where that legibility gets committed to.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
             Platform maturity · Legibility as the success metric
@@ -241,30 +219,3 @@ const COMPOSITION: Array<{ index: string; module: string; signal: string; body: 
   },
 ];
 
-const COMMITMENTS: Principle[] = [
-  {
-    index: '01',
-    title: 'Single operational view',
-    description: 'One org-level surface composes every module — no per-workspace context switching for state.',
-  },
-  {
-    index: '02',
-    title: 'Quiet by default',
-    description: 'Steady-state is silent. The view earns the admin&rsquo;s attention only when something demands it.',
-  },
-  {
-    index: '03',
-    title: 'Delegated authority',
-    description: 'Org administration scoped — multi-org users switch context without escalating privilege.',
-  },
-  {
-    index: '04',
-    title: 'Composable signals',
-    description: 'Every module emits the same shape of state. New modules slot in without rewriting the view.',
-  },
-  {
-    index: '05',
-    title: 'Audit-first',
-    description: 'Every administrative event is a normalized record. Provenance is always one query away.',
-  },
-];

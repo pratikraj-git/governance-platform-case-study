@@ -25,7 +25,7 @@ export function ProblemSpace() {
         <SectionHeader
           eyebrow="01 · Problem Space"
           title="Governance kept getting solved feature by feature."
-          description="Each new identity, lifecycle, or access capability shipped as its own surface — configured per workspace, owned by no one in particular. Setting up an enterprise meant repeating the same five operations on every tenant, every time."
+          description="Identity, lifecycle, and access each shipped as their own surface — configured per workspace, owned by no one in particular."
           descriptionWidth="narrow"
         />
 
@@ -109,8 +109,7 @@ export function ProblemSpace() {
         >
           <p>
             The problem was never any one screen. It was that every screen treated governance
-            as a per-tenant concern — and the cost of that decision compounded with every new
-            workspace, every new feature, every new enterprise customer.
+            as a per-tenant concern — and the cost compounded with every new workspace.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
             Framing · Why governance became a systems problem
@@ -127,21 +126,21 @@ const PROBLEMS: Array<{ index: string; kind: string; title: string; body: string
     kind: 'Identity Provider Bloat',
     title: 'One SCIM application per workspace violates enterprise security policy.',
     body:
-      'A customer running 15–20 workspaces had to register 15–20 separate SCIM apps in their identity provider, each with its own token and base URL. Enterprise IT teams enforce a single-application architecture for security review — the platform required them to break it on entry.',
+      'Customers running 15–20 workspaces had to register 15–20 separate SCIM apps in their IdP. Enterprise IT enforces a single-application architecture — the platform required them to break it on entry.',
   },
   {
     index: '02',
     kind: 'Configuration Overhead',
     title: 'Bearer tokens and base URLs copy-pasted per workspace, with no central view.',
     body:
-      'Setting up identity for a new tenant meant repeating the same orchestration ritual: generate a token, register an app, configure attributes, map roles. Error-prone, untestable in aggregate, and impossible to audit from a single surface.',
+      'Setup repeated the same orchestration ritual per tenant: generate a token, register an app, configure attributes, map roles. Error-prone, untestable in aggregate, unauditable from one surface.',
   },
   {
     index: '03',
     kind: 'No Organizational Plane',
     title: 'User management, settings, and governance were siloed inside each workspace.',
     body:
-      'Nothing correlated tenants. No org-wide view of who had access where. No way to template policy across workspaces. The platform behaved like a federation of independent products — exactly the shape enterprise administrators were asking us to unify.',
+      'Nothing correlated tenants. No org-wide view of who had access where. No way to template policy across workspaces — a federation of independent products, exactly the shape enterprises were asking us to unify.',
   },
 ];
 

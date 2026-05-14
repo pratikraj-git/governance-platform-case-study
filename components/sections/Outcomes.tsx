@@ -25,7 +25,7 @@ export function Outcomes() {
         <SectionHeader
           eyebrow="08 · Outcomes"
           title="The platform now holds — and the architecture is what holds it."
-          description="The work was not a screen redesign; it was the construction of a layer that hadn&rsquo;t existed. The outcomes here are structural: where five fragmented surfaces stood, one composable governance layer now sits — and every later module gets to inherit it."
+          description="The work was not a redesign. It was the construction of a layer that hadn&rsquo;t existed — and where five fragmented surfaces stood, one composable governance layer now sits."
           descriptionWidth="narrow"
         />
 
@@ -47,16 +47,12 @@ export function Outcomes() {
           <motion.div variants={revealUp} className="lg:col-span-7 flex flex-col gap-5">
             <p className="text-body text-ink-2 text-pretty">
               The redesign succeeded when there was no longer a screen that owned governance.
-              SSO, SCIM, RBAC, audit, and break-glass became facets of one architectural
-              object — authored once, projected to many — and the per-workspace surfaces
-              became consumers, not authors.
+              SSO, SCIM, RBAC, audit, and break-glass became facets of one architectural object —
+              authored once, projected to many.
             </p>
             <p className="text-body text-ink-2 text-pretty">
-              That shift made the rest of the platform inherit governance properties for free.
-              Subsequent modules — content templates, parent-child inheritance, approval
-              workflows, analytics-only access — now compose against a plane that already
-              knows how to delegate authority, project policy, and emit audit. The work
-              compounds, not duplicates.
+              Subsequent modules now compose against a plane that already knows how to delegate
+              authority, project policy, and emit audit. The work compounds; it does not duplicate.
             </p>
           </motion.div>
         </motion.div>
@@ -95,10 +91,9 @@ export function Outcomes() {
               The layer absorbs new modules without re-architecting itself.
             </h3>
             <p className="mt-5 max-w-[52ch] text-body text-ink-2 text-pretty">
-              Future surfaces — content governance, parent-child inheritance, approval
-              workflows, analytics-only access — are designed to slot into the existing
-              shape: an org-level authority, a per-workspace projection, a normalized
-              audit trail. Adding modules costs less than adding workspaces used to.
+              Future surfaces slot into the existing shape — org-level authority, per-workspace
+              projection, normalized audit trail. Adding modules now costs less than adding
+              workspaces used to.
             </p>
           </motion.div>
 

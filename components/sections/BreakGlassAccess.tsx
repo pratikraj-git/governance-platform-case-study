@@ -29,7 +29,7 @@ export function BreakGlassAccess() {
         <SectionHeader
           eyebrow="05 · Break-Glass Access"
           title="Designing for failure scenarios and operational continuity."
-          description="Federated identity is the right default for the 99% — and the wrong dependency for the moment it fails. Break-Glass and temporary access decouple emergency administration from IdP availability so that the platform stays administrable when SSO does not."
+          description="Federated identity is the right default — and the wrong dependency for the moment it fails. Break-Glass decouples emergency administration from IdP availability so the platform stays administrable when SSO does not."
           descriptionWidth="narrow"
         />
 
@@ -49,9 +49,8 @@ export function BreakGlassAccess() {
               Three ways the IdP becomes the platform's failure surface.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              An enterprise admin's access to the platform is 100% dependent on the identity
-              provider. Three independent events can sever that path — and any one of them
-              leaves the workspace without an active administrator.
+              Admin access depends entirely on the identity provider. Three independent events sever
+              that path — any one leaves the workspace without an active administrator.
             </motion.p>
           </motion.header>
 
@@ -101,9 +100,8 @@ export function BreakGlassAccess() {
               Break-Glass for emergencies. Temporary access for everything that isn't.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              Both bypass SSO. Both use local passwords. The constraints are what make them
-              safe: a hard ceiling on Break-Glass users, a hard expiry on temporary ones, and
-              an audit notification on every emergency login.
+              Both bypass SSO. The constraints make them safe — a hard ceiling on Break-Glass users,
+              a hard expiry on temporary ones, an audit notification on every emergency login.
             </motion.p>
           </motion.header>
 
@@ -159,10 +157,8 @@ export function BreakGlassAccess() {
               The bypass is discoverable — never marketed.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              On SSO-enabled workspaces, the fallback is a single neutral link beneath the
-              SSO button. Standard users who shouldn't see it are told why. SSO-disabled
-              workspaces don't render the fallback at all — passwords already work; there is
-              no glass to break.
+              On SSO-enabled workspaces, the fallback is a single neutral link beneath the SSO button.
+              SSO-disabled workspaces don't render it — passwords already work; there is no glass to break.
             </motion.p>
           </motion.header>
 
@@ -182,13 +178,11 @@ export function BreakGlassAccess() {
               <p className="text-body text-ink-1 text-pretty">
                 Break-Glass and temporary users are flagged{' '}
                 <code className="rounded-sm bg-surface px-1 py-0.5 font-mono text-[12px] text-ink-1">is_scim_managed: false</code>.
-                They are never moved to Disabled by a SCIM payload — including the 72-hour grace-period
-                edge case where misconfiguration has historically deprovisioned every admin in a workspace.
-                The door survives the sync.
+                They are never deprovisioned by a SCIM payload — including the 72-hour grace-period edge
+                case that has historically locked every admin out of a workspace. The door survives the sync.
               </p>
               <p className="text-body-sm text-ink-3 text-pretty">
-                Every Break-Glass login fires an automated security notification to all administrators
-                in the workspace — emergency access never happens silently.
+                Every Break-Glass login also fires an audit notification to all admins — emergency access never happens silently.
               </p>
             </div>
           </motion.aside>
@@ -210,11 +204,9 @@ export function BreakGlassAccess() {
               Time-bounded by design — the access knows when it ends.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
-              Temporary users carry a hard-coded expiry at invite time. The platform sends
-              reminders at T-7, T-2, and T-1 days so the deadline is never a surprise. At
-              T+90 (00:00), the session is killed and the user transitions to Deactivated.
-              Admins can re-invite, convert to permanent, or delete — but they can't extend
-              past the ceiling.
+              Temporary users carry a hard-coded expiry. Reminders fire at T-7, T-2, T-1 so the
+              deadline is never a surprise. At T+90 (00:00) the session terminates and the user
+              transitions to Deactivated — admins re-invite, convert, or delete, but never extend.
             </motion.p>
           </motion.header>
 
