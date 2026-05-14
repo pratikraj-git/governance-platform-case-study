@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { SITE } from '@/lib/constants';
 import { SiteShell } from '@/components/layout/SiteShell';
+import { DevReviewTools } from '@/components/dev/DevReviewTools';
 import './globals.css';
 
 const inter = Inter({
@@ -80,6 +81,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
       <body>
         <SiteShell>{children}</SiteShell>
+        {/*
+          Dev-only review toolkit. Renders null in production builds — the
+          NODE_ENV check is statically evaluated by Next.js, so the entire
+          component tree is dead-code-eliminated from the production bundle.
+        */}
+        <DevReviewTools />
       </body>
     </html>
   );
