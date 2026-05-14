@@ -15,8 +15,9 @@ build/
 .env.local
 .env.*.local
 
-# Editor
+# Editor / OS
 .DS_Store
+**/.DS_Store
 .vscode/settings.json
 *.suo
 *.ntvs*
@@ -32,9 +33,16 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Large binary work files (archived separately)
+# Original Google-Drive export bundle and source folders (replaced by /assets and /docs)
 Work files-20260514T145534Z-3-001.zip
 Work files/
 
-# TypeScript cache
+# PDFs over GitHub's 100 MB per-file hard limit — kept locally only.
+# If they ever need to ship, migrate them to Git LFS or external storage.
+docs/business-context/sso-existing-design.pdf
+docs/prd/teammates-design.pdf
+
+# TypeScript / Vite cache
 *.tsbuildinfo
+.vite
+.eslintcache
