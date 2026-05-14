@@ -232,7 +232,7 @@ export function SCIMLifecycle() {
           className="max-w-[var(--container-narrow)] border-l-2 border-ink-1 pl-6 text-[1.0625rem] leading-[1.65] text-ink-1 text-pretty"
         >
           <p>
-            Provisioning maturity isn't how many features the setup screen has. It's how few
+            Provisioning maturity isn’t how many features the setup screen has. It’s how few
             decisions an admin re-makes when an enterprise adds its 16th workspace.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">

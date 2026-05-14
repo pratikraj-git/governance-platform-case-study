@@ -49,7 +49,7 @@ export function SSOOrchestration() {
                 A · Certificate as a lifecycle object
               </motion.p>
               <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-                Parse the cert. Show what's in it. Name the state.
+                Parse the cert. Show what’s in it. Name the state.
               </motion.h3>
               <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
                 Certs used to be inert text — pasted PEM blobs, verified out-of-band. The redesign
@@ -177,12 +177,12 @@ export function SSOOrchestration() {
           className="max-w-[var(--container-narrow)] border-l-2 border-ink-1 pl-6 text-[1.0625rem] leading-[1.65] text-ink-1 text-pretty"
         >
           <p>
-            Reliability in identity is a function of what's visible. The work was less about
+            Reliability in identity is a function of what’s visible. The work was less about
             redesigning the setup screen and more about making cert state, error provenance,
             and session continuity legible to the admin living with the configuration.
           </p>
           <footer className="mt-4 text-eyebrow uppercase text-ink-3">
-            Identity reliability · A function of what's visible
+            Identity reliability · A function of what’s visible
           </footer>
         </motion.blockquote>
       </div>

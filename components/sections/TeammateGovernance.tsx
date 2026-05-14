@@ -76,7 +76,7 @@ export function TeammateGovernance() {
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
               Activating SCIM closes specific administrative paths. Manual invites disable. Role changes
-              disable. Lifecycle moves to the sync. The point isn't to remove admin capability — it's
+              disable. Lifecycle moves to the sync. The point isn’t to remove admin capability — it’s
               to keep one source of truth at a time.
             </motion.p>
           </motion.header>
@@ -98,7 +98,7 @@ export function TeammateGovernance() {
               Offboarding is a governance event — content, not just users.
             </h3>
             <p className="mt-5 max-w-[52ch] text-body text-ink-2 text-pretty">
-              When a teammate leaves, their access disappears — their work doesn't. The platform
+              When a teammate leaves, their access disappears — their work doesn’t. The platform
               requires an explicit ownership target before delete completes. User authority may
               shift to the IdP; ownership transfer stays administrative.
             </p>

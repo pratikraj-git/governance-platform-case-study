@@ -46,7 +46,7 @@ export function BreakGlassAccess() {
               A · The single point of failure
             </motion.p>
             <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-              Three ways the IdP becomes the platform's failure surface.
+              Three ways the IdP becomes the platform’s failure surface.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
               Admin access depends entirely on the identity provider. Three independent events sever
@@ -97,7 +97,7 @@ export function BreakGlassAccess() {
               B · Two access types · One fallback layer
             </motion.p>
             <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-              Break-Glass for emergencies. Temporary access for everything that isn't.
+              Break-Glass for emergencies. Temporary access for everything that isn’t.
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
               Both bypass SSO. The constraints make them safe — a hard ceiling on Break-Glass users,
@@ -158,7 +158,7 @@ export function BreakGlassAccess() {
             </motion.h3>
             <motion.p variants={revealUp} className="max-w-[58ch] text-body text-ink-2 text-pretty">
               On SSO-enabled workspaces, the fallback is a single neutral link beneath the SSO button.
-              SSO-disabled workspaces don't render it — passwords already work; there is no glass to break.
+              SSO-disabled workspaces don’t render it — passwords already work; there is no glass to break.
             </motion.p>
           </motion.header>
 
@@ -222,7 +222,7 @@ export function BreakGlassAccess() {
           className="max-w-[var(--container-narrow)] border-l-2 border-ink-1 pl-6 text-[1.0625rem] leading-[1.65] text-ink-1 text-pretty"
         >
           <p>
-            Resilience isn't a feature added after an outage. It's a design constraint that
+            Resilience isn’t a feature added after an outage. It’s a design constraint that
             shows up in five subtle places: a quiet link below the SSO button, a flag on a
             user record, a notification to every other admin, a countdown on a calendar, and
             a session that knows how to end on its own.

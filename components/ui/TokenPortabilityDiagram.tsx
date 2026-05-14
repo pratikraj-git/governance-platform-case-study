@@ -145,7 +145,7 @@ export function TokenPortabilityDiagram({ className }: TokenPortabilityDiagramPr
             <p className="mt-1.5 text-body-sm text-ink-1 text-pretty">
               Regenerating a shared token is a blocking event: a modal lists every workspace
               referencing it, and on confirm, all fetching workspaces enter a broken state until
-              the new token is re-pushed. The operational cost is made legible before it's paid.
+              the new token is re-pushed. The operational cost is made legible before it’s paid.
             </p>
           </div>
         </motion.aside>

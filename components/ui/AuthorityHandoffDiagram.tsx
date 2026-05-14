@@ -99,7 +99,7 @@ export function AuthorityHandoffDiagram({ className }: AuthorityHandoffDiagramPr
         </span>
         <span className="text-pretty">
           The platform never forks authority — manual paths close cleanly when SCIM
-          is active, and reopen when it isn't.
+          is active, and reopen when it isn’t.
         </span>
       </motion.footer>
     </motion.div>

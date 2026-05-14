@@ -1,3 +1,6 @@
+# Local toolchain (portable Node.js for environments without global npm)
+.tools/
+
 # Dependencies
 node_modules/
 **/node_modules/
