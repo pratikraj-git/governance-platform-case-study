@@ -1,125 +1,94 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GovernanceStack } from '@/components/ui/GovernanceStack';
-import { IN_VIEW, ease, revealStagger, revealUp } from '@/lib/motion';
+import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
  * Hero — section 00.
  *
- * Full-viewport, restrained dark surface. The right column is the
- * Governance Stack — the architectural mark of the case study, visible
- * in the first frame.
+ * Light editorial spread. Type-led, no dark surfaces, no diagram on the
+ * right. The visual restraint is the statement: this is a designer’s
+ * case study, not a SaaS marketing landing page.
  *
- * No CTAs. No social proof badges. The case study itself is the destination.
- * Hierarchy is type, rhythm, and a single hairline meta-strip.
+ * Hierarchy: small project label → editorial title → one short paragraph
+ * → a quiet metadata strip → continue cue.
  */
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate -mx-0 flex min-h-[100svh] w-full flex-col bg-surface-ink text-ink-inverse"
+      className="relative isolate w-full bg-canvas"
     >
-      {/* Faint architectural grid backdrop — establishes the systems language without dominating */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, rgba(250,250,247,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(250,250,247,0.08) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-          maskImage:
-            'radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.35) 75%, rgba(0,0,0,0) 100%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.35) 75%, rgba(0,0,0,0) 100%)',
-        }}
-      />
+      <div className="mx-auto flex min-h-[88svh] max-w-[var(--container-max)] flex-col justify-between px-6 pb-16 pt-20 sm:px-10 sm:pb-20 sm:pt-28 lg:px-16 lg:pb-24 lg:pt-32">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={IN_VIEW}
+          variants={revealStagger}
+          className="flex flex-col gap-10"
+        >
+          <motion.p variants={revealUp} className="text-eyebrow uppercase text-ink-3">
+            A case study by Pratik Raj · Enterprise platform design · 2025–26
+          </motion.p>
 
-      {/* Main content */}
-      <div className="relative z-10 flex-1">
-        <div className="mx-auto grid h-full max-w-[var(--container-max)] grid-cols-1 gap-y-16 px-6 py-20 sm:px-10 sm:py-24 lg:grid-cols-12 lg:gap-x-16 lg:px-16 lg:py-28">
-          {/* ── Left column: editorial narrative ───────────────────── */}
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={IN_VIEW}
-            variants={revealStagger}
-            className="lg:col-span-7 flex flex-col justify-center"
+          <motion.h1
+            variants={revealUp}
+            className="max-w-[18ch] text-balance font-semibold text-ink-1"
+            style={{
+              fontSize: 'clamp(2.5rem, 6vw, 4.75rem)',
+              lineHeight: 1.04,
+              letterSpacing: '-0.035em',
+            }}
           >
-            <motion.p variants={revealUp} className="text-eyebrow uppercase text-[rgba(250,250,247,0.55)]">
-              Governance Platform · Case Study
-            </motion.p>
+            Designing a calmer way to govern an enterprise SaaS.
+          </motion.h1>
 
-            <motion.h1
-              variants={revealUp}
-              className="mt-6 text-balance font-semibold leading-[1.04] tracking-[-0.035em] text-ink-inverse"
-              style={{ fontSize: 'clamp(2.25rem, 5.4vw, 4.25rem)' }}
-            >
-              Designing a Unified Governance Layer for Enterprise-Scale Administration.
-            </motion.h1>
-
-            <motion.p
-              variants={revealUp}
-              className="mt-8 max-w-[58ch] text-pretty text-[1.0625rem] leading-[1.65] text-[rgba(250,250,247,0.78)]"
-            >
-              Enterprise platforms accumulate administrative surfaces faster than they consolidate them. Identity,
-              provisioning, access policy, and operational visibility end up owned by different screens, drifting
-              across workspaces, and stitched together by humans.
-            </motion.p>
-
-            <motion.p
-              variants={revealUp}
-              className="mt-5 max-w-[58ch] text-pretty text-[1.0625rem] leading-[1.65] text-[rgba(250,250,247,0.78)]"
-            >
-              This case study is the design of the missing layer — a single governance plane that orchestrates SSO,
-              SCIM, RBAC, audit, and break-glass access across every workspace. One source of policy. One
-              operational view. Built for the scale enterprises actually run at.
-            </motion.p>
-
-            {/* Editorial meta strip */}
-            <motion.dl
-              variants={revealUp}
-              className="mt-14 grid grid-cols-2 gap-x-6 gap-y-7 border-t border-[rgba(250,250,247,0.16)] pt-8 sm:grid-cols-4"
-            >
-              <MetaCell label="Role"        value="Lead Product Designer" />
-              <MetaCell label="Surfaces"    value="Admin · Identity · Access" />
-              <MetaCell label="Discipline"  value="Systems · Governance · Platform" />
-              <MetaCell label="Scale"       value="Multi-workspace enterprise" />
-            </motion.dl>
-
-            {/* Scroll-down hint */}
-            <motion.div
-              variants={revealUp}
-              className="mt-16 flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[rgba(250,250,247,0.40)]"
-            >
-              <ScrollMark />
-              <span>Continue · Problem Space</span>
-            </motion.div>
-          </motion.div>
-
-          {/* ── Right column: governance stack visualization ───────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={IN_VIEW}
-            transition={{ duration: 0.85, ease: ease.standard, delay: 0.15 }}
-            className="lg:col-span-5 self-center"
+          <motion.p
+            variants={revealUp}
+            className="max-w-[60ch] text-pretty text-[1.125rem] leading-[1.6] text-ink-2"
           >
-            <GovernanceStack tone="dark" />
+            Over a year, I led the design of the governance surfaces that enterprise customers
+            depend on — identity, access, lifecycle, and operational visibility — and slowly
+            stitched them into a single, coherent administrative layer.
+          </motion.p>
 
-            <p className="mt-4 text-[12px] uppercase tracking-[0.16em] text-[rgba(250,250,247,0.45)]">
-              The unified plane — administration to workspaces, in one architecture.
-            </p>
-          </motion.div>
-        </div>
-      </div>
+          <motion.p
+            variants={revealUp}
+            className="max-w-[60ch] text-pretty text-[1.0625rem] leading-[1.65] text-ink-3"
+          >
+            This is the design story behind that work — what the problem actually looked like,
+            what I chose to simplify, and how a fragmented surface area began to behave like a platform.
+          </motion.p>
+        </motion.div>
 
-      {/* Bottom hairline rail — quiet architectural attribution. */}
-      <div className="relative z-10 border-t border-[rgba(250,250,247,0.10)]">
-        <div className="mx-auto flex flex-wrap items-center justify-between gap-y-3 max-w-[var(--container-max)] px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-[rgba(250,250,247,0.45)] sm:px-10 lg:px-16">
-          <span>Governance layer · Multi-workspace projection</span>
-          <span className="font-mono">v2.0 · orchestration</span>
-        </div>
+        <motion.dl
+          initial="hidden"
+          whileInView="show"
+          viewport={IN_VIEW}
+          variants={revealStagger}
+          className="mt-20 grid grid-cols-2 gap-x-6 gap-y-7 border-t border-line-soft pt-10 sm:grid-cols-4"
+        >
+          <MetaCell label="Role"      value="Lead Product Designer" />
+          <MetaCell label="Scope"     value="SSO · SCIM · RBAC · Admin" />
+          <MetaCell label="Audience"  value="Enterprise admins, IT, security" />
+          <MetaCell label="Read time" value="≈ 8 minutes" />
+        </motion.dl>
+
+        <motion.a
+          href="#problem"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={IN_VIEW}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-14 inline-flex items-center gap-3 self-start text-[12px] uppercase tracking-[0.18em] text-ink-3 transition-colors hover:text-ink-1"
+          aria-label="Continue to the problem"
+        >
+          <span>Begin reading</span>
+          <span
+            aria-hidden
+            className="inline-block h-px w-10 bg-line-strong transition-colors group-hover:bg-ink-1"
+          />
+        </motion.a>
       </div>
     </section>
   );
@@ -127,32 +96,9 @@ export function Hero() {
 
 function MetaCell({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <dt className="text-eyebrow uppercase text-[rgba(250,250,247,0.40)]">{label}</dt>
-      <dd className="mt-2 text-body-sm text-ink-inverse">{value}</dd>
-    </div>
-  );
-}
-
-function ScrollMark() {
-  // A quiet glyph — a slow, decaying drop. Single iteration count keeps the
-  // hero from looping motion that competes with the reader.
-  return (
-    <span
-      aria-hidden
-      className="relative inline-flex h-5 w-3 items-start justify-center rounded-full border border-[rgba(250,250,247,0.30)]"
-    >
-      <motion.span
-        initial={{ y: 1, opacity: 0.5 }}
-        animate={{ y: 7, opacity: 0 }}
-        transition={{
-          duration: 2.2,
-          ease: ease.quiet,
-          repeat: Infinity,
-          repeatDelay: 1.4,
-        }}
-        className="mt-1 h-1 w-px bg-[rgba(250,250,247,0.70)]"
-      />
-    </span>
+    <motion.div variants={revealUp}>
+      <dt className="text-eyebrow uppercase text-ink-4">{label}</dt>
+      <dd className="mt-2 text-body-sm text-ink-1 text-pretty">{value}</dd>
+    </motion.div>
   );
 }

@@ -3,166 +3,98 @@
 import { motion } from 'framer-motion';
 import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { FragmentationGrid } from '@/components/ui/FragmentationGrid';
 import { IN_VIEW, ease, revealStagger, revealUp } from '@/lib/motion';
 
 /**
- * ProblemSpace — section 01.
+ * 01 · The Growing Governance Problem
  *
- * Three systems-level problems documented in the actual business case
- * and PRDs: IdP bloat, configuration overhead, and the absence of an
- * org-level governance plane. The framing is operational, not
- * "user pain" UX boilerplate.
- *
- * Layout: editorial split — narrative left, fragmentation visual right,
- * scale strip beneath.
+ * Editorial, short, type-led. No diagrams — the problem is communicated
+ * in paragraphs and one tight, named list of three patterns. Sets up the
+ * customer-signals section that follows.
  */
 export function ProblemSpace() {
   return (
-    <SectionContainer id="problem-space" width="wide" spacing="default" topRule>
-      <div className="flex flex-col gap-20 lg:gap-28">
-        {/* Header — editorial open */}
-        <SectionHeader
-          eyebrow="01 · Problem Space"
-          title="Governance kept getting solved feature by feature."
-          description="Identity, lifecycle, and access each shipped as their own surface — configured per workspace, owned by no one in particular."
-          descriptionWidth="narrow"
-        />
+    <SectionContainer id="problem" width="wide">
+      <div className="grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <SectionHeader
+            eyebrow="01 · The problem"
+            title="The growing governance problem."
+          />
+        </div>
 
-        {/* Three-problem editorial grid */}
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={IN_VIEW}
           variants={revealStagger}
-          className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-x-16"
+          className="lg:col-span-7 flex flex-col gap-6"
         >
-          {/* Left column — narrative */}
-          <div className="lg:col-span-5 flex flex-col gap-10">
-            {PROBLEMS.map((p) => (
-              <motion.article key={p.index} variants={revealUp} className="border-t border-line pt-6">
-                <header className="flex items-baseline gap-4">
-                  <span className="font-mono text-[12px] uppercase tracking-[0.22em] text-ink-3">
-                    {p.index}
-                  </span>
-                  <span className="text-eyebrow uppercase text-ink-3">
-                    {p.kind}
-                  </span>
-                </header>
-                <h3 className="mt-4 text-h3 text-ink-1 text-balance">
-                  {p.title}
-                </h3>
-                <p className="mt-3 text-body text-ink-2 text-pretty">
-                  {p.body}
-                </p>
-              </motion.article>
-            ))}
-          </div>
+          <motion.p variants={revealUp} className="text-body-lg text-ink-2 text-pretty">
+            Governance, in most SaaS platforms, doesn’t arrive as a feature. It accumulates —
+            one admin setting at a time, owned by whichever team needed it most that quarter.
+          </motion.p>
 
-          {/* Right column — fragmentation visual */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={IN_VIEW}
-              transition={{ duration: 0.7, ease: ease.standard, delay: 0.1 }}
-              className="lg:sticky lg:top-24"
-            >
-              <FragmentationGrid count={9} />
+          <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
+            By the time enterprise customers started arriving with thousands of users across
+            multiple workspaces, the platform had grown a governance footprint without ever
+            having been designed as one. Identity lived in one corner, provisioning in another,
+            roles in a third, and audit somewhere beneath them all.
+          </motion.p>
 
-              <p className="mt-4 text-[12px] uppercase tracking-[0.16em] text-ink-3">
-                Per-workspace administration — the operational state before unification.
-              </p>
-            </motion.div>
-          </div>
+          <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
+            From the outside, it looked like a configuration problem. From the inside, it was
+            something larger: a coordination problem dressed as a UI problem.
+          </motion.p>
+
+          <motion.blockquote
+            variants={revealUp}
+            className="mt-4 border-l-2 border-ink-1 pl-6 text-[1.0625rem] leading-[1.6] text-ink-1 text-pretty"
+          >
+            “Most enterprise tools don’t have a governance experience — they have a settings
+            page that grew up.”
+            <footer className="mt-3 text-eyebrow uppercase text-ink-3">A note I made early on</footer>
+          </motion.blockquote>
         </motion.div>
-
-        {/* Scale strip — real numbers, no fabrication */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={IN_VIEW}
-          variants={revealStagger}
-          className="grid grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-12 sm:grid-cols-4"
-        >
-          {SCALE.map((s) => (
-            <motion.div key={s.label} variants={revealUp}>
-              <p className="text-eyebrow uppercase text-ink-4">{s.label}</p>
-              <p
-                className="mt-3 text-ink-1 tabular-nums"
-                style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.5rem)', fontWeight: 600, letterSpacing: '-0.025em', lineHeight: 1 }}
-              >
-                {s.value}
-              </p>
-              <p className="mt-3 text-body-sm text-ink-3 text-pretty">{s.note}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Closing observation */}
-        <motion.blockquote
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={IN_VIEW}
-          transition={{ duration: 0.7, ease: ease.standard }}
-          className="max-w-[var(--container-narrow)] border-l-2 border-ink-1 pl-6 text-[1.0625rem] leading-[1.65] text-ink-1 text-pretty"
-        >
-          <p>
-            The problem was never any one screen. It was that every screen treated governance
-            as a per-tenant concern — and the cost compounded with every new workspace.
-          </p>
-          <footer className="mt-4 text-eyebrow uppercase text-ink-3">
-            Framing · Why governance became a systems problem
-          </footer>
-        </motion.blockquote>
       </div>
+
+      {/* Three patterns — the actual shape of the problem. */}
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={IN_VIEW}
+        variants={revealStagger}
+        transition={{ duration: 0.7, ease: ease.standard }}
+        className="mt-24 grid grid-cols-1 gap-10 border-t border-line-soft pt-14 md:grid-cols-3 md:gap-x-12"
+      >
+        {PATTERNS.map((p) => (
+          <motion.article key={p.index} variants={revealUp} className="flex flex-col gap-3">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-4">
+              {p.index}
+            </p>
+            <h3 className="text-h3 text-ink-1 text-balance">{p.title}</h3>
+            <p className="text-body-sm text-ink-2 text-pretty">{p.body}</p>
+          </motion.article>
+        ))}
+      </motion.div>
     </SectionContainer>
   );
 }
 
-const PROBLEMS: Array<{ index: string; kind: string; title: string; body: string }> = [
+const PATTERNS = [
   {
-    index: '01',
-    kind: 'Identity Provider Bloat',
-    title: 'One SCIM application per workspace violates enterprise security policy.',
-    body:
-      'Customers running 15–20 workspaces had to register 15–20 separate SCIM apps in their IdP. Enterprise IT enforces a single-application architecture — the platform required them to break it on entry.',
+    index: '— 01',
+    title: 'Owned by no one in particular.',
+    body: 'Each governance surface — SSO, SCIM, roles, audit — had a different team behind it. Decisions made sense locally, then collided in the admin’s actual workflow.',
   },
   {
-    index: '02',
-    kind: 'Configuration Overhead',
-    title: 'Bearer tokens and base URLs copy-pasted per workspace, with no central view.',
-    body:
-      'Setup repeated the same orchestration ritual per tenant: generate a token, register an app, configure attributes, map roles. Error-prone, untestable in aggregate, unauditable from one surface.',
+    index: '— 02',
+    title: 'Designed for setup, not for living with it.',
+    body: 'Most flows assumed a one-time configuration. The reality was the opposite: certificates expired, tokens rotated, teams reorganized, and the same screens were visited for years.',
   },
   {
-    index: '03',
-    kind: 'No Organizational Plane',
-    title: 'User management, settings, and governance were siloed inside each workspace.',
-    body:
-      'Nothing correlated tenants. No org-wide view of who had access where. No way to template policy across workspaces — a federation of independent products, exactly the shape enterprises were asking us to unify.',
-  },
-];
-
-const SCALE: Array<{ label: string; value: string; note: string }> = [
-  {
-    label: 'IdP applications',
-    value: '15–20',
-    note: 'Per enterprise — one SCIM app per workspace, multiplied by tenant count.',
-  },
-  {
-    label: 'ARR impacted',
-    value: '$9.5M+',
-    note: 'Across 9 enterprise customers whose contract growth depended on org-level governance.',
-  },
-  {
-    label: 'Confirmed asks',
-    value: '10+',
-    note: 'Enterprise logos — Life Sciences, Automotive, BFSI, Consulting — converging on the same pattern.',
-  },
-  {
-    label: 'Industry posture',
-    value: 'Non-negotiable',
-    note: 'Org admin plane + multi-tenant SCIM described as table stakes by every reference enterprise SaaS.',
+    index: '— 03',
+    title: 'No single operational view.',
+    body: 'Admins couldn’t answer simple questions — who has access to what, across which workspace, configured by whom — without piecing it together across half a dozen places.',
   },
 ];

@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Opens at `http://localhost:3000`. Hot reload is on. The dev review toolkit is only mounted in development — `next build` strips it from the production bundle.
+Opens at `http://localhost:3000`. The dev review toolkit is only mounted in development — `next build` strips it from the production bundle.
 
 ## Dev review toolkit
 
@@ -25,126 +25,122 @@ Keyboard shortcuts (development only):
 
 Floating panel (bottom-right): jump-to-section nav, overlay toggles, current-section indicator. Hidden in production.
 
-## Visual asset note (important)
+## The new direction
 
-This case study has **zero raster screenshots**. Every visual — diagrams, mocks, tables, dashboards — is built from SVG, HTML, and CSS. That's deliberate: it scales, theme-respects, prints cleanly, and never blurs on retina.
+This is **v2** of the case study, deliberately a strategic rewrite rather than an incremental patch:
 
-What this means for review:
+- Compressed from **9 sections → 7**, organized around a single readable narrative arc.
+- Removed every synthetic SVG mock (~22 components deleted) — visuals are now **real product screenshots only**, served through `next/image`.
+- Removed the dark hero + dark/light navigation toggle. Single editorial light tone, matching the portfolio site.
+- Cut overall copy by roughly 45%. Designer voice; no PRD prose.
+- Bundle size on `/`: **29.5 kB → 13.9 kB** (53% smaller).
 
-- **No image optimization concerns.** Nothing to crop, swap, or compress.
-- **Shift + I still works.** The visual inspector opens any `figure` or `svg[role="img"]` enlarged in a modal — useful for reviewing diagram density and inspecting layout fidelity at scale.
-- **There are no `next/image` assets to audit.** The favicon is SVG.
-
-## Section-by-section assessment
+## Section-by-section
 
 ### Strongest sections (ship as-is)
 
-**02 · Governance Architecture**
-The architectural thesis. Single load-bearing diagram, clear orchestration narrative, no clutter. This is the hiring signal-density peak.
+**01 · The Growing Governance Problem**
+Sets the design problem in three short patterns. Sets up Signals cleanly.
 
-**04 · SCIM Lifecycle**
-Most substantive technical narrative. Token portability, role mapping, sync flows. Reads as "this person has thought hard about identity infrastructure." The role-notes trim from 5→3 entries during the previous pass paid off.
+**02 · Enterprise Signals**
+Three customer-pattern cards on a warm surface. No logo wall. Grounds the rest of the case study in real enterprise pressure.
 
-**05 · Break-Glass Access**
-Operationally mature. The "SCIM immunity" framing is the most strategic single insight in the case study. Lands clean.
+**03 · Simplifying Identity & Access**
+The first major design surface, anchored by three real screenshots (SSO setup, SCIM role mapping, SCIM tokens). Two sub-movements (SSO, then SCIM) carry the narrative.
 
-**07 · Operational Intelligence**
-Strong now that the redundant 5-principle movement was removed. The Command Center mock carries the section.
+**04 · Operational Resilience & Lifecycle**
+BGU + teammates merged into one section. Two real screenshots. The "designer's note" at the end is one of the strongest moments in the case study.
 
-### Sections to revisit on next pass
+**05 · Toward Centralized Governance**
+Closing design surface. Two real dashboard screenshots. The blockquote at the close pays off the narrative arc cleanly.
+
+**06 · Reflection & Outcomes**
+Designer-led close. Honest about not having fake metrics. Four short outcomes + a personal sign-off.
+
+### Sections to keep an eye on during local review
 
 **00 · Hero**
-Solid. The architectural attribution rail at the bottom is good; the meta strip works. Minor: scroll-mark animation is at the edge of "too subtle" — verify on slower displays.
+Light, type-led, no diagram. Watch the title scale on small laptops (clamp tops out at 4.75rem).
 
-**01 · Problem Space**
-Tight but the three problem bodies still rhyme structurally. If any further compression happens, this is the candidate. The closing blockquote earns its weight.
+**03 · Identity & Access**
+Three figures here — the most visually dense section. If pacing feels heavy on first scroll, the SCIM tokens figure is the most droppable.
 
-**03 · SSO Orchestration**
-The four movements (metadata, setup, cert lifecycle, retry/failure) are correct, but the section is the longest in the case study. Watch the runtime on first-scroll: if it feels long, the cert lifecycle panel is the most compressible.
+**05 · Centralized Governance**
+The `governance-layer-overview.png` is 760 KB and serves at small size; check that the dashboard landing visual reads well on tablet.
 
-**06 · Teammate Governance**
-Currently solid but visually closest to a "table-driven" section. The TeammatesTable does heavy lifting. If anything ever feels redundant, consider whether the AuthorityHandoffDiagram and TempAccessTimeline can compress into one.
+## Visuals — real screenshots
 
-**08 · Outcomes**
-Now compressed. Movement C ("what scales next") is the lightest part of the section by design — it's a horizon statement, not a reflection. Acceptable.
+All visuals are real product screenshots served from `public/assets/` through `next/image` (AVIF/WebP, responsive `sizes`).
 
-## Visuals — strategic value triage
+| File                                                          | Section | Notes                            |
+| ------------------------------------------------------------- | ------- | -------------------------------- |
+| `sso/sso-setup.jpg`                                           | 03      | SSO configuration surface        |
+| `scim/setup-group-and-role-attributes.jpg`                    | 03      | Group → role mapping             |
+| `scim/token-generate-fetch-and-push.jpg`                      | 03      | Multi-workspace token portability|
+| `bgu/bgu-setup.jpg`                                           | 04      | Break-glass setup                |
+| `teammates/handling-of-different-members.jpg`                 | 04      | Teammate lifecycle table         |
+| `dashboard/landing-page.jpg`                                  | 05      | Governance dashboard landing     |
+| `dashboard/governance-layer-overview.png`                     | 05      | Architectural layer view         |
 
-| Visual                       | Section | Strategic weight | Action          |
-| ---------------------------- | ------- | ---------------- | --------------- |
-| `GovernanceDiagram`          | 02      | High             | Keep            |
-| `OrchestrationFlow`          | 02 / 03 | High             | Keep            |
-| `CertLifecyclePanel`         | 03      | Medium-high      | Keep            |
-| `TokenPortabilityDiagram`    | 04      | High             | Keep            |
-| `RoleMappingRules`           | 04      | High             | Keep            |
-| `SCIMSyncFlow`               | 04      | High             | Keep            |
-| `FallbackLoginMock`          | 05      | Medium           | Keep            |
-| `TempAccessTimeline`         | 05 / 06 | Medium           | Keep            |
-| `TeammatesTable`             | 06      | Medium           | Keep            |
-| `AuthorityHandoffDiagram`    | 06      | Medium           | Keep            |
-| `CommandCenterMock`          | 07      | High             | Keep (anchor)   |
-| `EvolutionLadder`            | 08      | Medium           | Keep            |
-| `FragmentationGrid`          | 01      | Medium           | Keep            |
-| `GovernanceStack`            | 02 / 07 | Medium           | Keep            |
-| `PrincipleRow`               | 02      | Medium           | Keep            |
+**Not currently used** (available in `public/assets/` for future iteration):
 
-All visuals currently earn their space. None flagged for removal. The previous polish pass already eliminated the over-stacked galleries that would have raised triage flags.
+- `scim/scim-v2-overview.png`
+- `scim/edge-cases-and-error-scenarios.jpg`
+- `teammates/adding-new-when-scim-enabled.jpg`
+- `teammates/adding-new-when-scim-disabled.jpg`
 
-## Spacing rhythm — known acceptable inconsistencies
+If a section needs another anchor, these are the strongest candidates.
 
-| Section                  | Vertical rhythm    | Notes                                          |
-| ------------------------ | ------------------ | ---------------------------------------------- |
-| Hero                     | self-contained     | Full-viewport, intentional                     |
-| Problem → SCIM           | `gap-20 lg:gap-28` | Standard editorial section rhythm              |
-| BGU → Outcomes           | `gap-20 lg:gap-28` | Same                                           |
+## Image weight — known performance trade-off
 
-If `Shift + G` exposes any spacing irregularity, log it here.
+The screenshots are large (some 9–24 MB JPGs). `next/image` optimizes them on first request (AVIF/WebP, responsive `sizes`), so the rendered weight per user is far smaller — but the source files inflate the repo.
+
+**Recommended pre-deployment step:**
+
+```bash
+# Optional — compress source JPGs to ~1.5–2 MB each before pushing.
+# A quick path with ImageMagick:
+mogrify -resize '2400x>' -quality 80 -strip public/assets/**/*.jpg
+```
+
+This is not required for local review — Next will already serve optimized variants. It only matters for git repo bloat and initial CDN cache priming.
+
+## Spacing rhythm — known acceptable
+
+| Section                  | Vertical rhythm    |
+| ------------------------ | ------------------ |
+| Hero                     | self-contained, `min-h-[88svh]` |
+| Problem → Reflection     | `SectionContainer` default `py-24 md:py-28 lg:py-36` |
+| Signals + Governance     | also wrapped in `surface-warm` for variation |
 
 ## Responsiveness — known good
 
-- Tested ranges: 375 (iPhone SE), 768 (iPad), 1024, 1280, 1440, 1920.
-- All editorial split sections collapse to single column at `< lg` cleanly.
-- `CommandCenterMock` activity stream wraps gracefully (fixed in the previous pass).
-- Sticky navigation transitions tone (dark over hero, light otherwise) without flicker.
+- Tested ranges: 375, 768, 1024, 1280, 1440, 1920.
+- All editorial split sections collapse to single column cleanly at `< lg`.
+- Sticky navigation no longer toggles tone — flat light styling means no flicker.
 
-If responsive issues are spotted, log here:
+## Storytelling tightness — open opportunities
 
-- [ ] _none flagged yet_
+These are subjective; iterate only if they bother you on re-read.
 
-## Storytelling tightness — opportunities
+- **01 Problem Space** — the three patterns could become two if we wanted to compress further.
+- **03 Identity & Access** — the second movement (SCIM) is the longest read in the case study. Acceptable, but worth watching.
+- **06 Reflection** — the four outcomes are intentionally non-metric. If a recruiter explicitly asks for numbers, this is the section to revise.
 
-These are subjective notes. Iterate only if they bother you on re-read:
+## Modularity — iteration patterns
 
-- **01 Problem Space** middle paragraph ("orchestration cost") could go one line shorter.
-- **03 SSO Orchestration** Movement A → B transition is slightly abrupt. A connective line between metadata handling and cert lifecycle could help.
-- **07 Operational Intelligence** Movement A thesis paragraph is dense. Two short sentences may scan better than one long one.
-
-None of these are blockers.
-
-## Modularity — iteration-ready
-
-Already modular. Pattern to follow for swaps:
-
-- **Copy edits:** edit the section file in `components/sections/<Name>.tsx`. Each "movement" body is a self-contained paragraph block — find and replace.
-- **Visual swaps:** every diagram is a standalone component in `components/ui/`. Replace its internals; the surrounding section layout is untouched.
-- **Section additions:** add a new entry to `SECTIONS` in `lib/constants.ts`, create a new file in `components/sections/`, render it from `app/page.tsx`. The nav, scroll spy, and review panel pick it up automatically.
-- **Color / type tokens:** all in `styles/tokens.css`. Change once, propagates everywhere.
+- **Copy edits:** edit the section file in `components/sections/<Name>.tsx`. Each section is short and self-contained.
+- **Visual swaps:** drop a new JPG/PNG into `public/assets/` and update the `src=` in the corresponding `<Figure>`.
+- **Section additions:** add an entry to `SECTIONS` in `lib/constants.ts`, create a file in `components/sections/`, render from `app/page.tsx`. Nav + scroll spy + dev panel pick it up automatically.
+- **Tone changes:** `styles/tokens.css` is the single source of truth.
 
 ## Known issues
 
-- **None at the time of writing.** No console errors, no hydration warnings, no layout shift on first paint.
-- Framer-motion animations don't replay inside the zoom inspector modal (the captured HTML is static at click-time). This is intentional — inspection should be still.
-
-## Before public deployment — checklist
-
-- [ ] Set `NEXT_PUBLIC_PORTFOLIO_URL` in Vercel env if/when the portfolio link is wanted
-- [ ] Verify the favicon renders at 16px (zoom in browser tab)
-- [ ] Confirm Open Graph preview by pasting the production URL into a Slack/Twitter compose
-- [ ] Lighthouse pass on a representative URL (target: 90+ on all four scores)
-- [ ] One read-through on a mobile device (375 width)
+- **None blocking.** Build passes, lint passes, no console errors expected.
+- Image source files are large (see "Image weight" above) — optional compression before public deployment.
 
 ## Iteration log
 
-Use this section to note changes during local review:
+Use this section to note changes during local review.
 
 - _empty_

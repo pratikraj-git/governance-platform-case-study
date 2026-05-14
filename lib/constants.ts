@@ -11,26 +11,24 @@ export const SITE = {
   shortTitle: 'Governance Platform',
   author: 'Pratik Raj',
   description:
-    'Designing scalable governance infrastructure for enterprise SaaS administration across SSO, SCIM, RBAC, lifecycle management, and operational intelligence.',
+    'A designer’s case study on simplifying enterprise governance — SSO, SCIM, RBAC, and lifecycle administration brought into one calm operational layer.',
   repoUrl: 'https://github.com/pratikraj-git/governance-platform-case-study',
   /** Set NEXT_PUBLIC_PORTFOLIO_URL in .env.local or Vercel to activate the back-link. */
-  portfolioUrl: process.env.NEXT_PUBLIC_PORTFOLIO_URL ?? '',
+  portfolioUrl: process.env.NEXT_PUBLIC_PORTFOLIO_URL ?? 'https://www.pratikrdesign.com/',
 } as const;
 
 export type SectionId =
   | 'hero'
-  | 'problem-space'
-  | 'governance-architecture'
-  | 'sso-orchestration'
-  | 'scim-lifecycle'
-  | 'break-glass-access'
-  | 'teammate-governance'
-  | 'operational-intelligence'
-  | 'outcomes';
+  | 'problem'
+  | 'signals'
+  | 'identity'
+  | 'resilience'
+  | 'governance'
+  | 'reflection';
 
 export interface SectionMeta {
   id: SectionId;
-  index: string;       // editorial section number ("01" … "08")
+  index: string;       // editorial section number ("00" … "06")
   label: string;       // nav label
   title: string;       // editorial title
   /** Whether this section appears in the top navigation rail. */
@@ -38,14 +36,11 @@ export interface SectionMeta {
 }
 
 export const SECTIONS: readonly SectionMeta[] = [
-  { id: 'hero',                     index: '00', label: 'Overview',     title: 'Overview',                inNav: true  },
-  { id: 'problem-space',            index: '01', label: 'Problem',      title: 'Problem Space',           inNav: true  },
-  { id: 'governance-architecture',  index: '02', label: 'Architecture', title: 'Governance Architecture', inNav: true  },
-  { id: 'sso-orchestration',        index: '03', label: 'SSO',          title: 'SSO Orchestration',       inNav: true  },
-  { id: 'scim-lifecycle',           index: '04', label: 'SCIM',         title: 'SCIM Lifecycle',          inNav: true  },
-  { id: 'break-glass-access',       index: '05', label: 'BGU',          title: 'Break-Glass Access',      inNav: true  },
-  // Teammate governance sits inline in the page flow but is not a top-level nav anchor.
-  { id: 'teammate-governance',      index: '06', label: 'Teammates',    title: 'Teammate Governance',     inNav: false },
-  { id: 'operational-intelligence', index: '07', label: 'Governance',   title: 'Operational Intelligence',inNav: true  },
-  { id: 'outcomes',                 index: '08', label: 'Outcomes',     title: 'Outcomes',                inNav: true  },
+  { id: 'hero',       index: '00', label: 'Overview',    title: 'Overview',                                  inNav: true },
+  { id: 'problem',    index: '01', label: 'Problem',     title: 'The Growing Governance Problem',           inNav: true },
+  { id: 'signals',    index: '02', label: 'Signals',     title: 'Enterprise Signals',                        inNav: true },
+  { id: 'identity',   index: '03', label: 'Identity',    title: 'Simplifying Identity & Access',             inNav: true },
+  { id: 'resilience', index: '04', label: 'Resilience',  title: 'Operational Resilience & Lifecycle',       inNav: true },
+  { id: 'governance', index: '05', label: 'Governance',  title: 'Toward Centralized Governance',             inNav: true },
+  { id: 'reflection', index: '06', label: 'Reflection',  title: 'Reflection & Outcomes',                     inNav: true },
 ] as const;

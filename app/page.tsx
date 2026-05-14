@@ -1,32 +1,33 @@
 import { Hero } from '@/components/sections/Hero';
 import { ProblemSpace } from '@/components/sections/ProblemSpace';
-import { GovernanceArchitecture } from '@/components/sections/GovernanceArchitecture';
-import { SSOOrchestration } from '@/components/sections/SSOOrchestration';
-import { SCIMLifecycle } from '@/components/sections/SCIMLifecycle';
-import { BreakGlassAccess } from '@/components/sections/BreakGlassAccess';
-import { TeammateGovernance } from '@/components/sections/TeammateGovernance';
-import { OperationalIntelligence } from '@/components/sections/OperationalIntelligence';
-import { Outcomes } from '@/components/sections/Outcomes';
+import { EnterpriseSignals } from '@/components/sections/EnterpriseSignals';
+import { IdentityAccess } from '@/components/sections/IdentityAccess';
+import { OperationalResilience } from '@/components/sections/OperationalResilience';
+import { CentralizedGovernance } from '@/components/sections/CentralizedGovernance';
+import { Reflection } from '@/components/sections/Reflection';
 
 /**
- * Home — single editorial page composed of the 9 site-structure sections.
+ * Home — single editorial page composed of seven highly-consumable sections.
  *
- * Each section is a self-contained composition built from foundation
- * primitives. No detailed content is committed at this phase; the goal
- * is information architecture, visual system, and editorial rhythm.
+ * Narrative arc:
+ *   00 Overview        → A designer’s introduction to the work.
+ *   01 Problem         → How governance quietly grew into a systems problem.
+ *   02 Signals         → What enterprise customers were actually asking for.
+ *   03 Identity        → SSO + SCIM, simplified without being simplified away.
+ *   04 Resilience      → Break-glass and lifecycle — designing for the long now.
+ *   05 Governance      → The dashboard that emerges when surfaces agree.
+ *   06 Reflection      → What changed, and what was learned.
  */
 export default function Home() {
   return (
     <>
       <Hero />
       <ProblemSpace />
-      <GovernanceArchitecture />
-      <SSOOrchestration />
-      <SCIMLifecycle />
-      <BreakGlassAccess />
-      <TeammateGovernance />
-      <OperationalIntelligence />
-      <Outcomes />
+      <EnterpriseSignals />
+      <IdentityAccess />
+      <OperationalResilience />
+      <CentralizedGovernance />
+      <Reflection />
     </>
   );
 }
