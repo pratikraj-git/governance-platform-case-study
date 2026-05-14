@@ -1,0 +1,32 @@
+# Local toolchain — portable Node.js install used in this workspace only.
+.tools/
+
+# Reference docs / PRD / archive folders not part of the published case study.
+docs/
+context/
+Work files/
+Work\ files/
+Work*files*/
+*.zip
+dashboard-prototype/
+
+# Build + dependency artifacts — Vercel builds them in its own environment.
+.next/
+node_modules/
+tsconfig.tsbuildinfo
+
+# Local-only review notes + AI review briefs — keep them in the repo on
+# GitHub for reference, but no need to ship them to the public CDN.
+REVIEW_NOTES.md
+GOVERNANCE_CASE_STUDY_V2_AI_REVIEW.md
+public/assets/logos/README.md
+
+# OS / editor cruft.
+.DS_Store
+*.log
+.cursor/
+.idea/
+.vscode/
+
+# Vercel CLI artifacts (already at deploy root).
+.vercel/

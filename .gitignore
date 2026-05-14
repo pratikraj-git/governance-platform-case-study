@@ -52,3 +52,4 @@ docs/prd/teammates-design.pdf
 .vite
 .eslintcache
 .turbo
+.vercel
