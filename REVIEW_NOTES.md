@@ -42,6 +42,56 @@ Five figures remain — one per major design surface — at the smaller, more cu
 
 ---
 
+## What changed in the precision refinement pass (v2.2)
+
+**Hero rewritten**
+
+The hero no longer carries autobiographical narration or duration framing ("over a year", "I led"). It is now a calm editorial title page:
+
+- Eyebrow: `Enterprise platform design · Case study`
+- H1: `Governance Infrastructure for Enterprise-Scale SaaS Administration`
+- Subtext: discipline-led description of governance systems across enterprise-scale SaaS
+- Meta strip: Discipline · Scope · Audience · Read time (no personal role attribution)
+
+**Editorial crops on every figure**
+
+`Figure` now accepts two new optional props — `aspect` and `objectPosition` — that turn the frame into a CSS-level crop window over the source image. This solves the central visual problem: the source files in `public/assets/` are large Figma boards (the SSO file is 8302 × 10855; the SCIM role-mapping file is 20215 × 4287), and rendering them at native aspect dumped the whole board.
+
+| Figure | Source aspect | Frame aspect | Anchor | What's shown |
+|---|---|---|---|---|
+| `sso-setup.jpg` | 0.76 (vertical board) | `16/10` | `center top` | The canonical SSO setup state at the top of the board |
+| `setup-group-and-role-attributes.jpg` | 4.72 (horizontal board) | `16/10` | `left center` | The leftmost role-mapping state |
+| `bgu-setup.jpg` | 3.50 (horizontal board) | `16/10` | `left center` | The leftmost BGU configuration state |
+| `handling-of-different-members.jpg` | 2.20 (multi-state board) | `16/10` | `left center` | The canonical teammates lifecycle table |
+| `dashboard/landing-page.jpg` | 1.55 (near single screen) | `16/10` | `center top` | The dashboard, anchored to the top |
+
+The result: every figure now renders as a tight editorial crop, not a Figma board dump. Source files don't need re-exporting to ship.
+
+### Fine-tuning a crop
+
+Open the section file (e.g. `components/sections/IdentityAccess.tsx`) and adjust the props on the `<Figure>`:
+
+```tsx
+<Figure
+  src="/assets/sso/sso-setup.jpg"
+  aspect="16/10"               // or "16/9", "4/3", "3/2", "auto"
+  objectPosition="center top"  // or "left center", "50% 18%", etc.
+  ...
+/>
+```
+
+`objectPosition` accepts any CSS object-position value — percentages, keywords, or pixel values — so you can dial each crop precisely.
+
+### When real single-screen exports drop in
+
+When you re-export single screens from Figma and replace the board files at the same paths, just remove `aspect` and `objectPosition` from the corresponding `<Figure>` to let the image render at native aspect. Update `width` / `height` if the new export has different dimensions.
+
+**Logo strip caption removed**
+
+The implementation-facing caption beneath the logo strip is gone. The strip now stands on its eyebrow + wordmarks alone.
+
+---
+
 ## Internal-info redaction checklist (do before public deploy)
 
 The screenshots in `public/assets/` are raw Figma exports. Before pushing this site to a public URL, apply the following per-image edits (any image editor — Pixelmator / Photopea / Figma export). Each item lists the **likely sensitive elements** you should crop, blur, or replace with generic placeholders.

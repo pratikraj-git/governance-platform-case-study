@@ -96,18 +96,15 @@ export function EnterpriseSignals() {
       </motion.p>
 
       {/*
-        Closing logo strip — industries / customers shaping these signals.
-        Render order matches the four industries named in the section's intro
-        paragraph above. Each entry can be upgraded from a typographic
-        wordmark to a real brand SVG by dropping the file into
-        public/assets/logos/ and setting `src` on the corresponding entry.
-        See REVIEW_NOTES.md for the swap procedure and permission checklist.
+        Closing strip — the industries shaping these signals. Each entry
+        can be upgraded from a typographic wordmark to a real brand SVG
+        by dropping the file into public/assets/logos/ and setting `src`
+        on the corresponding entry. See REVIEW_NOTES.md for guidance.
       */}
       <div className="mt-20 border-t border-line-soft pt-12">
         <LogoStrip
           eyebrow="Industries shaping these signals"
           logos={CUSTOMER_LOGOS}
-          caption="Industries are named editorially; specific customers are anonymized. Drop a real brand SVG into public/assets/logos/ and update the array to replace any wordmark with a logo."
         />
       </div>
     </SectionContainer>

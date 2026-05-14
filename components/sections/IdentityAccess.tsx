@@ -63,10 +63,12 @@ export function IdentityAccess() {
         >
           <Figure
             src="/assets/sso/sso-setup.jpg"
-            alt="SSO setup screen showing identity provider configuration, metadata, and certificate state."
-            width={2400}
-            height={1500}
-            caption="The setup reads the IdP metadata and parses the certificate, then surfaces the four observable states inline. Admins stop translating their IdP — they review it."
+            alt="SSO setup — identity provider configuration with metadata parsed and certificate state surfaced inline."
+            width={8302}
+            height={10855}
+            aspect="16/10"
+            objectPosition="center top"
+            caption="The settled SSO setup state. Metadata is parsed, the certificate is read, and the four observable states are surfaced inline — so admins review their IdP rather than translate it."
           />
         </motion.div>
       </div>
@@ -106,10 +108,12 @@ export function IdentityAccess() {
         >
           <Figure
             src="/assets/scim/setup-group-and-role-attributes.jpg"
-            alt="SCIM role and group attribute mapping screen with source-of-truth indicators and validation states."
-            width={2400}
-            height={1500}
-            caption="Role mapping is the highest-stakes screen in SCIM. Precedence is explicit, validation runs against the configured IdP groups, and two rules can never silently disagree."
+            alt="SCIM role and group attribute mapping — precedence and validation against the configured identity provider."
+            width={20215}
+            height={4287}
+            aspect="16/10"
+            objectPosition="left center"
+            caption="The role-mapping surface. Precedence is explicit, validation runs against the configured IdP groups, and two rules can never silently disagree — the highest-stakes screen in the SCIM lifecycle."
           />
         </motion.div>
       </div>

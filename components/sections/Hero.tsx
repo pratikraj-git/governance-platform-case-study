@@ -6,12 +6,9 @@ import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 /**
  * Hero — section 00.
  *
- * Light editorial spread. Type-led, no dark surfaces, no diagram on the
- * right. The visual restraint is the statement: this is a designer’s
- * case study, not a SaaS marketing landing page.
- *
- * Hierarchy: small project label → editorial title → one short paragraph
- * → a quiet metadata strip → continue cue.
+ * Editorial title page for a governance case study. No autobiographical
+ * narration, no duration framing. The hero names the subject and the
+ * scope; the sections that follow do the storytelling.
  */
 export function Hero() {
   return (
@@ -28,36 +25,36 @@ export function Hero() {
           className="flex flex-col gap-10"
         >
           <motion.p variants={revealUp} className="text-eyebrow uppercase text-ink-3">
-            A case study by Pratik Raj · Enterprise platform design · 2025–26
+            Enterprise platform design · Case study
           </motion.p>
 
           <motion.h1
             variants={revealUp}
-            className="max-w-[18ch] text-balance font-semibold text-ink-1"
+            className="max-w-[22ch] text-balance font-semibold text-ink-1"
             style={{
               fontSize: 'clamp(2.5rem, 6vw, 4.75rem)',
               lineHeight: 1.04,
               letterSpacing: '-0.035em',
             }}
           >
-            Designing a calmer way to govern an enterprise SaaS.
+            Governance Infrastructure for Enterprise-Scale SaaS Administration.
           </motion.h1>
 
           <motion.p
             variants={revealUp}
-            className="max-w-[60ch] text-pretty text-[1.125rem] leading-[1.6] text-ink-2"
+            className="max-w-[62ch] text-pretty text-[1.125rem] leading-[1.6] text-ink-2"
           >
-            Over a year, I led the design of the governance surfaces that enterprise customers
-            depend on — identity, access, lifecycle, and operational visibility — and slowly
-            stitched them into a single, coherent administrative layer.
+            Designing governance systems that simplify identity, access, lifecycle management,
+            and operational administration across enterprise-scale SaaS environments.
           </motion.p>
 
           <motion.p
             variants={revealUp}
-            className="max-w-[60ch] text-pretty text-[1.0625rem] leading-[1.65] text-ink-3"
+            className="max-w-[62ch] text-pretty text-[1.0625rem] leading-[1.65] text-ink-3"
           >
-            This is the design story behind that work — what the problem actually looked like,
-            what I chose to simplify, and how a fragmented surface area began to behave like a platform.
+            The study traces how separate administrative surfaces — single sign-on, provisioning,
+            break-glass access, and teammate lifecycle — were brought into a single, coherent
+            governance layer.
           </motion.p>
         </motion.div>
 
@@ -68,10 +65,10 @@ export function Hero() {
           variants={revealStagger}
           className="mt-20 grid grid-cols-2 gap-x-6 gap-y-7 border-t border-line-soft pt-10 sm:grid-cols-4"
         >
-          <MetaCell label="Role"      value="Lead Product Designer" />
-          <MetaCell label="Scope"     value="SSO · SCIM · RBAC · Admin" />
-          <MetaCell label="Audience"  value="Enterprise admins, IT, security" />
-          <MetaCell label="Read time" value="≈ 8 minutes" />
+          <MetaCell label="Discipline" value="Enterprise platform design" />
+          <MetaCell label="Scope"      value="SSO · SCIM · Lifecycle · Governance" />
+          <MetaCell label="Audience"   value="Enterprise admins, IT, security" />
+          <MetaCell label="Read time"  value="≈ 8 minutes" />
         </motion.dl>
 
         <motion.a

@@ -1,6 +1,6 @@
-# Governance Platform Case Study — v2.1 AI Review Brief
+# Governance Platform Case Study — v2.2 AI Review Brief
 
-**Purpose:** Single markdown document to hand to an AI agent (or human reviewer) for structured feedback on the **current shipped direction** of the case study website (v2 editorial direction + v2.1 refinement pass: flow diagrams, screenshot curation, three-scale figure system).
+**Purpose:** Single markdown document to hand to an AI agent (or human reviewer) for structured feedback on the **current shipped direction** of the case study website (v2 editorial direction + v2.1 flow diagrams + **v2.2 precision refinement**: depersonalized hero, editorial crop framing on every figure, logo-strip caption removed).
 
 **Repository:** `https://github.com/pratikraj-git/governance-platform-case-study`  
 **Author:** Pratik Raj  
@@ -57,9 +57,11 @@ Enterprise governance **accumulated** across disconnected admin surfaces. **Ente
 
 ### 00 · Hero (`components/sections/Hero.tsx`, `id="hero"`)
 
-- **Headline:** “Designing a calmer way to govern an enterprise SaaS.”
-- **Voice:** First person (“I led…”, “This is the design story…”).
-- **Meta strip:** Role, scope, audience, read time (~8 min).
+- **Eyebrow:** `Enterprise platform design · Case study`
+- **Headline:** “Governance Infrastructure for Enterprise-Scale SaaS Administration.”
+- **Voice:** Discipline-led, no autobiographical narration or duration framing.
+- **Subtext:** Two short paragraphs describing the scope and the arc — identity, access, lifecycle, operational administration; the gathering of separate surfaces into one governance layer.
+- **Meta strip:** Discipline · Scope · Audience · Read time (~8 min).
 - **Visual:** None (type-led opener).
 - **CTA:** “Begin reading” → `#problem`.
 
@@ -113,15 +115,17 @@ Enterprise governance **accumulated** across disconnected admin surfaces. **Ente
 
 ## 6. Visual inventory (5 screenshots + 4 flow diagrams)
 
-**Screenshots used on the page (curated from 7 → 5 in the v2.1 pass):**
+**Screenshots used on the page (curated from 7 → 5 in v2.1, then editorially cropped in v2.2):**
 
-| Public URL path | Section | Scale |
-|---|---|---|
-| `/assets/sso/sso-setup.jpg` | Identity (Movement A) | `support` (default) |
-| `/assets/scim/setup-group-and-role-attributes.jpg` | Identity (Movement B) | `support` |
-| `/assets/bgu/bgu-setup.jpg` | Resilience (Movement A) | `support` |
-| `/assets/teammates/handling-of-different-members.jpg` | Resilience (Movement B) | `support` |
-| `/assets/dashboard/landing-page.jpg` | Governance | `support` |
+| Public URL path | Section | Scale | Crop frame | Anchor |
+|---|---|---|---|---|
+| `/assets/sso/sso-setup.jpg` | Identity (Movement A) | `support` | `16/10` | `center top` |
+| `/assets/scim/setup-group-and-role-attributes.jpg` | Identity (Movement B) | `support` | `16/10` | `left center` |
+| `/assets/bgu/bgu-setup.jpg` | Resilience (Movement A) | `support` | `16/10` | `left center` |
+| `/assets/teammates/handling-of-different-members.jpg` | Resilience (Movement B) | `support` | `16/10` | `left center` |
+| `/assets/dashboard/landing-page.jpg` | Governance | `support` | `16/10` | `center top` |
+
+**Why crop framing matters here:** the source assets are large Figma boards (e.g. the SSO file is 8,302 × 10,855; the SCIM role-mapping file is 20,215 × 4,287). Rendering them at native aspect dumped the whole board. The v2.2 `Figure` component accepts `aspect` and `objectPosition` props that wrap each image in a CSS-level crop window — so every figure now reads as a single, intentional operational moment without requiring a re-export.
 
 **Removed in v2.1:**
 
@@ -144,7 +148,7 @@ Enterprise governance **accumulated** across disconnected admin surfaces. **Ente
 | C | Resilience | SSO unavailable → Break-glass access → Temporary continuity → Lifecycle recovery |
 | D | Governance | Workspaces → Identity → Teammates → Auditability → Operational visibility |
 
-**Figure implementation:** `components/ui/Figure.tsx`. Three-scale system: `hero` (1240px), `support` (880px, default), `detail` (680px). Frame chrome was removed in v2.1 — figures render as a bare image with a single caption.
+**Figure implementation:** `components/ui/Figure.tsx`. Three-scale system: `hero` (1240px), `support` (880px, default), `detail` (680px). Frame chrome was removed in v2.1 — figures render as a bare image with a single caption. v2.2 adds optional `aspect` (`auto` / `16/10` / `16/9` / `4/3` / `3/2`) and `objectPosition` props that turn the frame into a CSS-level crop window over the source image.
 
 **Note on source JPG size:** Files are large (9–24 MB each); `next/image` serves optimized formats to browsers. Internal-information redaction checklist for each screenshot is in `REVIEW_NOTES.md`.
 
@@ -218,7 +222,7 @@ Copy any of these into your agent chat along with this file:
 
 ## 12. Document version
 
-This brief describes the **v2.1 refinement**: real screenshots curated 7 → 5, four monochrome flow diagrams added, three-scale Figure system, frame chrome removed. The IA (seven sections), tone (warm light editorial), and designer voice are unchanged from v2. Regenerate this file if the IA or section files change materially.
+This brief describes the **v2.2 precision refinement**: hero depersonalized (no autobiographical or duration framing, new title "Governance Infrastructure for Enterprise-Scale SaaS Administration"), every figure now rendered through an editorial CSS-level crop window via the extended `Figure` component, implementation-facing caption on the logo strip removed. The v2.1 substrate (7 → 5 screenshots, four monochrome flow diagrams, three-scale Figure system, frame chrome removed) is retained. The IA (seven sections), tone (warm light editorial), and designer voice are unchanged from v2. Regenerate this file if the IA or section files change materially.
 
 ---
 

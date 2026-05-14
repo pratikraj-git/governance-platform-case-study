@@ -64,10 +64,12 @@ export function OperationalResilience() {
         >
           <Figure
             src="/assets/bgu/bgu-setup.jpg"
-            alt="Break-glass access setup with a hard ceiling on emergency users, an immutable flag, and audit notification rules."
-            width={2400}
-            height={1500}
-            caption="A hard ceiling on emergency users, an immutable sync-exempt flag, and a notification rule on every login. The constraints make it safe — not the absence of the feature."
+            alt="Break-glass access setup — emergency user ceiling, sync-exempt flag, and audit-notification rules."
+            width={16105}
+            height={4595}
+            aspect="16/10"
+            objectPosition="left center"
+            caption="A hard ceiling on emergency users, an immutable sync-exempt flag, and a notification rule on every login. Constraints — not absence of the feature — make this safe."
           />
         </motion.div>
       </div>
@@ -109,8 +111,10 @@ export function OperationalResilience() {
           <Figure
             src="/assets/teammates/handling-of-different-members.jpg"
             alt="Teammates table — four lifecycle states with source-of-truth indicators per row."
-            width={2400}
-            height={1500}
+            width={17976}
+            height={8158}
+            aspect="16/10"
+            objectPosition="left center"
             caption="Each row carries a small indicator of who manages it. Read-only states are explicit. The action menu adapts to the row, not the page."
           />
         </motion.div>

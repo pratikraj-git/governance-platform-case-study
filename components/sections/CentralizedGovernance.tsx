@@ -69,9 +69,11 @@ export function CentralizedGovernance() {
         >
           <Figure
             src="/assets/dashboard/landing-page.jpg"
-            alt="Governance dashboard — workspaces grouped by posture, attention items, a quiet activity feed."
-            width={2400}
-            height={1500}
+            alt="Governance dashboard — workspaces grouped by posture, attention items, and a quiet activity feed."
+            width={6065}
+            height={3922}
+            aspect="16/10"
+            objectPosition="center top"
             caption="Workspaces grouped by posture, attention items pinned to the top, and an activity feed that anchors the page in real operational signal."
           />
         </motion.div>
