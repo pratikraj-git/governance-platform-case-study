@@ -170,6 +170,20 @@ export interface KeyDecisionProps {
   /** Optional element rendered after the tradeoff — a pull quote, a
    *  metric, a one-line attribution. Keep ≤ 25 words. */
   footnote?: React.ReactNode;
+  /**
+   * Optional supporting visual evidence rendered at the *foot* of the
+   * prose column. Use for tiny contextual crops or miniature embeds
+   * that reinforce the decision — never for hero images. Two small
+   * `<Figure scale="detail" />` items in a 2-col grid is the typical
+   * shape; the prose still dominates the column above.
+   */
+  evidence?: React.ReactNode;
+  /**
+   * Optional eyebrow label printed above the evidence block, e.g.
+   * "Evidence · Invitation constraints". Reads as a quiet caption,
+   * not as a section header.
+   */
+  evidenceLabel?: string;
   /** Anchor id for deep-linking from a preview index. */
   id?: string;
   className?: string;
@@ -181,6 +195,8 @@ export function KeyDecision({
   why,
   tradeoff,
   footnote,
+  evidence,
+  evidenceLabel,
   id,
   className,
 }: KeyDecisionProps) {
@@ -211,6 +227,16 @@ export function KeyDecision({
           <p className="border-t border-line-soft pt-5 text-[13px] italic leading-[1.65] text-ink-3 text-pretty">
             {footnote}
           </p>
+        )}
+        {evidence && (
+          <div className="flex flex-col gap-4 border-t border-line-soft pt-6">
+            {evidenceLabel && (
+              <p className="font-mono text-[10.5px] uppercase tracking-[0.20em] text-ink-3">
+                {evidenceLabel}
+              </p>
+            )}
+            {evidence}
+          </div>
         )}
       </div>
     </motion.article>

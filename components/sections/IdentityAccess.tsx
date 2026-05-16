@@ -5,6 +5,7 @@ import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Figure } from '@/components/ui/Figure';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
+import { ArtifactLink } from '@/components/ui/ArtifactLink';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -62,16 +63,39 @@ export function IdentityAccess() {
           className="lg:col-span-7"
         >
           <Figure
-            src="/assets/sso/sso-setup.jpg"
-            alt="SSO setup — identity provider configuration with metadata parsed and certificate state surfaced inline."
-            width={8302}
-            height={10855}
-            aspect="16/10"
-            objectPosition="center top"
-            caption="The settled SSO setup state. Metadata is parsed, the certificate is read, and the four observable states are surfaced inline — so admins review their IdP rather than translate it."
+            src="/assets/screens/sso/direct-sign-in.png"
+            alt="Direct SSO sign-in — the canonical authentication surface every admin sees first."
+            width={2203}
+            height={1093}
+            caption="The canonical sign-in. The default state of the page when the identity provider is reachable."
           />
         </motion.div>
       </div>
+
+      {/* SSO — routing outcome below the hero */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={IN_VIEW}
+        transition={{ duration: 0.7 }}
+        className="mt-12 flex justify-center lg:mt-16"
+      >
+        <Figure
+          src="/assets/screens/sso/domain-identified-sso.png"
+          alt="Domain identified — the system recognises the enterprise domain and continues on the SSO route."
+          width={1742}
+          height={650}
+          scale="support"
+          caption="Routing outcome. When the domain is identified and SSO is healthy, the surface stays quiet — no fallback is advertised."
+        />
+      </motion.div>
+
+      <ArtifactLink
+        href="/workflows#sso-break-glass-screens"
+        eyebrow="Architecture artifact"
+        label="View the full SSO + identity routing flow"
+        className="mx-auto"
+      />
 
       {/* SCIM Movement — anchor */}
       <div className="mt-28 grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12">
@@ -107,16 +131,39 @@ export function IdentityAccess() {
           className="lg:col-span-7"
         >
           <Figure
-            src="/assets/scim/setup-group-and-role-attributes.jpg"
-            alt="SCIM role and group attribute mapping — precedence and validation against the configured identity provider."
-            width={20215}
-            height={4287}
-            aspect="16/10"
-            objectPosition="left center"
-            caption="The role-mapping surface. Precedence is explicit, validation runs against the configured IdP groups, and two rules can never silently disagree — the highest-stakes screen in the SCIM lifecycle."
+            src="/assets/screens/scim/state-wise-messages.png"
+            alt="SCIM state-wise messages — operational guidance shown for each connection state, surfaced inline on the setup page."
+            width={1654}
+            height={952}
+            caption="State-aware messaging. Provisioning is asynchronous, and admins were left guessing whether sync was healthy — until each operational condition got a short, specific recovery message of its own."
           />
         </motion.div>
       </div>
+
+      {/* SCIM — full sequence below the hero: Setup → Active Sync → Failure Recovery */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={IN_VIEW}
+        transition={{ duration: 0.7 }}
+        className="mt-12 flex justify-center lg:mt-16"
+      >
+        <Figure
+          src="/assets/screens/scim/operational-states.png"
+          alt="SCIM operational states — the four observable conditions of a SCIM connection, surfaced as a sequence on the setup page."
+          width={4528}
+          height={1028}
+          scale="hero"
+          caption="Setup → Active sync → Failure recovery. The configuration page now reports its own ongoing state, so support escalations stop being the first signal."
+        />
+      </motion.div>
+
+      <ArtifactLink
+        href="/workflows#scim-orchestration-screens"
+        eyebrow="Architecture artifact"
+        label="View SCIM orchestration across enterprise tenants"
+        className="mx-auto"
+      />
 
       {/* Flow B — Identity lifecycle. Connects SSO → SCIM → operational lifecycle. */}
       <div className="mt-28 border-t border-line-soft pt-14">

@@ -5,6 +5,7 @@ import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Figure } from '@/components/ui/Figure';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
+import { ArtifactLink } from '@/components/ui/ArtifactLink';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -62,17 +63,32 @@ export function OperationalResilience() {
           transition={{ duration: 0.7 }}
           className="lg:col-span-7"
         >
-          <Figure
-            src="/assets/bgu/bgu-setup.jpg"
-            alt="Break-glass access setup — emergency user ceiling, sync-exempt flag, and audit-notification rules."
-            width={16105}
-            height={4595}
-            aspect="16/10"
-            objectPosition="left center"
-            caption="A hard ceiling on emergency users, an immutable sync-exempt flag, and a notification rule on every login. Constraints — not absence of the feature — make this safe."
-          />
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+            <Figure
+              src="/assets/screens/sso/domain-identified-bgu-emergency.png"
+              alt="Domain identified — break-glass user (emergency access). The fallback for when the identity provider is unavailable."
+              width={1194}
+              height={859}
+            />
+            <Figure
+              src="/assets/screens/sso/domain-identified-bgu-active-temp.png"
+              alt="Domain identified — break-glass user (active temporary teammate). The fallback for in-flight temporary access."
+              width={1295}
+              height={859}
+            />
+          </div>
+          <p className="mt-5 max-w-[var(--container-prose)] text-body-sm text-ink-3 text-pretty">
+            Identity routing adapted authentication paths based on enterprise governance state — an emergency fallback when the IdP was unreachable, a narrower one for in-flight temporary access.
+          </p>
         </motion.div>
       </div>
+
+      <ArtifactLink
+        href="/workflows#sso-break-glass-screens"
+        eyebrow="Architecture artifact"
+        label="View governed recovery paths + remaining auth states"
+        className="mx-auto"
+      />
 
       {/* Teammate Lifecycle */}
       <div className="mt-28 grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12">
@@ -109,16 +125,57 @@ export function OperationalResilience() {
           className="lg:col-span-7"
         >
           <Figure
-            src="/assets/teammates/handling-of-different-members.jpg"
-            alt="Teammates table — four lifecycle states with source-of-truth indicators per row."
-            width={17976}
-            height={8158}
-            aspect="16/10"
-            objectPosition="left center"
-            caption="Each row carries a small indicator of who manages it. Read-only states are explicit. The action menu adapts to the row, not the page."
+            src="/assets/screens/teammates/teammates-view.png"
+            alt="Teammates table — lifecycle state surfaced as a column on every row."
+            width={1448}
+            height={908}
+            caption="Each row carries the state it is in — managed, guest, temporary, inactive. Lifecycle becomes operational state, not a setting buried in a drawer."
           />
         </motion.div>
       </div>
+
+      {/* Teammates — validity handling below the hero */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={IN_VIEW}
+        transition={{ duration: 0.7 }}
+        className="mt-12 flex justify-center lg:mt-16"
+      >
+        <Figure
+          src="/assets/screens/teammates/validity-handling.png"
+          alt="Teammates validity handling — temporary access modelled as a first-class property of the row, with a visible expiry."
+          width={2938}
+          height={908}
+          scale="hero"
+          caption="Temporary access modelled as a property of the row, not a separate page. Permissions become time-aware; membership becomes operational state."
+        />
+      </motion.div>
+
+      {/* Teammates — guest invite (one representative variant) */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={IN_VIEW}
+        transition={{ duration: 0.7 }}
+        className="mt-12 flex justify-center lg:mt-16"
+      >
+        <Figure
+          src="/assets/screens/teammates/add-guests.png"
+          alt="Add teammates — Guests tab. The invite path for time-bounded guest access, with SCIM-enabled restrictions in place."
+          width={1448}
+          height={908}
+          scale="support"
+          caption="Guest invite. Time-bounded by default, with SCIM-enabled restrictions held on the invite surface — not enforced silently after the fact."
+        />
+      </motion.div>
+
+      <ArtifactLink
+        href="/decisions#governance-beyond-authentication"
+        eyebrow="Strategic decision"
+        label="View governance beyond authentication"
+        className="mx-auto"
+      />
 
       {/* Flow C — Operational resilience. Connects failure to recovery. */}
       <div className="mt-28 border-t border-line-soft pt-14">

@@ -31,6 +31,7 @@ import {
   KeyDecisionsList,
   KeyDecisionsSection,
 } from './_primitives';
+import { Figure } from '@/components/ui/Figure';
 
 /* ──────────────────────────────────────────────────────────────────── *
  *  01 · Centralised governance without removing ENT autonomy
@@ -92,6 +93,27 @@ export function GovernanceBeyondAuthenticationDecision() {
       title="Governance beyond authentication."
       why="Most of the operational risk in an enterprise account lives in the years after a teammate is invited — guest access that lingers past the project, temporary roles that never expire, inactive accounts that retain permissions long after a team has moved on."
       tradeoff="We modelled the lifecycle as a state machine instead of a setting. Six explicit states, named transitions, and three cross-cutting concerns — so the interface answers questions the configuration page never asked, and the data model finally agrees with how enterprises already think about membership."
+      evidenceLabel="Evidence · Invitation constraints"
+      evidence={
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+          <Figure
+            src="/assets/screens/teammates/invite-error-outside-domain.png"
+            alt="Teammate invitation error — an outside-domain address blocked at the invite step, with the constraint named explicitly."
+            width={1448}
+            height={908}
+            scale="detail"
+            caption="Outside-domain block. The constraint is named, not generic."
+          />
+          <Figure
+            src="/assets/screens/teammates/invite-error-non-whitelisted.png"
+            alt="Teammate invitation error — a non-whitelisted domain blocked at the invite step, distinct from the outside-domain case."
+            width={1448}
+            height={908}
+            scale="detail"
+            caption="Non-whitelisted-domain block. A distinct constraint, on purpose."
+          />
+        </div>
+      }
     />
   );
 }

@@ -5,6 +5,7 @@ import { SectionContainer } from '@/components/layout/SectionContainer';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Figure } from '@/components/ui/Figure';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
+import { ArtifactLink } from '@/components/ui/ArtifactLink';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -68,16 +69,42 @@ export function CentralizedGovernance() {
           className="lg:col-span-7"
         >
           <Figure
-            src="/assets/dashboard/landing-page.jpg"
-            alt="Governance dashboard — workspaces grouped by posture, attention items, and a quiet activity feed."
-            width={6065}
-            height={3922}
-            aspect="16/10"
-            objectPosition="center top"
-            caption="Workspaces grouped by posture, attention items pinned to the top, and an activity feed that anchors the page in real operational signal."
+            src="/assets/screens/dashboard/wireframe-insight-driven-flow.png"
+            alt="Governance dashboard — the shipped direction. An insight-driven flow that leads with operational posture before any configuration."
+            width={1536}
+            height={1024}
+            caption="The shipped direction. The dashboard stopped being reporting infrastructure and became operational governance infrastructure — posture first, attention items second, configuration deliberately one click away."
           />
         </motion.div>
       </div>
+
+      {/* Compact comparison — the alternate direction that didn't ship */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={IN_VIEW}
+        transition={{ duration: 0.7 }}
+        className="mt-14 flex flex-col items-center gap-3 lg:mt-16"
+      >
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">
+          Comparison · The alternate direction
+        </p>
+        <Figure
+          src="/assets/screens/dashboard/wireframe-section-workbench.png"
+          alt="Governance dashboard — sectioned-workbench direction. A domain-grouped surface that organised by area of administration."
+          width={1536}
+          height={1024}
+          scale="support"
+          caption="A sectioned workbench, kept here for comparison. It organised by area of administration; the shipped direction organised by operational signal."
+        />
+      </motion.div>
+
+      <ArtifactLink
+        href="/explorations#admin-dashboard-screens"
+        eyebrow="Exploration directions"
+        label="View all three early dashboard directions"
+        className="mx-auto"
+      />
 
       {/* Flow D — Governance command surface. The five things this page makes available in one view. */}
       <div className="mt-24 border-t border-line-soft pt-14">
