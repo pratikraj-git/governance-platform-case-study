@@ -5,6 +5,10 @@ import { IdentityAccess } from '@/components/sections/IdentityAccess';
 import { OperationalResilience } from '@/components/sections/OperationalResilience';
 import { CentralizedGovernance } from '@/components/sections/CentralizedGovernance';
 import { Reflection } from '@/components/sections/Reflection';
+import {
+  KeyDecisionsPreview,
+  DesignExplorationsPreview,
+} from '@/components/previews/previews';
 
 /**
  * Home — single editorial page composed of seven highly-consumable sections.
@@ -23,9 +27,24 @@ export default function Home() {
     <>
       <Hero />
       <ProblemSpace />
+
+      {/* Side note · Strategic decisions
+          A compact, type-led interlude pointing to the full /decisions
+          artifact page. Renders as a warm-canvas strip with three
+          editorial cards — never inlines the decisions themselves. */}
+      <KeyDecisionsPreview />
+
       <EnterpriseSignals />
       <IdentityAccess />
       <OperationalResilience />
+
+      {/* Side note · Design explorations
+          A compact preview of the three direction-study artifacts kept
+          on /explorations. Sits between the resilience surfaces and the
+          governance dashboard so the reader carries the exploration
+          context into the final movement. */}
+      <DesignExplorationsPreview />
+
       <CentralizedGovernance />
       <Reflection />
     </>

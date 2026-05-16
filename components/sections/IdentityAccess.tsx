@@ -6,6 +6,10 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Figure } from '@/components/ui/Figure';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { ArtifactLink } from '@/components/ui/ArtifactLink';
+import {
+  BeforeAfterPreview,
+  WorkflowsPreview,
+} from '@/components/previews/previews';
 import { IN_VIEW, revealStagger, revealUp } from '@/lib/motion';
 
 /**
@@ -97,6 +101,13 @@ export function IdentityAccess() {
         className="mx-auto"
       />
 
+      {/* Side note · Before vs After (inline)
+          A compact interlude pointing to the /before-after artifact
+          page. Visually distinct from the SSO screens above — type-
+          led cards, no images — so the reader registers it as a
+          systems-thinking beat between sub-movements. */}
+      <BeforeAfterPreview variant="inline" />
+
       {/* SCIM Movement — anchor */}
       <div className="mt-28 grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12">
         <motion.div
@@ -164,6 +175,12 @@ export function IdentityAccess() {
         label="View SCIM orchestration across enterprise tenants"
         className="mx-auto"
       />
+
+      {/* Side note · Workflow artifacts (inline)
+          A compact preview of the three workflow diagrams that live
+          on /workflows. Reads as architecture context, not as a
+          repeat of the SCIM surface above. */}
+      <WorkflowsPreview variant="inline" />
 
       {/* Flow B — Identity lifecycle. Connects SSO → SCIM → operational lifecycle. */}
       <div className="mt-28 border-t border-line-soft pt-14">
