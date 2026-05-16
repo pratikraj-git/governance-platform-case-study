@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ScimRoleMappingExploration } from '@/components/explorations/ScimRoleMappingExploration';
 import { GovernanceNavigationEvolution } from '@/components/explorations/GovernanceNavigationEvolution';
 import { AdminDashboardDirections } from '@/components/explorations/AdminDashboardDirections';
+import { AdminDashboardScreens } from '@/components/explorations/AdminDashboardScreens';
 
 /**
  * /explorations — preview page for the standalone design-exploration
@@ -37,6 +38,7 @@ export default function ExplorationsPreviewPage() {
       <div className="border-t border-line-soft" aria-hidden />
 
       <AdminDashboardDirections />
+      <AdminDashboardScreens />
 
       <BackToCaseStudy />
     </>

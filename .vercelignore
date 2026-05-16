@@ -10,6 +10,15 @@ Work*files*/
 *.zip
 dashboard-prototype/
 
+# Source screenshot folder + stray root PNGs — already copied into
+# public/assets/screens/ for deployment; the originals stay local for
+# reference but should never be uploaded.
+Case Study Screens/
+Case\ Study\ Screens/
+wireframe-1-kpi-card-grid.png
+wireframe-2-section-workbench.png
+wireframe-3-insight-driven-flow.png
+
 # Build + dependency artifacts — Vercel builds them in its own environment.
 .next/
 node_modules/

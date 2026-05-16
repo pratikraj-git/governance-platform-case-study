@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ScimOrchestrationWorkflow } from '@/components/workflows/ScimOrchestrationWorkflow';
+import { ScimOrchestrationScreens } from '@/components/workflows/ScimOrchestrationScreens';
 import { SsoBreakGlassWorkflow } from '@/components/workflows/SsoBreakGlassWorkflow';
+import { SsoBreakGlassScreens } from '@/components/workflows/SsoBreakGlassScreens';
 import { TeammateLifecycleWorkflow } from '@/components/workflows/TeammateLifecycleWorkflow';
+import { TeammateLifecycleScreens } from '@/components/workflows/TeammateLifecycleScreens';
 
 /**
  * /workflows — preview page for the standalone workflow artifacts.
@@ -30,14 +33,17 @@ export default function WorkflowsPreviewPage() {
       <PreviewBanner />
 
       <ScimOrchestrationWorkflow />
+      <ScimOrchestrationScreens />
 
       <div className="border-t border-line-soft" aria-hidden />
 
       <SsoBreakGlassWorkflow />
+      <SsoBreakGlassScreens />
 
       <div className="border-t border-line-soft" aria-hidden />
 
       <TeammateLifecycleWorkflow />
+      <TeammateLifecycleScreens />
 
       <BackToCaseStudy />
     </>

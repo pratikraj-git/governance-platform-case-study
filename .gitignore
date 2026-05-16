@@ -42,6 +42,15 @@ pnpm-debug.log*
 Work files-20260514T145534Z-3-001.zip
 Work files/
 
+# Raw screenshot exports — kept locally as the source of truth; the
+# renamed, web-ready copies live in public/assets/screens/ and ship
+# from there. Do not commit the originals.
+Case Study Screens/
+Case\ Study\ Screens/
+/wireframe-1-kpi-card-grid.png
+/wireframe-2-section-workbench.png
+/wireframe-3-insight-driven-flow.png
+
 # PDFs over GitHub's 100 MB per-file hard limit — kept locally only.
 # If they ever need to ship, migrate them to Git LFS or external storage.
 docs/business-context/sso-existing-design.pdf
