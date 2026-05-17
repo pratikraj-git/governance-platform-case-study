@@ -25,8 +25,8 @@ export function CentralizedGovernance() {
       bottomRule
     >
       <SectionHeader
-        eyebrow="05 · Centralized governance"
-        title="What started as separate features became one operational surface."
+        eyebrow="05 · The admin home"
+        title="The settings page admins were opening every day wasn’t really a settings page."
         description={
           <>
             Each redesigned surface had quietly been built to feed the same model — workspaces,
@@ -51,13 +51,12 @@ export function CentralizedGovernance() {
             One place to open. One place to scan. One place to act.
           </motion.h3>
           <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
-            The governance dashboard is the screen an admin should be able to keep open all day
-            and trust. It shows the workspaces under their care, the identity posture of each,
-            anything that needs attention, and one clear next action.
+            The admin home is the screen someone should be able to keep open all day and trust.
+            It shows the workspaces under their care, the identity posture of each, anything that
+            needs attention, and one clear next action.
           </motion.p>
           <motion.p variants={revealUp} className="text-body text-ink-3 text-pretty">
-            It is, deliberately, not an analytics page. It is an operational page that happens
-            to summarize.
+            Deliberately not an analytics page. An operational page that happens to summarise.
           </motion.p>
         </motion.div>
 
@@ -70,10 +69,10 @@ export function CentralizedGovernance() {
         >
           <Figure
             src="/assets/screens/dashboard/wireframe-insight-driven-flow.png"
-            alt="Governance dashboard — the shipped direction. An insight-driven flow that leads with operational posture before any configuration."
+            alt="Admin dashboard — the shipped direction. The page leads with posture before any configuration."
             width={1536}
             height={1024}
-            caption="The shipped direction. The dashboard stopped being reporting infrastructure and became operational governance infrastructure — posture first, attention items second, configuration deliberately one click away."
+            caption="The shipped direction. Posture first, attention items second, configuration deliberately one click away."
           />
         </motion.div>
       </div>
@@ -87,22 +86,22 @@ export function CentralizedGovernance() {
         className="mt-14 flex flex-col items-center gap-3 lg:mt-16"
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">
-          Comparison · The alternate direction
+          For comparison · An alternate direction
         </p>
         <Figure
           src="/assets/screens/dashboard/wireframe-section-workbench.png"
-          alt="Governance dashboard — sectioned-workbench direction. A domain-grouped surface that organised by area of administration."
+          alt="Admin dashboard — sectioned-workbench direction. A page organised by area of administration."
           width={1536}
           height={1024}
           scale="support"
-          caption="A sectioned workbench, kept here for comparison. It organised by area of administration; the shipped direction organised by operational signal."
+          caption="A sectioned workbench, kept here for comparison. Organised by area of administration; the shipped direction organised by what needs attention."
         />
       </motion.div>
 
       <ArtifactLink
         href="/explorations#admin-dashboard-screens"
-        eyebrow="Exploration directions"
-        label="View all three early dashboard directions"
+        eyebrow="Read more"
+        label="See all three dashboard directions"
         className="mx-auto"
       />
 

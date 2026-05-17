@@ -26,9 +26,9 @@ export function SsoBreakGlassScreens() {
   return (
     <ScreenSection
       id="sso-break-glass-screens"
-      eyebrow="Screens · Authentication continuity"
-      title="The fallback path, walked end to end."
-      description="Six screens, in the order the system uses them — canonical SSO, the domain identifier that routes the request, the two fallback paths, the setup surface, and the configuration summary the admin returns to."
+      eyebrow="Screens · SSO and fallback access"
+      title="The sign-in path, walked end to end."
+      description="Six screens, in the order the system uses them — the canonical SSO sign-in, the domain identifier that routes the request, the two fallback paths, the metadata-aware setup surface, and the configuration summary the admin returns to."
       surface="warm"
     >
       {/* ── 01 · Canonical SSO sign-in */}

@@ -42,9 +42,9 @@ export function CentralizedGovernanceDecision() {
     <KeyDecision
       id="centralised-governance-vs-ent-autonomy"
       ordinal="01"
-      title="Centralised governance without removing ENT autonomy."
-      why="Enterprise customers needed organisation-level visibility — posture, drift, audit — across workspaces they had spent years configuring independently. The asks for visibility kept colliding with the operational control each ENT already held."
-      tradeoff="Visibility had to be aggregated; control had to stay distributed. The governance surface separated the two — global reporting flows up to the enterprise tier, day-to-day administration stays with each workspace — so org-wide oversight could scale without touching the boundaries that ENT teams already trusted."
+      title="Organisation-wide visibility, without taking control away from teams."
+      why="Enterprise customers needed to see what was happening across every workspace they owned — posture, drift, audit history — but those workspaces had been configured independently for years. Every ask for visibility kept colliding with the operational control each team already held."
+      tradeoff="We separated the two. Visibility aggregates up to the enterprise tier; day-to-day administration stays with each workspace. Organisation-wide oversight could finally scale without touching the boundaries the teams running it already trusted."
     />
   );
 }
@@ -58,9 +58,9 @@ export function IdpSourceOfTruthDecision() {
     <KeyDecision
       id="idp-source-of-truth"
       ordinal="02"
-      title="Treating the identity provider as the source of truth."
-      why="Provisioning conflicts and lifecycle drift compounded the moment an enterprise had more than a handful of workspaces. The platform was trying to model identity it didn't own — and every divergence between platform state and IdP state produced a support ticket."
-      tradeoff="We gave up the ability to edit identity locally and gained the ability to reason about it correctly. The IdP became upstream — explicitly, in the data model and on the surface — and every downstream conflict picked up a single, predictable resolution. Read-only states stopped feeling restrictive and started reading as truth."
+      title="Letting the identity provider be the source of truth."
+      why="Provisioning conflicts and drift compounded the moment an enterprise had more than a handful of workspaces. The platform was modelling identity it didn't actually own — and every disagreement between platform state and IdP state turned into a support ticket."
+      tradeoff="We gave up the ability to edit identity locally and gained the ability to reason about it correctly. The IdP became upstream — explicitly, in the data model and on the surface — and every downstream conflict picked up one predictable resolution. Read-only states stopped feeling restrictive and started reading as truth."
     />
   );
 }
@@ -74,9 +74,9 @@ export function OperationalStatesInSetupDecision() {
     <KeyDecision
       id="operational-state-in-setup"
       ordinal="03"
-      title="Surfacing operational state inside the setup flow."
-      why="Setup completion didn't mean the system was healthy. Certificate drift, provisioning failures, and sync errors arrived after the configuration screen was closed — and admins were the last to know, often hearing about it from their support contact."
-      tradeoff="The setup surface stopped pretending to be a one-time wizard. It now reports its own ongoing state — the four observable conditions of an SSO connection, the validation outcome of a SCIM mapping — so the page that configured the integration is also the page that tells you it is still working."
+      title="Showing system state inside the setup screen."
+      why="Setup completion didn't mean the system was healthy. Certificates expired, provisioning quietly broke, syncs failed at three in the morning — and admins were the last to know, often hearing about it from their support contact instead of the product."
+      tradeoff="The setup screen stopped pretending to be a one-time wizard. It reports its own state — the four observable conditions of an SSO connection, the validation outcome of a SCIM mapping — so the page that configured the integration is also the page that tells you it is still working."
     />
   );
 }
@@ -90,9 +90,9 @@ export function GovernanceBeyondAuthenticationDecision() {
     <KeyDecision
       id="governance-beyond-authentication"
       ordinal="04"
-      title="Governance beyond authentication."
-      why="Most of the operational risk in an enterprise account lives in the years after a teammate is invited — guest access that lingers past the project, temporary roles that never expire, inactive accounts that retain permissions long after a team has moved on."
-      tradeoff="We modelled the lifecycle as a state machine instead of a setting. Six explicit states, named transitions, and three cross-cutting concerns — so the interface answers questions the configuration page never asked, and the data model finally agrees with how enterprises already think about membership."
+      title="Designing for the years after someone is invited."
+      why="Most of the operational risk in an enterprise account lives in the years after a teammate joins — guest access that lingers past the project, temporary roles that never expire, inactive accounts that quietly retain permissions long after the team has moved on."
+      tradeoff="We modelled membership as a lifecycle instead of a setting. Six named states, the transitions between them, and three rules that stay true across all of them — so the interface could answer questions the configuration page never asked, and the data model finally matched how teams already think about who belongs."
       evidenceLabel="Evidence · Invitation constraints"
       evidence={
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
@@ -127,9 +127,9 @@ export function OperationalIntelligenceOverSettingsDecision() {
     <KeyDecision
       id="operational-intelligence-over-settings"
       ordinal="05"
-      title="Operational intelligence over settings navigation."
-      why="A governance surface that opens to a configuration page answers the wrong question first. The page admins actually open it for is operational: what changed, what needs attention, what is healthy across the workspaces they oversee."
-      tradeoff="We made the dashboard the home. Configuration moved one click away, but the surface now leads with posture — workspaces grouped by health, attention items pinned to the top, an activity feed grounded in real operational signal. The shape of the page now matches the shape of the question."
+      title="Opening to posture, not to a settings page."
+      why="The home of a governance platform that opens to a configuration page answers the wrong question first. The reason admins actually open it on a Monday is operational — what changed, what needs attention, what's healthy across the workspaces they look after."
+      tradeoff="The dashboard became the home. Configuration moved one click away, but the page now leads with posture — workspaces grouped by health, attention items pinned to the top, an activity feed grounded in real signal. The shape of the page finally matches the shape of the question."
     />
   );
 }
@@ -147,10 +147,10 @@ export function KeyDecisions() {
   return (
     <KeyDecisionsSection
       id="key-decisions"
-      eyebrow="Key decisions · Strategic tradeoffs"
-      title="Five decisions that shaped the governance surface."
-      description="Each one chose between a feature reading and a systems reading of the same problem. The systems reading won — and the design got simpler because the data model finally agreed with itself."
-      insight="The interface gets smaller as the decisions get sharper. Every block below is a place where a layer of the configuration page was removed, not by hiding it, but by naming what it was always trying to say."
+      eyebrow="Strategic decisions"
+      title="Five decisions that shaped the platform."
+      description="Each one came from a real operational friction — admins repeating themselves, settings disagreeing with each other, support tickets explaining things the surface should have. The interface got smaller as the decisions got sharper."
+      insight="Every decision below removed a layer of the settings page — not by hiding it, but by naming what it was always trying to say."
     >
       <KeyDecisionsList>
         <CentralizedGovernanceDecision />

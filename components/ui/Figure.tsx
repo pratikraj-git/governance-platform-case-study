@@ -127,37 +127,51 @@ export function Figure({
       transition={{ duration: 0.7, ease: ease.standard }}
       className={cn('w-full', container, className)}
     >
+      {/* Outer frame — calm container with consistent breathing room.
+          The image itself sits inside a generous warm-canvas inset so
+          every screenshot reads as "placed", not as "dumped".
+          Padding scales with the figure size for visual consistency. */}
       <div
         className={cn(
-          'overflow-hidden rounded-md border border-line-soft bg-surface',
+          'rounded-lg border border-line-soft bg-surface-warm',
           'shadow-[0_1px_0_0_rgba(14,15,14,0.02),0_18px_40px_-28px_rgba(14,15,14,0.06)]',
-          isCropped && 'relative w-full',
+          // Internal breathing room around the screenshot
+          scale === 'hero' && 'p-3 sm:p-5 md:p-7',
+          scale === 'support' && 'p-3 sm:p-4 md:p-5',
+          scale === 'detail' && 'p-2 sm:p-3',
         )}
-        style={isCropped ? { aspectRatio: aspectCss } : undefined}
       >
-        {isCropped ? (
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes={sizes}
-            priority={priority}
-            quality={82}
-            className="object-cover"
-            style={{ objectPosition }}
-          />
-        ) : (
-          <Image
-            src={src}
-            alt={alt}
-            width={width}
-            height={height}
-            sizes={sizes}
-            priority={priority}
-            quality={82}
-            className="h-auto w-full"
-          />
-        )}
+        <div
+          className={cn(
+            'overflow-hidden rounded-md border border-line-soft bg-surface',
+            isCropped && 'relative w-full',
+          )}
+          style={isCropped ? { aspectRatio: aspectCss } : undefined}
+        >
+          {isCropped ? (
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              sizes={sizes}
+              priority={priority}
+              quality={82}
+              className="object-cover"
+              style={{ objectPosition }}
+            />
+          ) : (
+            <Image
+              src={src}
+              alt={alt}
+              width={width}
+              height={height}
+              sizes={sizes}
+              priority={priority}
+              quality={82}
+              className="h-auto w-full"
+            />
+          )}
+        </div>
       </div>
 
       {caption && (

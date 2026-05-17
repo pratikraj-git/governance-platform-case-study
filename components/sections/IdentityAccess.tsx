@@ -24,12 +24,12 @@ export function IdentityAccess() {
     <SectionContainer id="identity" width="wide">
       <SectionHeader
         eyebrow="03 · Identity & Access"
-        title="Simplifying identity and access — without simplifying it away."
+        title="Identity setup quickly became more than a login problem."
         description={
           <>
             SSO and SCIM had each been built as separate features, by separate teams, at separate
-            times. The redesign treated them as one identity surface, and asked a quieter
-            question: what does an admin actually need to know, and when?
+            times. The redesign treated them as one surface, and asked a quieter question — what
+            does an admin actually need to know, and when?
           </>
         }
       />
@@ -47,15 +47,15 @@ export function IdentityAccess() {
             A · Single sign-on setup
           </motion.p>
           <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-            Make the setup the truth — not a translation of it.
+            The setup screen should know more before it asks.
           </motion.h3>
           <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
             The old SSO form asked admins to translate their identity provider into a series of
-            inputs, then guess whether the translation was correct. The redesign reads the
+            inputs, then guess whether the translation was right. The new screen reads the
             metadata, parses the certificate, names the state, and only then asks for input.
           </motion.p>
           <motion.p variants={revealUp} className="text-body text-ink-3 text-pretty">
-            The screen looks calmer because it does more before it asks anything.
+            The page looks calmer because it does more before it asks anything.
           </motion.p>
         </motion.div>
 
@@ -68,10 +68,10 @@ export function IdentityAccess() {
         >
           <Figure
             src="/assets/screens/sso/direct-sign-in.png"
-            alt="Direct SSO sign-in — the canonical authentication surface every admin sees first."
+            alt="Direct SSO sign-in — the default sign-in screen when the identity provider is reachable."
             width={2203}
             height={1093}
-            caption="The canonical sign-in. The default state of the page when the identity provider is reachable."
+            caption="The default sign-in. Calm by design — when the identity provider is reachable, no fallback is shown."
           />
         </motion.div>
       </div>
@@ -90,14 +90,14 @@ export function IdentityAccess() {
           width={1742}
           height={650}
           scale="support"
-          caption="Routing outcome. When the domain is identified and SSO is healthy, the surface stays quiet — no fallback is advertised."
+          caption="Domain identified. The system recognises the enterprise and continues on SSO without surfacing any of the recovery paths."
         />
       </motion.div>
 
       <ArtifactLink
         href="/workflows#sso-break-glass-screens"
-        eyebrow="Architecture artifact"
-        label="View the full SSO + identity routing flow"
+        eyebrow="Read more"
+        label="See the full sign-in path, end to end"
         className="mx-auto"
       />
 
@@ -118,19 +118,20 @@ export function IdentityAccess() {
           className="lg:col-span-5 lg:sticky lg:top-24 lg:self-start flex flex-col gap-5"
         >
           <motion.p variants={revealUp} className="text-eyebrow uppercase text-ink-3">
-            B · Provisioning, as a lifecycle
+            B · Provisioning as a living system
           </motion.p>
           <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-            Design the years after setup, not just the afternoon of it.
+            Provisioning failures weren’t always permanent — but admins had no way to tell.
           </motion.h3>
           <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
             SCIM is rarely a single moment. It’s a token that has to be regenerated, a workspace
             list that grows, a role mapping that drifts, and a sync that can quietly fail at
-            three in the morning. The design had to be legible at every one of those moments.
+            three in the morning. Some failures were temporary, some came from incorrect mappings,
+            some from delayed syncs — and the surface had to read clearly for all of them.
           </motion.p>
           <motion.p variants={revealUp} className="text-body text-ink-3 text-pretty">
-            The decision underneath all of it: keep one source of truth at a time. Manual paths
-            close cleanly when SCIM is active. They reopen, just as cleanly, when it’s not.
+            One decision held the rest together: keep a single source of truth at a time. Manual
+            paths close cleanly when SCIM is active, and reopen — just as cleanly — when it isn’t.
           </motion.p>
         </motion.div>
 
@@ -143,10 +144,10 @@ export function IdentityAccess() {
         >
           <Figure
             src="/assets/screens/scim/state-wise-messages.png"
-            alt="SCIM state-wise messages — operational guidance shown for each connection state, surfaced inline on the setup page."
+            alt="SCIM state-wise messages — the operational guidance shown for each connection state, inline on the setup page."
             width={1654}
             height={952}
-            caption="State-aware messaging. Provisioning is asynchronous, and admins were left guessing whether sync was healthy — until each operational condition got a short, specific recovery message of its own."
+            caption="Provisioning failures became visible instead of opaque. Each state has a short, specific message — no more guessing whether sync is healthy."
           />
         </motion.div>
       </div>
@@ -165,14 +166,14 @@ export function IdentityAccess() {
           width={4528}
           height={1028}
           scale="hero"
-          caption="Setup → Active sync → Failure recovery. The configuration page now reports its own ongoing state, so support escalations stop being the first signal."
+          caption="Setup → Active sync → Failure recovery. The setup page now reports its own state, so support escalations stop being the first signal."
         />
       </motion.div>
 
       <ArtifactLink
         href="/workflows#scim-orchestration-screens"
-        eyebrow="Architecture artifact"
-        label="View SCIM orchestration across enterprise tenants"
+        eyebrow="Read more"
+        label="See how SCIM provisioning works underneath"
         className="mx-auto"
       />
 

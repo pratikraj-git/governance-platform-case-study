@@ -30,10 +30,10 @@ export function SsoBreakGlassWorkflow() {
   return (
     <WorkflowSection
       id="sso-break-glass"
-      eyebrow="Workflow · Authentication continuity"
-      title="SSO with a quietly-engineered fallback path."
-      description="A two-track authentication surface — primary single sign-on on one side, break-glass user access on the other — joined by a recovery loop that returns the system to the identity provider as soon as it can."
-      insight="Resilience isn't a separate feature. It's a sequence the admin can follow without thinking, designed once and quietly available the day the identity provider isn't."
+      eyebrow="Workflow · SSO and fallback access"
+      title="What happens when the identity provider isn't reachable."
+      description="Most days, single sign-on works. On the day it doesn't — a certificate expires, an IdP outage hits, a misconfiguration lands — the admin still needs to get into the platform. This workflow shows the primary sign-in path, the two narrow fallback paths beside it, and the recovery loop that returns the system to SSO as soon as it can."
+      insight="Fallback access isn't a separate feature. It's the same authentication surface, with two narrow paths that stay available without being advertised — and an audit trail that makes sure no quiet entry is actually quiet."
     >
       <Stagger className="flex flex-col">
         {/* 00 · Entry */}

@@ -40,31 +40,31 @@ export function KeyDecisionsPreview({ variant }: { variant?: PreviewVariant } = 
     <ArtifactPreviewStrip
       id="preview-key-decisions"
       variant={variant}
-      eyebrow="Side note · Strategic decisions"
-      title="Three decisions framing the work."
-      description="Before the surfaces — the calls that decided what the platform would model, where control would live, and what the dashboard would lead with."
+      eyebrow="Behind the screens · Strategic decisions"
+      title="Three decisions that framed the work."
+      description="The calls made before the surfaces — what the platform would model, where control would live, and what the admin home would lead with."
       cta={{
         href: '/decisions',
-        eyebrow: 'Strategic artifact',
-        label: 'View strategic governance decisions',
+        eyebrow: 'Read more',
+        label: 'See the strategic decisions in detail',
       }}
     >
       <PreviewCard
         ordinal="01"
-        title="Centralised governance, without removing ENT autonomy."
-        summary="Visibility aggregates upward to the enterprise tier; day-to-day control stays distributed at the workspace."
+        title="Organisation-wide visibility, without taking control from teams."
+        summary="Visibility aggregates up to the enterprise tier. Day-to-day control stays with each workspace, the way teams already work."
         href="/decisions#centralised-governance-vs-ent-autonomy"
       />
       <PreviewCard
         ordinal="02"
         title="The identity provider is the source of truth."
-        summary="The platform stops modelling identity it doesn't own. Read-only states become truth, not restriction."
+        summary="The platform stops modelling identity it doesn't own. Read-only states stop feeling restrictive and start reading as truth."
         href="/decisions#idp-source-of-truth"
       />
       <PreviewCard
         ordinal="05"
-        title="Operational intelligence over settings navigation."
-        summary="The dashboard becomes the home; configuration moves one click away. The page now answers the question admins actually open it for."
+        title="Opening to posture, not to a settings page."
+        summary="The dashboard becomes the home. Configuration moves one click away — the page now answers the question admins actually open it for."
         href="/decisions#operational-intelligence-over-settings"
       />
     </ArtifactPreviewStrip>
@@ -82,25 +82,25 @@ export function BeforeAfterPreview({ variant }: { variant?: PreviewVariant } = {
     <ArtifactPreviewStrip
       id="preview-before-after"
       variant={variant}
-      eyebrow="Side note · Before vs After"
-      title="The shape of governance the SSO redesign sits inside."
-      description="Two short comparisons of what changed at the platform level — not the screen level — once identity was federated and provisioning was orchestrated."
+      eyebrow="Behind the screens · Governance evolution"
+      title="What changed at the platform level."
+      description="Two short comparisons of what shifted underneath the surfaces — not at the screen level — once identity was federated and provisioning was orchestrated."
       cta={{
         href: '/before-after',
-        eyebrow: 'Comparison artifact',
-        label: 'View governance evolution',
+        eyebrow: 'Read more',
+        label: 'See how governance evolved',
       }}
     >
       <PreviewCard
         ordinal="01"
-        title="Fragmented → Centralised governance."
-        summary="From per-workspace silos with no organisation-level view to an aggregated posture surface that scales with enterprise size."
+        title="Fragmented → Organisation-wide visibility."
+        summary="From per-workspace silos with no shared view to a posture surface that scales with the size of the enterprise."
         href="/before-after#fragmented-to-centralised"
       />
       <PreviewCard
         ordinal="02"
         title="Manual → Orchestrated provisioning."
-        summary="From ticket-driven onboarding and ad-hoc role assignment to a SCIM contract the platform owns end to end."
+        summary="From ticket-driven onboarding and ad-hoc role assignment to a SCIM contract the platform handles end to end."
         href="/before-after#manual-to-orchestrated"
       />
     </ArtifactPreviewStrip>
@@ -118,31 +118,31 @@ export function WorkflowsPreview({ variant }: { variant?: PreviewVariant } = {})
     <ArtifactPreviewStrip
       id="preview-workflows"
       variant={variant}
-      eyebrow="Side note · Workflow artifacts"
-      title="The architecture behind the surfaces."
-      description="Three standalone workflow diagrams — provisioning, authentication continuity, and lifecycle governance — kept off the main page so the case study stays in narrative."
+      eyebrow="Behind the screens · Operational workflows"
+      title="How the surfaces work underneath."
+      description="Three workflow walkthroughs — provisioning, SSO with fallback, and teammate lifecycle — kept off the main page so the case study stays focused on the story."
       cta={{
         href: '/workflows',
-        eyebrow: 'Architecture artifact',
-        label: 'View workflow artifacts',
+        eyebrow: 'Read more',
+        label: 'See the workflow walkthroughs',
       }}
     >
       <PreviewCard
         ordinal="01"
-        title="SCIM orchestration across enterprise tenants."
-        summary="Three-layer architecture: identity provider → orchestration → tenants. Where truth lives, where the design happens, where the contract lands."
+        title="How provisioning moves between systems."
+        summary="Identity lives in the customer's IdP; the platform listens to it. Token rotation, role mapping and sync failures all kept observable."
         href="/workflows#scim-orchestration"
       />
       <PreviewCard
         ordinal="02"
-        title="SSO with a quietly-engineered fallback path."
-        summary="Canonical sign-in with two narrowly-scoped fallbacks — emergency access and active temporary teammate continuity."
+        title="What happens when SSO isn't reachable."
+        summary="The canonical sign-in path with two narrow fallback paths beside it, and a recovery loop that returns the system to SSO as soon as it can."
         href="/workflows#sso-break-glass"
       />
       <PreviewCard
         ordinal="03"
-        title="Teammate lifecycle as a governance state machine."
-        summary="Six explicit states, named transitions, three cross-cutting concerns — operated through one consistent action menu."
+        title="The years after a teammate joins."
+        summary="Six named lifecycle states, the transitions between them, and three rules that stay true across all of them — operated through one consistent menu."
         href="/workflows#teammate-lifecycle"
       />
     </ArtifactPreviewStrip>
@@ -159,31 +159,31 @@ export function DesignExplorationsPreview({ variant }: { variant?: PreviewVarian
     <ArtifactPreviewStrip
       id="preview-design-explorations"
       variant={variant}
-      eyebrow="Side note · Design explorations"
-      title="How the surfaces earned their final shape."
-      description="Wireframe-level direction studies — kept as artifacts so the call the team made reads as a call, not as the only possibility."
+      eyebrow="Behind the screens · Design explorations"
+      title="How three surfaces earned their shape."
+      description="Wireframe-level direction studies — kept on the page so the call the team made reads as a call, not as the only possibility."
       cta={{
         href: '/explorations',
-        eyebrow: 'Exploration artifact',
-        label: 'View design explorations',
+        eyebrow: 'Read more',
+        label: 'See the design explorations',
       }}
     >
       <PreviewCard
         ordinal="01"
-        title="SCIM role-mapping exploration."
-        summary="Three role-mapping directions, with the one that survived and the explicit reason the other two didn't."
+        title="Role mapping directions."
+        summary="Three explored approaches to mapping IdP groups to platform roles — and the explicit reason the others didn't ship."
         href="/explorations#scim-role-mapping"
       />
       <PreviewCard
         ordinal="02"
-        title="Governance navigation evolution."
-        summary="How the platform's information architecture earned its shape — from feature shelf to governance surface."
+        title="Navigation evolution."
+        summary="How the platform's information architecture moved from a feature shelf to a single admin home."
         href="/explorations#governance-navigation"
       />
       <PreviewCard
         ordinal="03"
-        title="Admin dashboard directions."
-        summary="Three early wireframes, each testing a different first question the surface could answer. Only the third shipped."
+        title="Dashboard directions."
+        summary="Three early wireframes, each testing a different first question the page could answer. Only the third one shipped."
         href="/explorations#admin-dashboard"
       />
     </ArtifactPreviewStrip>

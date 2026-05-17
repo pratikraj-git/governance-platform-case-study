@@ -32,10 +32,10 @@ export function ScimOrchestrationWorkflow() {
   return (
     <WorkflowSection
       id="scim-orchestration"
-      eyebrow="Workflow · Identity provisioning"
-      title="SCIM orchestration across enterprise tenants."
-      description="A three-layer view of how enterprise identity is provisioned, kept in sync, and reconciled — with the identity provider held as the single source of truth."
-      insight="The platform doesn't own identity. It orchestrates the lifecycle of identity that lives somewhere else — and the design has to make that asymmetry legible to the admin at every step."
+      eyebrow="Workflow · Provisioning"
+      title="How provisioning actually moves between systems."
+      description="Identity is owned by the customer's identity provider. The platform's job is to listen to it accurately, apply the result deterministically across every workspace, and keep that loop legible to the admin — through token rotation, role mapping, and sync failures."
+      insight="The platform doesn't own identity. It listens to identity that lives somewhere else — and the design has to make that asymmetry obvious at every step, not just on the day setup happens."
     >
       <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-12 lg:gap-x-12">
         {/* DIAGRAM */}

@@ -77,10 +77,10 @@ export function TeammateLifecycleWorkflow() {
   return (
     <WorkflowSection
       id="teammate-lifecycle"
-      eyebrow="Workflow · Lifecycle governance"
-      title="Teammate lifecycle as a governed state machine."
-      description="Six explicit states, named transitions, and three cross-cutting concerns — modeling the years after a teammate joins, not just the afternoon they were invited."
-      insight="The lifecycle is the contract. Once the states are named and the transitions are explicit, the interface gets simpler because the data model finally agrees with itself."
+      eyebrow="Workflow · Teammate lifecycle"
+      title="The years after someone is invited."
+      description="Most of the operational risk in an enterprise account doesn't sit in the moment a teammate is invited — it sits in the years after. Six named states, the transitions between them, and three rules that stay true across all of them. The interface gets simpler because every row already knows what it is."
+      insight="Lifecycle is the part of governance admins live with longest, and that gets the least design attention. Naming the states explicitly meant the interface could finally answer the questions the configuration page never asked."
     >
       <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-12 lg:gap-x-12">
         {/* DIAGRAM column */}

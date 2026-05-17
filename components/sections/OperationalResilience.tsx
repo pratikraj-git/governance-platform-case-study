@@ -20,12 +20,12 @@ export function OperationalResilience() {
     <SectionContainer id="resilience" width="wide">
       <SectionHeader
         eyebrow="04 · Resilience & Lifecycle"
-        title="Designing for the day SSO doesn’t work — and the years after it does."
+        title="Once SSO worked, the harder questions started."
         description={
           <>
-            Once identity was federated, the design problem moved. It became less about how
-            people get in, and more about what happens when they can’t — and what happens to
-            them, slowly, over time.
+            What happens when an admin can’t get in? What happens to a teammate slowly, over
+            years? Once identity was federated, the design problem moved — from how people get
+            in to what happens around them once they’re there.
           </>
         }
       />
@@ -40,19 +40,19 @@ export function OperationalResilience() {
           className="lg:col-span-5 lg:sticky lg:top-24 lg:self-start flex flex-col gap-5"
         >
           <motion.p variants={revealUp} className="text-eyebrow uppercase text-ink-3">
-            A · Break-glass access
+            A · Fallback access
           </motion.p>
           <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-            A quiet door, never marketed — but always there.
+            A quiet door — never advertised, always there.
           </motion.h3>
           <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
-            The first design constraint was simple: the platform must remain administrable when
-            the identity provider isn’t. That meant a fallback path that is discoverable, not
-            visible — and a class of user that survives a SCIM sync gone wrong.
+            The first constraint was simple: the platform has to stay administrable when the
+            identity provider isn’t. That meant a fallback path that’s discoverable but not
+            visible — and a small class of user that survives a sync gone wrong.
           </motion.p>
           <motion.p variants={revealUp} className="text-body text-ink-3 text-pretty">
-            Every break-glass login notifies the other admins. Resilience without observability
-            is just risk in a different jacket.
+            Every fallback sign-in notifies the other admins. Resilience without visibility is
+            just risk in a different jacket.
           </motion.p>
         </motion.div>
 
@@ -78,15 +78,15 @@ export function OperationalResilience() {
             />
           </div>
           <p className="mt-5 max-w-[var(--container-prose)] text-body-sm text-ink-3 text-pretty">
-            Identity routing adapted authentication paths based on enterprise governance state — an emergency fallback when the IdP was unreachable, a narrower one for in-flight temporary access.
+            Two narrow paths the system can take when the identity provider isn’t reachable — an emergency fallback for outages and a separate one for temporary access already in flight.
           </p>
         </motion.div>
       </div>
 
       <ArtifactLink
         href="/workflows#sso-break-glass-screens"
-        eyebrow="Architecture artifact"
-        label="View governed recovery paths + remaining auth states"
+        eyebrow="Read more"
+        label="See the recovery paths and remaining sign-in states"
         className="mx-auto"
       />
 
@@ -103,17 +103,16 @@ export function OperationalResilience() {
             B · Teammate lifecycle
           </motion.p>
           <motion.h3 variants={revealUp} className="text-h2 text-ink-1 text-balance">
-            One table, four kinds of teammate, one set of rules.
+            As more enterprises adopted the platform, managing teammates became a governance problem instead of an invitation flow.
           </motion.h3>
           <motion.p variants={revealUp} className="text-body text-ink-2 text-pretty">
-            The teammates surface had quietly grown into the most-used screen in the platform’s
-            admin area. The redesign treats every member as a lifecycle object — managed,
-            unmanaged, guest, or temporary — and lets the same actions read consistently across
-            the four states.
+            The teammates page had quietly grown into the most-used screen in the admin area.
+            The redesign treats every member as a lifecycle — managed, unmanaged, guest, or
+            temporary — so the same actions read consistently across all four states.
           </motion.p>
           <motion.p variants={revealUp} className="text-body text-ink-3 text-pretty">
-            When SCIM is on, certain rows become read-only; the source of truth is named at the
-            row, not buried in a global mode switch.
+            When SCIM is on, certain rows become read-only. The source of truth is named at the
+            row itself, not hidden behind a global toggle.
           </motion.p>
         </motion.div>
 
@@ -129,7 +128,7 @@ export function OperationalResilience() {
             alt="Teammates table — lifecycle state surfaced as a column on every row."
             width={1448}
             height={908}
-            caption="Each row carries the state it is in — managed, guest, temporary, inactive. Lifecycle becomes operational state, not a setting buried in a drawer."
+            caption="Each row already knows what it is — managed, guest, temporary, inactive. Lifecycle becomes a column, not a setting hidden in a drawer."
           />
         </motion.div>
       </div>
@@ -144,11 +143,11 @@ export function OperationalResilience() {
       >
         <Figure
           src="/assets/screens/teammates/validity-handling.png"
-          alt="Teammates validity handling — temporary access modelled as a first-class property of the row, with a visible expiry."
+          alt="Teammates validity handling — temporary access modelled as a property of the row, with a visible expiry."
           width={2938}
           height={908}
           scale="hero"
-          caption="Temporary access modelled as a property of the row, not a separate page. Permissions become time-aware; membership becomes operational state."
+          caption="Temporary access lives on the row itself. Permissions are time-aware; expiry is visible without opening anything."
         />
       </motion.div>
 
@@ -166,14 +165,14 @@ export function OperationalResilience() {
           width={1448}
           height={908}
           scale="support"
-          caption="Guest invite. Time-bounded by default, with SCIM-enabled restrictions held on the invite surface — not enforced silently after the fact."
+          caption="Guest access stays time-bound by default. SCIM restrictions are surfaced on the invite screen — not enforced quietly after the fact."
         />
       </motion.div>
 
       <ArtifactLink
         href="/decisions#governance-beyond-authentication"
-        eyebrow="Strategic decision"
-        label="View governance beyond authentication"
+        eyebrow="Read more"
+        label="See the thinking behind teammate lifecycle"
         className="mx-auto"
       />
 

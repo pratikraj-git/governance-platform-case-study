@@ -24,9 +24,9 @@ export function ScimOrchestrationScreens() {
   return (
     <ScreenSection
       id="scim-orchestration-screens"
-      eyebrow="Screens · Identity provisioning"
-      title="The orchestration, as it ships."
-      description="The role-mapping surface, the conflict-prevention model that holds it together, and the operational states that turn setup into ongoing lifecycle management."
+      eyebrow="Screens · Provisioning"
+      title="What admins actually see, in product."
+      description="The role-mapping surface, the conflict-prevention model behind it, and the state-aware messaging that turns setup into an ongoing system the admin can trust."
     >
       {/* ── 01 · Role mapping — hero */}
       <ScreenGroup

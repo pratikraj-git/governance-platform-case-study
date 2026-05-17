@@ -2,91 +2,91 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 /**
- * /review — the local review surface.
+ * /review — Design deep dives index.
  *
- * A single editorial index that lists every standalone artifact
- * family built outside the published case study, with a one-line
- * description and a deep link to each preview page. Use this while
- * iterating: open `/review`, click into the preview that needs
- * attention, refine, come back.
- *
- * Marked `noindex` like every other preview surface.
+ * A single calm index that lists every deep-dive companion to the main
+ * case study. Each entry describes what the page covers and links
+ * straight in. The route stays available for anyone who wants to read
+ * the deep dives as a set rather than linked from inside the case study.
  */
 
 export const metadata: Metadata = {
-  title: 'Artifact review',
+  title: 'Design deep dives · Index',
   description:
-    'Local review index for every standalone artifact family attached to the governance case study — architecture, process, strategy, and evolution.',
-  robots: { index: false, follow: false },
+    'An index of the design deep dives that accompany the governance platform case study — workflows, strategic decisions, design explorations, and governance evolution.',
 };
 
-const ARTIFACT_FAMILIES: ArtifactFamily[] = [
+interface DeepDive {
+  ordinal: string;
+  eyebrow: string;
+  title: string;
+  href: string;
+  description: string;
+  sections: string[];
+}
+
+const DEEP_DIVES: DeepDive[] = [
   {
     ordinal: '01',
-    eyebrow: 'Architecture',
-    title: 'Workflow artifacts',
+    eyebrow: 'Workflows',
+    title: 'Operational workflows behind the platform.',
     href: '/workflows',
     description:
-      'Three architecture diagrams — SCIM orchestration across enterprise tenants, SSO with a quietly-engineered fallback path, and teammate lifecycle as a governed state machine.',
-    artifacts: [
-      'SCIM orchestration workflow',
-      'SSO + break-glass workflow',
-      'Teammate lifecycle workflow',
+      'Detailed walkthroughs of provisioning, SSO with fallback access, and teammate lifecycle — the workflows that shape day-to-day admin work, with the screens that ship them.',
+    sections: [
+      'SCIM provisioning across enterprise environments',
+      'SSO with fallback access',
+      'Teammate lifecycle',
     ],
   },
   {
     ordinal: '02',
-    eyebrow: 'Process',
-    title: 'Design explorations',
-    href: '/explorations',
+    eyebrow: 'Decisions',
+    title: 'Strategic decisions behind the platform.',
+    href: '/decisions',
     description:
-      'Three wireframe-level explorations comparing the directions considered before each surface earned its final shape — rejected, bridged, shipped.',
-    artifacts: [
-      'SCIM role mapping exploration',
-      'Governance navigation evolution',
-      'Admin dashboard direction exploration',
+      'Five choices that shaped how the platform behaves — what it models, where control lives, and what the dashboard leads with. The friction that forced each call, what it gave up, and what it made possible.',
+    sections: [
+      'Organisation-wide visibility, without taking control away',
+      'The identity provider as source of truth',
+      'System state inside the setup screen',
+      'Designing for the years after someone is invited',
+      'Opening to posture, not to a settings page',
     ],
   },
   {
     ordinal: '03',
-    eyebrow: 'Strategy',
-    title: 'Key decisions',
-    href: '/decisions',
+    eyebrow: 'Explorations',
+    title: 'How three surfaces earned their shape.',
+    href: '/explorations',
     description:
-      'Five reusable decision blocks that surface the strategic tradeoffs behind the governance surface — type-led, no chrome, interview-friendly copy.',
-    artifacts: [
-      'Centralised governance vs ENT autonomy',
-      'IdP as source of truth',
-      'Operational state inside setup',
-      'Governance beyond authentication',
-      'Operational intelligence over settings',
+      'Wireframe-level direction studies for role mapping, navigation, and the admin dashboard. Each one shows the alternatives that were considered alongside the direction that shipped.',
+    sections: [
+      'Role mapping directions',
+      'Navigation evolution',
+      'Dashboard directions',
     ],
   },
   {
     ordinal: '04',
     eyebrow: 'Evolution',
-    title: 'Before vs After',
+    title: 'How governance evolved on the platform.',
     href: '/before-after',
     description:
-      'Three editorial comparisons of governance evolution — what the surface used to be vs what it became, named in operational language.',
-    artifacts: [
-      'Fragmented → Centralised governance',
-      'Manual provisioning → Orchestrated lifecycle',
-      'Settings navigation → Operational governance',
+      'Three before / after comparisons of what changed at the platform level — fragmented to organisation-wide visibility, manual to orchestrated provisioning, settings navigation to operational posture.',
+    sections: [
+      'Fragmented → Organisation-wide visibility',
+      'Manual → Orchestrated provisioning',
+      'Settings → Operational posture',
     ],
   },
 ];
 
-export default function ReviewIndexPage() {
-  const totalArtifacts = ARTIFACT_FAMILIES.reduce(
-    (sum, family) => sum + family.artifacts.length,
-    0,
-  );
-
+export default function DeepDivesIndexPage() {
   return (
     <>
-      <ReviewBanner totalArtifacts={totalArtifacts} />
-      <ArtifactFamiliesList />
+      <IndexHero />
+      <DeepDivesList />
       <Footer />
     </>
   );
@@ -94,49 +94,45 @@ export default function ReviewIndexPage() {
 
 /* ──────────────────────────────────────────────────────────────────── */
 
-interface ArtifactFamily {
-  ordinal: string;
-  eyebrow: string;
-  title: string;
-  href: string;
-  description: string;
-  artifacts: string[];
-}
-
-function ReviewBanner({ totalArtifacts }: { totalArtifacts: number }) {
+function IndexHero() {
   return (
     <section className="relative w-full border-b border-line-soft bg-surface-warm">
       <div className="mx-auto max-w-[var(--container-max)] px-6 py-14 sm:px-10 md:py-20 lg:px-16 lg:py-24">
         <div className="flex flex-col gap-5">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">
-            Local review · Artifact index
+            Governance Platform · Design deep dives
           </p>
-          <h1 className="max-w-[32ch] text-[clamp(1.875rem,3.6vw,2.5rem)] leading-[1.08] tracking-[-0.025em] font-semibold text-ink-1 text-balance">
-            Four standalone artifact families. {totalArtifacts} reusable sections.
+          <h1 className="max-w-[28ch] text-[clamp(1.875rem,3.6vw,2.5rem)] leading-[1.08] tracking-[-0.025em] font-semibold text-ink-1 text-balance">
+            Four deep dives behind the case study.
           </h1>
-          <p className="max-w-[68ch] text-body-lg text-ink-2 text-pretty">
-            Every artifact lives outside the published case study at its own preview route.
-            Each family is type-led, internally consistent, and ready to drop into the main
-            narrative when it earns a place there. The published case study at{' '}
-            <Link href="/" className="text-ink-1 underline decoration-line-strong underline-offset-[3px] transition-colors hover:decoration-ink-1">
-              the home page
-            </Link>{' '}
-            is not modified by anything below.
+          <p className="max-w-[64ch] text-body-lg text-ink-2 text-pretty">
+            The main case study tells the story. These pages expand on it — the workflows the
+            platform runs, the decisions that shaped it, the directions that were explored, and
+            how the surfaces evolved.
           </p>
+          <div className="mt-2 inline-flex items-baseline gap-3 text-[12.5px]">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 text-ink-2 transition-colors hover:text-ink-1"
+            >
+              <span aria-hidden>←</span>
+              Back to the main case study
+            </Link>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function ArtifactFamiliesList() {
+function DeepDivesList() {
   return (
     <section className="relative w-full">
       <div className="mx-auto max-w-[var(--container-max)] px-6 py-20 sm:px-10 md:py-24 lg:px-16 lg:py-28">
         <ul className="flex flex-col divide-y divide-line-soft">
-          {ARTIFACT_FAMILIES.map((family) => (
-            <li key={family.href}>
-              <ArtifactFamilyRow family={family} />
+          {DEEP_DIVES.map((dive) => (
+            <li key={dive.href}>
+              <DeepDiveRow dive={dive} />
             </li>
           ))}
         </ul>
@@ -145,60 +141,60 @@ function ArtifactFamiliesList() {
   );
 }
 
-function ArtifactFamilyRow({ family }: { family: ArtifactFamily }) {
+function DeepDiveRow({ dive }: { dive: DeepDive }) {
   return (
     <Link
-      href={family.href}
+      href={dive.href}
       className="group grid grid-cols-1 gap-x-12 gap-y-7 py-12 transition-colors lg:grid-cols-12 lg:gap-y-0 lg:py-16 hover:bg-canvas/40"
     >
       {/* Title column */}
       <header className="flex flex-col gap-4 lg:col-span-5">
         <div className="flex items-baseline gap-4">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-4">
-            {family.ordinal}
+            {dive.ordinal}
           </span>
           <span className="font-mono text-[10.5px] uppercase tracking-[0.20em] text-ink-3">
-            {family.eyebrow}
+            {dive.eyebrow}
           </span>
         </div>
-        <h2 className="max-w-[18ch] text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.12] tracking-[-0.018em] font-semibold text-ink-1 text-balance">
-          {family.title}
+        <h2 className="max-w-[22ch] text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.12] tracking-[-0.018em] font-semibold text-ink-1 text-balance">
+          {dive.title}
         </h2>
         <p className="font-mono text-[12px] text-ink-3 transition-colors group-hover:text-ink-1">
-          {family.href}
+          {dive.href}
         </p>
       </header>
 
-      {/* Description + artifact list column */}
+      {/* Description + section list column */}
       <div className="flex flex-col gap-6 lg:col-span-6 lg:max-w-[58ch]">
         <p className="text-[15px] leading-[1.65] text-ink-2 text-pretty">
-          {family.description}
+          {dive.description}
         </p>
         <div className="flex flex-col gap-2.5">
           <p className="font-mono text-[10.5px] uppercase tracking-[0.20em] text-ink-3">
-            Artifacts ({family.artifacts.length})
+            Inside this page
           </p>
           <ul className="flex flex-col gap-2">
-            {family.artifacts.map((artifact) => (
+            {dive.sections.map((section) => (
               <li
-                key={artifact}
+                key={section}
                 className="flex items-baseline gap-3 text-[14px] leading-[1.55] text-ink-3 text-pretty"
               >
                 <span
                   aria-hidden
                   className="relative top-[5px] inline-block h-1 w-1 shrink-0 rounded-full bg-line-strong"
                 />
-                <span>{artifact}</span>
+                <span>{section}</span>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      {/* "Review →" affordance */}
+      {/* "Open →" affordance */}
       <div className="flex items-end justify-start lg:col-span-1 lg:items-start lg:justify-end">
         <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3 transition-colors group-hover:text-ink-1">
-          Review
+          Open
           <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
         </span>
       </div>
@@ -209,25 +205,17 @@ function ArtifactFamilyRow({ family }: { family: ArtifactFamily }) {
 function Footer() {
   return (
     <section className="relative w-full border-t border-line-soft">
-      <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-4 px-6 py-12 sm:px-10 md:py-14 lg:px-16">
+      <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-3 px-6 py-12 sm:px-10 md:py-14 lg:px-16">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-3">
-          End of review index
+          End of index
         </p>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-body-sm text-ink-3">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-ink-1 transition-colors hover:text-ink-2"
-          >
-            <span aria-hidden>←</span>
-            Back to the case study
-          </Link>
-          <span aria-hidden className="font-mono text-ink-4">·</span>
-          <span>
-            Each preview route is{' '}
-            <code className="font-mono text-[12px] text-ink-2">noindex</code>; promote artifacts
-            into the case study individually as they earn a place there.
-          </span>
-        </div>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-body text-ink-1 transition-colors hover:text-ink-2"
+        >
+          <span aria-hidden>←</span>
+          Back to the main case study
+        </Link>
       </div>
     </section>
   );

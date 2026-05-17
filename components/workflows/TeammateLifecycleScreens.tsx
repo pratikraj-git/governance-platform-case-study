@@ -25,9 +25,9 @@ export function TeammateLifecycleScreens() {
   return (
     <ScreenSection
       id="teammate-lifecycle-screens"
-      eyebrow="Screens · Lifecycle governance"
-      title="The state machine, made operable."
-      description="The lifecycle states named in the workflow are operated through four surfaces — the teammates view, validity handling for time-bounded access, distinct member and guest invite paths, and the domain-policy constraints that gate invitation."
+      eyebrow="Screens · Teammate lifecycle"
+      title="What the lifecycle looks like in product."
+      description="The states named in the workflow are operated through four surfaces — the teammates view, validity handling for time-bounded access, distinct member and guest invite paths, and the domain-policy constraints that gate invitation."
     >
       {/* ── 01 · Teammates view — hero */}
       <ScreenGroup
